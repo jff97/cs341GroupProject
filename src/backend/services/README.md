@@ -1,0 +1,1 @@
+This is where most logic and backend coding will go. This layer will import the data access layer object and use it to get the data then do stuff to that data and pass it back up to the controllers to pass to the UI as a simplified service. This is so the above layers dont have to worry about how this is done they just want something done.
