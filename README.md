@@ -1,2 +1,3 @@
 # cs341GroupProject 
-Peter 
+Alex Cappel
+Peter Xiong
