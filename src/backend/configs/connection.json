@@ -1,0 +1,6 @@
+{
+    "host": "138.49.184.111:3600",
+    "database": "development",
+    "user": "backend",
+    "password": ""
+}
