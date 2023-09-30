@@ -1,5 +1,5 @@
 {
-    "host": "138.49.184.111:3600",
+    "host": "138.49.184.111:3306",
     "database": "development",
     "user": "backend",
     "password": ""
