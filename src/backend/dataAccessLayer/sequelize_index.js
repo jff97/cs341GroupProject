@@ -1,5 +1,5 @@
 const Sequelize = require('sequelize');
-const connection = require('../configs/connection.json');
+const connection = require('../configs/connection.js');
 
 // Create a Sequelize instance
 const sequelize = new Sequelize(
@@ -8,6 +8,7 @@ const sequelize = new Sequelize(
     connection.password,
     {
         host: connection.host,
+        port: connection.port,
         dialect: 'mysql',
         define: {
             freezeTableName: true,
