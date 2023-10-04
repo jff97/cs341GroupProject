@@ -1,5 +1,5 @@
 const Sequelize = require('sequelize');
-const connection = require('../configs/connection.js');
+const connection = require('../configs/connection');
 
 // Create a Sequelize instance
 const sequelize = new Sequelize(
