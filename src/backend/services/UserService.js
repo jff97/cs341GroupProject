@@ -10,22 +10,33 @@ class UserService {
             err.code = 400;
             throw err;
         }
-        bcrypt.hash(Password, SALT_ROUNDS, (err, hash) => {
-            if (err) {
-                err.code = 500;
-                throw err;
-            }
-            const userData = {
-                FirstName,
-                LastName,
-                UserName,
-                HashedPassword: hash,
-                Birthdate,
-                RoleID,
-                Active: true
-            };
-            return DataAccess.createUser(userData);
+        
+        // Generate a hashed password
+        const hashedPassword = await new Promise((resolve, reject) => {
+            bcrypt.hash(Password, SALT_ROUNDS, (err, hash) => {
+                if (err) reject(err)
+                resolve(hash)
+            })
+        }).catch(err => {
+            err.code = 500;
+            throw err;
         });
+
+        const userData = {
+            FirstName,
+            LastName,
+            UserName,
+            HashedPassword: hashedPassword,
+            Birthdate,
+            Active: true,
+            RoleID
+        };
+        
+        await DataAccess.createUser(userData);
+    }
+
+    async deleteUser({UserID}) {
+        await DataAccess.deleteUser(UserID);
     }
 }
 

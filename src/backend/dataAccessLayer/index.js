@@ -1,5 +1,6 @@
 const Sequelize = require('sequelize');
 const connection = require('../configs/connection');
+const { applyAssociations, synchronizeDatabase } = require('./extraSetup')
 
 // Create a Sequelize instance
 const sequelize = new Sequelize(
@@ -19,5 +20,22 @@ const sequelize = new Sequelize(
         logging: false
     }
 )
+
+// Import models
+const modelDefiners = [
+    require('./models/User'),
+    require('./models/Service'),
+    require('./models/Role'),
+    require('./models/AppointmentSlot'),
+];
+
+// Instantiate the models through dependency injection with sequelize
+for (const modelDefiner of modelDefiners) {
+    modelDefiner(sequelize);
+}
+
+// Apply relationships then synchronize the database
+applyAssociations(sequelize);
+synchronizeDatabase(sequelize);
 
 module.exports = sequelize;

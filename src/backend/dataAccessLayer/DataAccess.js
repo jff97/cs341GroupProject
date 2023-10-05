@@ -1,17 +1,22 @@
-const User = require('./models/User')
-const Service = require('./models/Service')
-const AppointmentSlot = require('./models/AppointmentSlot')
-const Role = require('./models/Role')
+const { models } = require('../dataAccessLayer')
 
 class DataAccess {
 
    // For User Services
    createUser(userData) {
-      return User.create(userData);
+      return models.User.create(userData);
+   }
+
+   deleteUser(UserID) {
+      return models.User.destroy({
+         where: {
+            UserID
+         }
+      });
    }
 
    getUsersRole(userID) {
-      return User.findOne({
+      return models.User.findOne({
          where: {
             UserID: userID
          },
@@ -23,7 +28,7 @@ class DataAccess {
    }
 
    getUser(userID) {
-      return User.findOne({
+      return models.User.findOne({
          where: {
             UserID: userID
          }

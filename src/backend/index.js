@@ -33,23 +33,9 @@ async function assertDatabaseConnectionOk() {
     }
 }
 
-// Synchronizes the Sequelize models with the database
-async function synchronizeDatabase() {
-    console.log('Synchronizing database...')
-    try {
-        sequelize.sync({force: true})
-        console.log('Database synchronized!')
-    } catch (error) {
-        console.log('Unable to synchronize the database:')
-        console.log(error.message)
-        process.exit(1)
-    }
-}
-
 // Initializes the server
 async function init() {
     await assertDatabaseConnectionOk();
-    await synchronizeDatabase();
 
     // Setup Routes
     app.use('/api/user', userRoutes);
@@ -62,7 +48,11 @@ async function init() {
     app.use((req, res) => res.status(404).send("404 NOT FOUND"))
     app.use((err, req, res, next) => {
         console.error(err.stack)
-        res.status(500).send(err.message)
+        if(err.code) {
+            res.status(err.code).send(err.message)
+        } else {
+            res.status(500).send(err.message)
+        }
     })
 
     app.listen(3000, () => {
@@ -71,3 +61,6 @@ async function init() {
 }
 
 init();
+
+
+

@@ -2,10 +2,10 @@ const options = {
     definition: {
       openapi: "3.1.0",
       info: {
-        title: "CS364 Final Project API",
+        title: "CS364 Appointment Scheduler API",
         version: "0.1.0",
         description:
-          "This is a simple CRUD API application made with Express and documented with Swagger",
+          "A simple CRUD application made with Express and documented with Swagger",
         license: {
           name: "MIT",
           url: "https://spdx.org/licenses/MIT.html",
