@@ -1,5 +1,5 @@
 const { DataTypes } = require('sequelize');
-const sequelize = require('../sequelize_index.js');
+const sequelize = require('..');
 
 const User = sequelize.define('User', {
     UserID: {
@@ -29,7 +29,7 @@ const User = sequelize.define('User', {
         allowNull: false
     },
     HashedPassword: {
-        type: DataTypes.STRING(50),
+        type: DataTypes.STRING(255),
         allowNull: false
     },
     Birthdate: {

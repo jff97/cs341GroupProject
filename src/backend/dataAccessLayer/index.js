@@ -1,32 +1,23 @@
-const sequelize = require('./sequelize_index');
-const User = require('./models/user')
-const Service = require('./models/service')
-const AppointmentSlot = require('./models/AppointmentSlot')
-const Role = require('./models/role')
+const Sequelize = require('sequelize');
+const connection = require('../configs/connection');
 
-// One role serves many users
-Role.hasMany(User, {
-    'foreignKey': 'RoleID',
-});
-// One user offers one service
-User.hasOne(Service, {
-    'foreignKey': 'UserID',
-    onDelete: 'CASCADE'
-});
-// A user books multiple appointments
-User.hasMany(AppointmentSlot, {
-    'foreignKey': 'UserID',
-    onDelete: 'CASCADE'
-});
+// Create a Sequelize instance
+const sequelize = new Sequelize(
+    connection.database,
+    connection.user,
+    connection.password,
+    {
+        host: connection.host,
+        port: connection.port,
+        dialect: 'mysql',
+        define: {
+            freezeTableName: true,
+            timestamps: true,
+            createdAt: 'CreatedDateTime', 
+            updatedAt: 'LastModifiedDateTime' 
+        },
+        logging: false
+    }
+)
 
-// A service provides many appointment slots
-Service.hasMany(AppointmentSlot, {
-    'foreignKey': 'ServiceID',
-});
-
-sequelize.sync({ alter: true })
-    .then(() => {
-        console.log('Database successfully synchronized');
-    }).catch((err) => {
-        console.log('Database synchronization failed: ', err);
-    });
+module.exports = sequelize;

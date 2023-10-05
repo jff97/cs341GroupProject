@@ -1,5 +1,5 @@
 const { DataTypes } = require('sequelize');
-const sequelize = require('../sequelize_index.js');
+const sequelize = require('..');
 
 const Role = sequelize.define('Role', {
     RoleID: {
