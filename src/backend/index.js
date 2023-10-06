@@ -51,6 +51,7 @@ async function init() {
     app.use((req, res) => res.status(404).send("404 NOT FOUND"))
     app.use((err, req, res, next) => {
         logger.error(err)
+        logger.error(err.stack)
         if(err.code) {
             res.status(err.code).send(err.message)
         } else {

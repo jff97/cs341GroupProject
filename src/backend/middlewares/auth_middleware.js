@@ -1,7 +1,9 @@
+ const jwt = require("jsonwebtoken");
+ 
  /**
  * Middleware for Access Token Validation
  */
-async function enforceAuthentication(res, req, next) {
+async function enforceAuthentication(req, res, next) {
     const authHeader = req.headers["authorization"];
     const token = authHeader && authHeader.split(" ")[1];
 

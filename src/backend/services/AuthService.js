@@ -1,8 +1,8 @@
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken')
 const DataAccess = require('../dataAccessLayer/DataAccess');
-class AuthService {
 
+class AuthService {
     constructor() {
         this.refreshTokens = [];
     }
@@ -36,7 +36,7 @@ class AuthService {
 
     // Logout a user by invalidating tokens
     async logout(refreshToken) {
-        this.refreshTokens.filter((token) => token !== refreshToken);
+        delete this.refreshTokens[refreshToken];
     }
 
     // Generate a pair of tokens (access and refresh) for a user
@@ -46,6 +46,24 @@ class AuthService {
             "RefreshToken": this.generateRefreshToken(User),
         }
     }
+
+    async getNewToken(refreshToken) {
+        if (refreshToken == null || this.refreshTokens[refreshToken] == null) {
+            const err = new Error('Invalid Token');
+            err.code = 401;
+            throw err;
+        };
+      
+        const decoded = jwt.verify(refreshToken, process.env.REFRESH_TOKEN_SECRET);
+
+        if (decoded == null) {
+            const err = new Error('Invalid Token');
+            err.code = 401;
+            throw err;
+        };
+
+        return this.generateAccessToken(decoded);
+      }
 
     generateAccessToken({UserID, RoleID, FullName, UserName}) {
         return jwt.sign({UserID, RoleID, FullName, UserName}, process.env.ACCESS_TOKEN_SECRET, {expiresIn: '15m'});

@@ -17,12 +17,31 @@ async function login(req, res, next) {
 async function logout(req, res, next) {
     try {
         await AuthService.logout(req.cookies.rft);
-        res.status(204).send("User successfully logged out!");
+        res.status(200).send("User successfully logged out!");
+    } catch (err) {
+        next(err);
+    }
+}
+
+async function checkIfAuthenticated(req, res, next) {
+    try {
+        res.status(200).send("User is authenticated!");
+    } catch (err) {
+        next(err);
+    }
+}
+
+async function renewAccessToken(req, res, next) {
+    try {
+        const newAccessToken = await AuthService.getNewToken(req.cookies.rft);
+        res.status(200).json({
+            "AccessToken": newAccessToken
+        });
     } catch (err) {
         next(err);
     }
 }
 
 module.exports = {
-    login, logout
+    login, logout, checkIfAuthenticated, renewAccessToken
 }
