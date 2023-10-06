@@ -35,10 +35,16 @@ class DataAccess {
       })
    }
 
-
    // For Appointment Service
    getUsersBookedAppointments(userID) {
       
+   }
+
+   //create a service and link it to the user with the given userID
+   createProvidedService(serviceData, userID) {
+      //add the userid to link the service to the user
+      serviceData.UserID = userID
+      return models.Service.create(serviceData)
    }
 }
 

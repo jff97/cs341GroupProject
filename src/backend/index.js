@@ -9,7 +9,10 @@ const sequelize = require('./dataAccessLayer');
 const swaggerJsdoc = require('swagger-jsdoc');
 const swaggerUi = require('swagger-ui-express');
 const swagger_options = require('./configs/swagger');
+
+//our API routes
 const userRoutes = require('./routes/UserRoutes');
+const serviceProviderRoutes = require('./routes/ServiceProviderRoutes');
 
 // Ensure the express app uses these modules
 app.use(cors())
@@ -39,6 +42,7 @@ async function init() {
 
     // Setup Routes
     app.use('/api/user', userRoutes);
+    app.use('/api/serviceprovider', serviceProviderRoutes);
 
     // Swagger Integration
     const specs = swaggerJsdoc(swagger_options);
