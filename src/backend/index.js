@@ -10,6 +10,7 @@ const swaggerJsdoc = require('swagger-jsdoc');
 const swaggerUi = require('swagger-ui-express');
 const swagger_options = require('./configs/swagger');
 const userRoutes = require('./routes/UserRoutes');
+const authRoutes = require('./routes/AuthRoutes');
 const { logger } = require('./logging');
 
 // Ensure the express app uses these modules
@@ -40,6 +41,7 @@ async function init() {
 
     // Setup Routes
     app.use('/api/user', userRoutes);
+    app.use('/api/auth', authRoutes);
 
     // Swagger Integration
     const specs = swaggerJsdoc(swagger_options);
@@ -56,10 +58,8 @@ async function init() {
         }
     })
 
-    console.log(sequelize.models.User)
-
-    app.listen(3000, () => {
-        logger.info('Server is running on port 3000')
+    app.listen(5000, () => {
+        logger.info('Server is running on port 5000')
     });
 }
 

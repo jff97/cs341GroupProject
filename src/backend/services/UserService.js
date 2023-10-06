@@ -1,6 +1,6 @@
 const DataAccess = require('../dataAccessLayer/DataAccess');
 const bcrypt = require('bcrypt');
-const logger = require('../logging');
+const logger = require('../logging')
 
 const SALT_ROUNDS = 10;
 

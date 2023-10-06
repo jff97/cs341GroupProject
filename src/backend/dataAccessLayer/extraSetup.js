@@ -20,13 +20,20 @@ function applyAssociations(sequelize) {
     });
     // A user books multiple appointments
     User.hasMany(AppointmentSlot, {
-        foreignKey: 'UserID',
+        foreignKey: {
+            name: 'ClientUserID',
+            allowNull: true
+        },
         onDelete: 'CASCADE'
     });
 
     // A service provides many appointment slots
     Service.hasMany(AppointmentSlot, {
-        'foreignKey': 'ServiceID',
+        foreignKey: {
+            name: 'ServiceID',
+            allowNull: false
+        },
+
     });
 }
 
