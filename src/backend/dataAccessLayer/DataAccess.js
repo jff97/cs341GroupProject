@@ -36,6 +36,26 @@ class DataAccess {
    }
 
 
+   createAppointment(appointmentData) {
+      return models.AppointmentSlot.create(appointmentData)
+   }
+
+   deleteAppointment(AppointmentID) {
+      return models.AppointmentSlot.destroy({
+         where: {
+            AppointmentID
+         }
+      });
+   }
+
+   bookAppointment(AppointmentID, UserID) {
+      return models.AppointmentSlot.update({UserID: UserID}, {
+         where: {
+            AppointmentID: AppointmentID
+         }
+      })
+   }
+
    // For Appointment Service
    getUsersBookedAppointments(userID) {
       
