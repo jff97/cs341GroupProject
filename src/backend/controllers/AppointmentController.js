@@ -18,6 +18,15 @@ async function deleteAppointment(req, res, next) {
     }
 }
 
+async function bookAppointment(req, res, next) {
+    try {
+        await AppointmentService.bookAppointment(req.body);
+        res.status(201).send("Appointment booked successfully!");
+    } catch (err) {
+        next(err);
+    }
+}
+
 module.exports = {
-    createAppointment, deleteAppointment
+    createAppointment, deleteAppointment, bookAppointment
 };

@@ -23,6 +23,10 @@ class AppointmentService {
     async deleteAppointment({AppointmentID}) {
         await DataAccess.deleteAppointment(AppointmentID);
     }
+
+    async bookAppointment({AppointmentID, UserID}) {
+        await DataAccess.bookAppointment(AppointmentID, UserID);
+    }
 }
 
 const appointmentServiceInstance = Object.freeze(new AppointmentService());

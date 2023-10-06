@@ -48,6 +48,14 @@ class DataAccess {
       });
    }
 
+   bookAppointment(AppointmentID, UserID) {
+      return models.AppointmentSlot.update({UserID: UserID}, {
+         where: {
+            AppointmentID: AppointmentID
+         }
+      })
+   }
+
    // For Appointment Service
    getUsersBookedAppointments(userID) {
       
