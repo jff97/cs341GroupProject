@@ -1,5 +1,5 @@
+const { Model } = require('sequelize');
 const { models } = require('../dataAccessLayer')
-
 class DataAccess {
 
    // For User Services
@@ -11,6 +11,19 @@ class DataAccess {
       return models.User.destroy({
          where: {
             UserID
+         }
+      });
+   }
+
+   /**
+    * Retrieves a user from the database by their username
+    * @param {string} UserName 
+    * @returns {Promise} A promise for models.User instance
+    */
+   getUserByUserName(UserName) {
+      return models.User.findOne({
+         where: {
+            UserName
          }
       });
    }

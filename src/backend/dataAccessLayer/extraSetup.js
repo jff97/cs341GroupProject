@@ -1,4 +1,5 @@
 const { Sequelize } = require("sequelize");
+const { logger } = require("../logging");
 
 /**
  * Setups the associations between the models
@@ -19,13 +20,20 @@ function applyAssociations(sequelize) {
     });
     // A user books multiple appointments
     User.hasMany(AppointmentSlot, {
-        foreignKey: 'UserID',
+        foreignKey: {
+            name: 'ClientUserID',
+            allowNull: true
+        },
         onDelete: 'CASCADE'
     });
 
     // A service provides many appointment slots
     Service.hasMany(AppointmentSlot, {
-        'foreignKey': 'ServiceID',
+        foreignKey: {
+            name: 'ServiceID',
+            allowNull: false
+        },
+
     });
 }
 
@@ -37,10 +45,9 @@ function applyAssociations(sequelize) {
 function synchronizeDatabase(sequelize) {
     sequelize.sync({force: false}).
         then(() => {
-            console.log('Database synchronized');
+            logger.info('Database models successfully synchronized with ORM!');
         }).catch((error) => {
-            console.log('Error synchronizing database');
-            console.log(error);
+            logger.error('Unable to synchronize database models with ORM!' + error);
         });
 }
 

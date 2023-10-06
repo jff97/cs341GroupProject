@@ -10,4 +10,9 @@ coverage
 
 # Benchmarking
 benchmarks/graphs
-src/backend/.env
+
+# env files
+.env
+.vscode/
+logs/
+
