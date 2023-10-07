@@ -5,23 +5,23 @@ import { Box } from "@mui/material";
 import { NotificationProvider } from "src/components/NotificationProvider";
 import CustomAppBar from "src/components/CustomAppBar";
 
-const rootStyle =  {
+const rootStyle = {
     display: 'flex'
-}  
+}
 
 export function Dashboard() {
-  return (
-    <NotificationProvider>
-      <Box sx={rootStyle}>
-          <NavDrawer />
-          <Box component="main" sx={{flexGrow: 1, p: 2, bgcolor: 'background.default'}}>
-              <Box sx={theme => theme.mixins.toolbar} />
-              <Routes>
-                <Route path="/book" element={<CustomAppBar pageTitle="Book an Appointment" />} />
-                <Route path="/" element={<Navigate to="/dashboard/book" />} />
-              </Routes>
-          </Box>
-      </Box>
-    </NotificationProvider>
-  );
+    return (
+        <NotificationProvider>
+            <Box sx={rootStyle}>
+                <NavDrawer />
+                <Box component="main" sx={{ flexGrow: 1, p: 2, bgcolor: 'background.default' }}>
+                    <Box sx={theme => theme.mixins.toolbar} />
+                    <Routes>
+                        <Route path="/book" element={<CustomAppBar pageTitle="Book an Appointment" />} />
+                        <Route path="/" element={<Navigate to="/dashboard/book" />} />
+                    </Routes>
+                </Box>
+            </Box>
+        </NotificationProvider>
+    );
 }
