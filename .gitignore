@@ -15,4 +15,4 @@ benchmarks/graphs
 .env
 .vscode/
 logs/
-
+.idea/

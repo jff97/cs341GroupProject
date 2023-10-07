@@ -1,4 +1,3 @@
-const { Model } = require('sequelize');
 const { models } = require('../dataAccessLayer')
 class DataAccess {
 
@@ -18,7 +17,7 @@ class DataAccess {
    /**
     * Retrieves a user from the database by their username
     * @param {string} UserName 
-    * @returns {Promise} A promise for models.User instance
+    * @returns {Promise<User>} A promise for models.User instance
     */
    getUserByUserName(UserName) {
       return models.User.findOne({
