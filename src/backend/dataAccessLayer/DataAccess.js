@@ -1,5 +1,5 @@
+const { Model } = require('sequelize');
 const { models } = require('../dataAccessLayer')
-
 class DataAccess {
 
    // For User Services
@@ -11,6 +11,19 @@ class DataAccess {
       return models.User.destroy({
          where: {
             UserID
+         }
+      });
+   }
+
+   /**
+    * Retrieves a user from the database by their username
+    * @param {string} UserName 
+    * @returns {Promise} A promise for models.User instance
+    */
+   getUserByUserName(UserName) {
+      return models.User.findOne({
+         where: {
+            UserName
          }
       });
    }
@@ -31,6 +44,42 @@ class DataAccess {
       return models.User.findOne({
          where: {
             UserID: userID
+         }
+      })
+   }
+
+   createAppointment(appointmentData) {
+      return models.AppointmentSlot.create(appointmentData)
+   }
+
+   deleteAppointment(AppointmentID) {
+      return models.AppointmentSlot.destroy({
+         where: {
+            AppointmentID
+         }
+      });
+   }
+
+   bookAppointment(AppointmentID, ClientUserID) {
+      return models.AppointmentSlot.update({ClientUserID: ClientUserID}, {
+         where: {
+            AppointmentID: AppointmentID
+         }
+      })
+   }
+
+   cancelAppointment(AppointmentID, ClientUserID) {
+      return models.AppointmentSlot.update({ClientUserID: null}, {
+         where: {
+            AppointmentID, ClientUserID
+         }
+      })
+   }
+
+   modifyAppointmentTime(AppointmentID, StartDateTime, EndDateTime) {
+      return models.AppointmentSlot.update({StartDateTime: StartDateTime, EndDateTime: EndDateTime}, {
+         where: {
+            AppointmentID
          }
       })
    }

@@ -13,6 +13,12 @@ const swagger_options = require('./configs/swagger');
 //our API routes
 const userRoutes = require('./routes/UserRoutes');
 const serviceProviderRoutes = require('./routes/ServiceProviderRoutes');
+const { logger } = require('./logging');
+
+// Routers
+const appointmentRoutes = require('./routes/AppointmentRoutes');
+const userRoutes = require('./routes/UserRoutes');
+const authRoutes = require('./routes/AuthRoutes');
 
 // Ensure the express app uses these modules
 app.use(cors())
@@ -25,13 +31,13 @@ app.use(cookieParser())
 
 // Checks the database connection
 async function assertDatabaseConnectionOk() {
-    console.log(`Checking database connection...`)
+    logger.info('Checking database connection')
     try {
         await sequelize.authenticate()
-        console.log('Database connection OK!')
+        logger.info('Database connection OK!')
     } catch (error) {
-        console.log('Unable to connect to the database:')
-        console.log(error.message)
+        logger.error('Unable to connect to the database')
+        logger.error(error.message)
         process.exit(1)
     }
 }
@@ -43,6 +49,8 @@ async function init() {
     // Setup Routes
     app.use('/api/user', userRoutes);
     app.use('/api/serviceprovider', serviceProviderRoutes);
+    app.use('/api/auth', authRoutes);
+    app.use('/api/appointment', appointmentRoutes);
 
     // Swagger Integration
     const specs = swaggerJsdoc(swagger_options);
@@ -51,7 +59,8 @@ async function init() {
     // Error handlers
     app.use((req, res) => res.status(404).send("404 NOT FOUND"))
     app.use((err, req, res, next) => {
-        console.error(err.stack)
+        logger.error(err)
+        logger.error(err.stack)
         if(err.code) {
             res.status(err.code).send(err.message)
         } else {
@@ -59,12 +68,9 @@ async function init() {
         }
     })
 
-    app.listen(3000, () => {
-        console.log('Server is running on port 3000');
+    app.listen(5000, () => {
+        logger.info('Server is running on port 5000')
     });
 }
 
 init();
-
-
-
