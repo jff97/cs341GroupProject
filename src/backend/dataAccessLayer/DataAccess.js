@@ -61,10 +61,26 @@ class DataAccess {
       });
    }
 
-   bookAppointment(AppointmentID, UserID) {
-      return models.AppointmentSlot.update({UserID: UserID}, {
+   bookAppointment(AppointmentID, ClientUserID) {
+      return models.AppointmentSlot.update({ClientUserID: ClientUserID}, {
          where: {
             AppointmentID: AppointmentID
+         }
+      })
+   }
+
+   cancelAppointment(AppointmentID, ClientUserID) {
+      return models.AppointmentSlot.update({ClientUserID: null}, {
+         where: {
+            AppointmentID, ClientUserID
+         }
+      })
+   }
+
+   modifyAppointmentTime(AppointmentID, StartDateTime, EndDateTime) {
+      return models.AppointmentSlot.update({StartDateTime: StartDateTime, EndDateTime: EndDateTime}, {
+         where: {
+            AppointmentID
          }
       })
    }
