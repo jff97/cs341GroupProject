@@ -2,7 +2,7 @@ import api from './api';
 
 const USER_ENDPOINT = '/api/user/';
 
-const categories = ['Medical', 'Beauty', 'Fitness']
+const categories = ['Health', 'Beauty', 'Fitness']
 
 const userService = {
     createUser: (FirstName, LastName, UserName, Password, Birthdate, RoleID, ServiceTitle, ServiceInfo, ServiceCategoryID) => {
