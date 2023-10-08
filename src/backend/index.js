@@ -13,12 +13,9 @@ const swagger_options = require('./configs/swagger');
 //our API routes
 const userRoutes = require('./routes/UserRoutes');
 const serviceProviderRoutes = require('./routes/ServiceProviderRoutes');
-const { logger } = require('./logging');
-
-// Routers
 const appointmentRoutes = require('./routes/AppointmentRoutes');
-const userRoutes = require('./routes/UserRoutes');
 const authRoutes = require('./routes/AuthRoutes');
+const { logger } = require('./logging');
 
 // Ensure the express app uses these modules
 app.use(cors())
