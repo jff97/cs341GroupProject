@@ -10,6 +10,9 @@ coverage
 
 # Benchmarking
 benchmarks/graphs
+launch.json
+src/backend/.env
+.idea/workspace.xml
 
 # env files
 .env
