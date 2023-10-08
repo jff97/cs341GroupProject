@@ -47,7 +47,6 @@ class DataAccess {
       })
    }
 
-
    createAppointment(appointmentData) {
       return models.AppointmentSlot.create(appointmentData)
    }
@@ -60,10 +59,26 @@ class DataAccess {
       });
    }
 
-   bookAppointment(AppointmentID, UserID) {
-      return models.AppointmentSlot.update({UserID: UserID}, {
+   bookAppointment(AppointmentID, ClientUserID) {
+      return models.AppointmentSlot.update({ClientUserID: ClientUserID}, {
          where: {
             AppointmentID: AppointmentID
+         }
+      })
+   }
+
+   cancelAppointment(AppointmentID, ClientUserID) {
+      return models.AppointmentSlot.update({ClientUserID: null}, {
+         where: {
+            AppointmentID, ClientUserID
+         }
+      })
+   }
+
+   modifyAppointmentTime(AppointmentID, StartDateTime, EndDateTime) {
+      return models.AppointmentSlot.update({StartDateTime: StartDateTime, EndDateTime: EndDateTime}, {
+         where: {
+            AppointmentID
          }
       })
    }
@@ -71,6 +86,29 @@ class DataAccess {
    // For Appointment Service
    getUsersBookedAppointments(userID) {
       
+   }
+
+   //create a service and link it to the user with the given userID
+   createProvidedService(serviceData) {
+      //add the userid to link the service to the user
+      //serviceData.UserID = userID
+      return models.Service.create(serviceData)
+   }
+
+   deleteProvidedService(ServiceID) {
+      return models.Service.destroy({
+         where: {
+            ServiceID
+         }
+      })
+   }
+
+   modifyProvidedService(ServiceID, ServiceTitle, ServiceInfo, Category) {
+      return models.Service.update({ServiceTitle: ServiceTitle, ServiceInfo: ServiceInfo, Category: Category}, {
+         where: {
+            ServiceID
+         }
+      })
    }
 }
 

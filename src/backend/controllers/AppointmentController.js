@@ -27,6 +27,24 @@ async function bookAppointment(req, res, next) {
     }
 }
 
+async function cancelAppointment(req, res, next) {
+    try {
+        await AppointmentService.cancelAppointment(req.body);
+        res.status(201).send("Appointment cancelled successfully!");
+    } catch (err) {
+        next(err);
+    }
+}
+
+async function modifyAppointmentTime(req, res, next) {
+    try {
+        await AppointmentService.modifyAppointmentTime(req.body);
+        res.status(201).send("Appointment time modified successfully!");
+    } catch (err) {
+        next(err);
+    }
+}
+
 module.exports = {
-    createAppointment, deleteAppointment, bookAppointment
+    createAppointment, deleteAppointment, bookAppointment, cancelAppointment, modifyAppointmentTime
 };

@@ -16,3 +16,8 @@ benchmarks/graphs
 .vscode/
 logs/
 .idea/
+
+launch.json
+src/backend/.env
+.idea/workspace.xml
+
