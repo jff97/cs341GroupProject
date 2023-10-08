@@ -5,7 +5,7 @@ const logger = require('../logging')
 const SALT_ROUNDS = 10;
 
 class UserService {
-    async createUser({FirstName, LastName, UserName, Password, Birthdate, RoleID}) {
+    async createUser({FirstName, LastName, UserName, Password, Birthdate, RoleID, ServiceTitle, ServiceInfo, Category}) {
         let hashedPassword; 
         if(!FirstName || !LastName || !UserName || !Password || !Birthdate || !RoleID) {
             const err = new Error('Missing required fields for user creation!');
@@ -32,7 +32,12 @@ class UserService {
             RoleID
         };
 
-        await DataAccess.createUser(userData);
+        const user = await DataAccess.createUser(userData);
+
+        if(RoleID === 2) {
+            user.createService({ServiceTitle, ServiceInfo, Category})
+        }
+
     }
 
     isPasswordValid(password) {

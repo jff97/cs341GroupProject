@@ -10,6 +10,14 @@ coverage
 
 # Benchmarking
 benchmarks/graphs
+
+# env files
+.env
+.vscode/
+logs/
+.idea/
+
 launch.json
 src/backend/.env
 .idea/workspace.xml
+
