@@ -41,10 +41,26 @@ class DataAccess {
    }
 
    //create a service and link it to the user with the given userID
-   createProvidedService(serviceData, userID) {
+   createProvidedService(serviceData) {
       //add the userid to link the service to the user
-      serviceData.UserID = userID
+      //serviceData.UserID = userID
       return models.Service.create(serviceData)
+   }
+
+   deleteProvidedService(ServiceID) {
+      return models.Service.destroy({
+         where: {
+            ServiceID
+         }
+      })
+   }
+
+   modifyProvidedService(ServiceID, ServiceTitle, ServiceInfo, Category) {
+      return models.Service.update({ServiceTitle: ServiceTitle, ServiceInfo: ServiceInfo, Category: Category}, {
+         where: {
+            ServiceID
+         }
+      })
    }
 }
 
