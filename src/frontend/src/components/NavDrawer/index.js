@@ -2,6 +2,7 @@ import * as React from 'react';
 import { Box, Drawer, CssBaseline, Toolbar, List, Typography, Divider, ListItem, ListItemButton, ListItemIcon, ListItemText } from '@mui/material';
 import TasksIcon from '@mui/icons-material/Task';
 import EventIcon from '@mui/icons-material/Event';
+import { CalendarMonthOutlined } from '@mui/icons-material';
 import { Link } from 'react-router-dom';
 import { useLocation } from 'react-router-dom';
 import AppConfig from 'src/config/config';
@@ -47,6 +48,16 @@ export default function NavDrawer() {
                                 <ListItemText primary="Book Appointment" />
                             </ListItemButton>
                         </ListItem>
+                        <Link to="/dashboard/appointment" style={linkStyles}>
+                        <ListItem disablePadding>
+                            <ListItemButton>
+                                <ListItemIcon>
+                                    <CalendarMonthOutlined />
+                                </ListItemIcon>
+                                <ListItemText primary="Create Appointment" />
+                            </ListItemButton>
+                        </ListItem>
+                    </Link>
                     </Link>
                 </List>
                 <Toolbar />

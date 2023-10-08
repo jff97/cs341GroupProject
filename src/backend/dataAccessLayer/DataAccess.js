@@ -68,6 +68,26 @@ class DataAccess {
       })
    }
 
+   getServiceIDByUserID(UserID) {
+      return models.Service.findOne({
+         where: {
+            UserID: UserID
+         }
+      })
+   }
+
+   getAllAppointmentSlotsForProvider(ServiceID) {
+      return models.AppointmentSlot.findAll({
+         where: {
+            ServiceID: ServiceID
+         },
+         include: [{
+            model: models.User,
+            attributes: ['FirstName', 'LastName']
+         }]
+      })
+   }
+
    // For Appointment Service
    getUsersBookedAppointments(userID) {
       
