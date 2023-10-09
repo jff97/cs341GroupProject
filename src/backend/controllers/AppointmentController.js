@@ -32,6 +32,10 @@ async function getAppointmentSlotsForProvider(req, res, next) {
     try {
         const data = await AppointmentService.getAllAppointmentSlotsForProvider(req.query.UserID);
         res.status(200).send(data);
+    } catch (err) {
+        next(err);
+    }
+}
 
 async function cancelAppointment(req, res, next) {
     try {
@@ -52,5 +56,5 @@ async function modifyAppointmentTime(req, res, next) {
 }
 
 module.exports = {
-    createAppointment, deleteAppointment, bookAppointment, cancelAppointment, modifyAppointmentTime
+    createAppointment, deleteAppointment, bookAppointment, cancelAppointment, modifyAppointmentTime, getAppointmentSlotsForProvider
 };

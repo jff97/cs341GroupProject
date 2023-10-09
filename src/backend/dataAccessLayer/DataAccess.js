@@ -72,8 +72,9 @@ class DataAccess {
       return models.Service.findOne({
          where: {
             UserID: UserID
-         })
-      }
+         }
+      })
+   }
                                     
    cancelAppointment(AppointmentID, ClientUserID) {
       return models.AppointmentSlot.update({ClientUserID: null}, {
@@ -92,6 +93,8 @@ class DataAccess {
             model: models.User,
             attributes: ['FirstName', 'LastName']
          }]
+      })
+   }
 
    modifyAppointmentTime(AppointmentID, StartDateTime, EndDateTime) {
       return models.AppointmentSlot.update({StartDateTime: StartDateTime, EndDateTime: EndDateTime}, {
