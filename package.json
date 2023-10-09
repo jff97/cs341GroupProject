@@ -1,7 +1,0 @@
-{
-  "dependencies": {
-    "dayjs": "^1.11.10",
-    "react-particles": "^2.12.2",
-    "tsparticles": "^2.12.0"
-  }
-}
