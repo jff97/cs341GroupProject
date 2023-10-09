@@ -2,9 +2,11 @@ import * as React from 'react';
 import { Box, Drawer, CssBaseline, Toolbar, List, Typography, Divider, ListItem, ListItemButton, ListItemIcon, ListItemText } from '@mui/material';
 import TasksIcon from '@mui/icons-material/Task';
 import EventIcon from '@mui/icons-material/Event';
+import { CalendarMonthOutlined } from '@mui/icons-material';
 import { Link } from 'react-router-dom';
 import { useLocation } from 'react-router-dom';
 import AppConfig from 'src/config/config';
+import useUserStore from 'src/utils/stores';
 
 const drawerWidth = 240;
 
@@ -15,6 +17,7 @@ const linkStyles = {
 
 export default function NavDrawer() {
     const location = useLocation();
+    const RoleID = useUserStore(state => state.RoleID);
 
     return (
         <Box sx={{ display: 'flex' }}>
@@ -38,6 +41,7 @@ export default function NavDrawer() {
                 </Toolbar>
                 <Divider />
                 <List>
+                    {RoleID === 1 && 
                     <Link to="/dashboard/tasks" style={linkStyles}>
                         <ListItem disablePadding>
                             <ListItemButton>
@@ -46,8 +50,22 @@ export default function NavDrawer() {
                                 </ListItemIcon>
                                 <ListItemText primary="Book Appointment" />
                             </ListItemButton>
-                        </ListItem>
+                        </ListItem>      
                     </Link>
+                    }
+                    {RoleID === 2 && 
+                        <Link to="/dashboard/appointment" style={linkStyles}>
+                        <ListItem disablePadding>
+                            <ListItemButton>
+                                <ListItemIcon>
+                                    <CalendarMonthOutlined />
+                                </ListItemIcon>
+                                <ListItemText primary="Create Appointment" />
+                            </ListItemButton>
+                        </ListItem>
+                        </Link>
+                    }
+              
                 </List>
                 <Toolbar />
             </Drawer>

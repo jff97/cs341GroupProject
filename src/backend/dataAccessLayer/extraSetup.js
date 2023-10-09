@@ -18,6 +18,7 @@ function applyAssociations(sequelize) {
         foreignKey: 'UserID',
         onDelete: 'CASCADE'
     });
+    
     // A user books multiple appointments
     User.hasMany(AppointmentSlot, {
         foreignKey: {
@@ -26,6 +27,15 @@ function applyAssociations(sequelize) {
         },
         onDelete: 'CASCADE'
     });
+
+    AppointmentSlot.belongsTo(User, {
+        foreignKey: {
+            name: 'ClientUserID',
+            allowNull: true
+        },
+        onDelete: 'CASCADE'
+    });
+    
 
     // A service provides many appointment slots
     Service.hasMany(AppointmentSlot, {
@@ -43,7 +53,7 @@ function applyAssociations(sequelize) {
  * @param {Sequelize} sequelize - Sequelize/DB instance
  */
 function synchronizeDatabase(sequelize) {
-    sequelize.sync({force: false}).
+    sequelize.sync({force: false, alter: true}).
         then(() => {
             logger.info('Database models successfully synchronized with ORM!');
         }).catch((error) => {

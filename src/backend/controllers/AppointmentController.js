@@ -27,6 +27,12 @@ async function bookAppointment(req, res, next) {
     }
 }
 
+
+async function getAppointmentSlotsForProvider(req, res, next) {
+    try {
+        const data = await AppointmentService.getAllAppointmentSlotsForProvider(req.query.UserID);
+        res.status(200).send(data);
+
 async function cancelAppointment(req, res, next) {
     try {
         await AppointmentService.cancelAppointment(req.body);

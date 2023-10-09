@@ -67,6 +67,14 @@ class DataAccess {
       })
    }
 
+
+   getServiceIDByUserID(UserID) {
+      return models.Service.findOne({
+         where: {
+            UserID: UserID
+         })
+      }
+                                    
    cancelAppointment(AppointmentID, ClientUserID) {
       return models.AppointmentSlot.update({ClientUserID: null}, {
          where: {
@@ -74,6 +82,16 @@ class DataAccess {
          }
       })
    }
+
+   getAllAppointmentSlotsForProvider(ServiceID) {
+      return models.AppointmentSlot.findAll({
+         where: {
+            ServiceID: ServiceID
+         },
+         include: [{
+            model: models.User,
+            attributes: ['FirstName', 'LastName']
+         }]
 
    modifyAppointmentTime(AppointmentID, StartDateTime, EndDateTime) {
       return models.AppointmentSlot.update({StartDateTime: StartDateTime, EndDateTime: EndDateTime}, {

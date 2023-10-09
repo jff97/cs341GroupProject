@@ -7,6 +7,10 @@ module.exports = (sequelize) => {
             primaryKey: true,
             autoIncrement: true
         },
+        AppointmentTitle: {
+            type: DataTypes.STRING(50),
+            allowNull: false
+        },
         StartDateTime: {
             type: DataTypes.DATE,
             allowNull: false
