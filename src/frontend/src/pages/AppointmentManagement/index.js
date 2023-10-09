@@ -4,6 +4,7 @@ import appointmentService from 'src/services/appointment.service';
 import useUserStore from 'src/utils/stores';
 import CustomAppBar from 'src/components/CustomAppBar';
 import CreateAppointmentSlotDialog from 'src/components/CreateAppointmentSlotDialog';
+import { Box } from '@mui/material';
 
 export default function AppointmentManagement() {
     const [appointmentSlots, setAppointmentSlots] = useState([]);
@@ -12,6 +13,10 @@ export default function AppointmentManagement() {
 
     const onCreateAppointmentSlotDialogClose = () => {
         setCreateAppointmentSlotDialogOpen(false);
+        getAppointmentSlotsForProvider();
+    }
+
+    const onDeleteAppointmentSlot = () => {
         getAppointmentSlotsForProvider();
     }
 
@@ -29,10 +34,10 @@ export default function AppointmentManagement() {
     }, []);
 
   return (
-    <div>
+    <Box sx={{height: '93%'}}>
         <CustomAppBar pageTitle="Appointment Management" />
         <CreateAppointmentSlotDialog open={createAppointmentSlotDialogOpen} handleClose={onCreateAppointmentSlotDialogClose} />
-        <AppointmentManageTable appointmentSlots={appointmentSlots} getAppointmentSlotsForProvider={getAppointmentSlotsForProvider} openCreateAppointmentSlotDialog={setCreateAppointmentSlotDialogOpen}/>
-    </div>
+        <AppointmentManageTable appointmentSlots={appointmentSlots} getAppointmentSlotsForProvider={getAppointmentSlotsForProvider} openCreateAppointmentSlotDialog={setCreateAppointmentSlotDialogOpen} onDeleteAppointmentSlot={onDeleteAppointmentSlot}/>
+    </Box>
   );
 }

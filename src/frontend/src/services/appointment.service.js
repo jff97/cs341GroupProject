@@ -26,6 +26,17 @@ const appointmentService = {
             .then((response) => {
                 return response.data;
             });
+    },
+
+    deleteAppointmentSlot: async (AppointmentID) => {
+        return await api
+            .delete(APPOINTMENT_ENDPOINT + "/delete", {
+                params: {
+                    AppointmentID: AppointmentID
+                }
+            }).then((response) => {
+                return response.data;
+            });
     }
 }
 

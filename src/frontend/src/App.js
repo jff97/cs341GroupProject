@@ -15,8 +15,8 @@ import {
 
 const rootStyle =  {
   display: 'flex',
-}
 
+}
 const contentStyle =  {
   flexGrow: 1,
 }

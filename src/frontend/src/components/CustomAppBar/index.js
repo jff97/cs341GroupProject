@@ -64,7 +64,6 @@ export default function AppBarCustom({ pageTitle }) {
     }
 
     return (
-        <Box sx={{ display: 'flex', justifyContent: 'space-around' }}>
             <AppBar
                 position="fixed"
                 sx={{ width: `calc(100% - ${drawerWidth}px)`, ml: `${drawerWidth}px`, bgcolor: 'primary.main' }}
@@ -140,6 +139,5 @@ export default function AppBarCustom({ pageTitle }) {
                 </Toolbar>
                 <Divider />
             </AppBar>
-        </Box>
     );
 }
