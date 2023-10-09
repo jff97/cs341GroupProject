@@ -26,8 +26,16 @@ class AppointmentService {
         await DataAccess.deleteAppointment(AppointmentID);
     }
 
-    async bookAppointment({AppointmentID, UserID}) {
-        await DataAccess.bookAppointment(AppointmentID, UserID);
+    async bookAppointment({AppointmentID, ClientUserID}) {
+        await DataAccess.bookAppointment(AppointmentID, ClientUserID);
+    }
+
+    async cancelAppointment({AppointmentID, ClientUserID}) {
+        await DataAccess.cancelAppointment(AppointmentID, ClientUserID);
+    }
+
+    async modifyAppointmentTime({AppointmentID, StartDateTime, EndDateTime}) {
+        await DataAccess.modifyAppointmentTime(AppointmentID, StartDateTime, EndDateTime);
     }
 
     async getAllAppointmentSlotsForProvider(UserID) {

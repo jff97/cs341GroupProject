@@ -27,15 +27,30 @@ async function bookAppointment(req, res, next) {
     }
 }
 
+
 async function getAppointmentSlotsForProvider(req, res, next) {
     try {
         const data = await AppointmentService.getAllAppointmentSlotsForProvider(req.query.UserID);
         res.status(200).send(data);
+
+async function cancelAppointment(req, res, next) {
+    try {
+        await AppointmentService.cancelAppointment(req.body);
+        res.status(201).send("Appointment cancelled successfully!");
+    } catch (err) {
+        next(err);
+    }
+}
+
+async function modifyAppointmentTime(req, res, next) {
+    try {
+        await AppointmentService.modifyAppointmentTime(req.body);
+        res.status(201).send("Appointment time modified successfully!");
     } catch (err) {
         next(err);
     }
 }
 
 module.exports = {
-    createAppointment, deleteAppointment, bookAppointment, getAppointmentSlotsForProvider
+    createAppointment, deleteAppointment, bookAppointment, cancelAppointment, modifyAppointmentTime
 };
