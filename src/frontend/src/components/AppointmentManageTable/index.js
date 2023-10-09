@@ -28,32 +28,37 @@ const columns = [
     }},
     { field: 'LastModifiedDateTime', headerName: 'Last Modified', type: 'dateTime', width: 200, valueGetter: (params) => {
         return new Date(params.value)
-    }}
+    }},
+    { field: 'Actions', headerName: 'Actions', width: 200, renderCell: (params) => {
+        return (
+            <div>
+                <Button variant="contained" color="info" size="small" sx={{color: 'white', marginLeft: 'auto', mr: 2}} onClick={() => {console.log(params.row.AppointmentID)}}  endIcon={<Add />}>
+                    Edit
+                </Button>
+            </div>)
+    }},
 ];
 
 export default function AppointmentManageTable({ appointmentSlots, openCreateAppointmentSlotDialog }) {
     return (
-        <div>
-            <div style={{ height: 400, width: '100%' }}>
-                <DataGrid 
-                    rows={appointmentSlots} 
-                    columns={columns} 
-                    pageSize={5} 
-                    height={'100vh'}
-                    rowsPerPageOptions={[5]} 
-                    getRowId={(appointmentSlot) => appointmentSlot.AppointmentID} 
-                    disableRowSelectionOnClick
-                    slots={{
-                        toolbar: CustomToolbar,
-                    }}
-                    slotProps={{toolbar: {openCreateAppointmentSlotDialog}}}
-                    sx={{
-                        boxShadow: 2,
-                        border: 2,
-                        borderColor: 'primary.light'
-                    }}
-                    />
-            </div>
+        <div style={{height: '100%'}}>
+            <DataGrid 
+                rows={appointmentSlots} 
+                columns={columns} 
+                pageSize={5} 
+                rowsPerPageOptions={[5]} 
+                getRowId={(appointmentSlot) => appointmentSlot.AppointmentID} 
+                disableRowSelectionOnClick
+                slots={{
+                    toolbar: CustomToolbar,
+                }}
+                slotProps={{toolbar: {openCreateAppointmentSlotDialog}}}
+                sx={{
+                    boxShadow: 2,
+                    border: 2,
+                    borderColor: 'primary.light',
+                }}
+                />
         </div>
     );
 }

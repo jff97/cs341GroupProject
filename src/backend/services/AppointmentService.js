@@ -1,8 +1,8 @@
 const DataAccess = require('../dataAccessLayer/DataAccess');
 
 class AppointmentService {
-    async createAppointment({StartDateTime, EndDateTime, CreatedDateTime, LastModifiedDateTime, UserID, AppointmentTitle}) {
-        if(!StartDateTime || !EndDateTime || !CreatedDateTime || !LastModifiedDateTime || !UserID || !ServiceID) {
+    async createAppointment({StartDateTime, EndDateTime, UserID, AppointmentTitle}) {
+        if(!StartDateTime || !EndDateTime || !UserID) {
             const err = new Error('Missing required fields for appointment creation!');
             err.code = 400;
             throw err;
@@ -14,8 +14,6 @@ class AppointmentService {
         const appointmentData = {
             StartDateTime,
             EndDateTime,
-            CreatedDateTime,
-            LastModifiedDateTime,
             AppointmentTitle: AppointmentTitle || 'Appointment',
             ClientUserID: null,
             ServiceID: service.ServiceID,

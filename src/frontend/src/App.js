@@ -14,11 +14,11 @@ import {
 } from 'react-router-dom';
 
 const rootStyle =  {
-  display: 'flex'
+  display: 'flex',
 }
 
 const contentStyle =  {
-  flexGrow: 1
+  flexGrow: 1,
 }
 
 function App() {

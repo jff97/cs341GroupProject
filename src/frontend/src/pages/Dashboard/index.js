@@ -7,7 +7,7 @@ import CustomAppBar from "src/components/CustomAppBar";
 import AppointmentManagement from "src/pages/AppointmentManagement";
 
 const rootStyle = {
-    display: 'flex'
+    display: 'flex',
 }
 
 export function Dashboard() {

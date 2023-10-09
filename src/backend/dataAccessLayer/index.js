@@ -17,7 +17,7 @@ const sequelize = new Sequelize(
             createdAt: 'CreatedDateTime', 
             updatedAt: 'LastModifiedDateTime' 
         },
-        logging: console.log
+        logging: null,
         
     }
 )

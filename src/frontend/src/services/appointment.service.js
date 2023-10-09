@@ -13,6 +13,19 @@ const appointmentService = {
             .then((response) => {
                 return response.data;
             });
+    },
+
+    createNewAppointmentSlot: async (StartDateTime, EndDateTime, UserID, AppointmentTitle ) => {
+        return await api
+            .post(APPOINTMENT_ENDPOINT + "/create", {
+                AppointmentTitle: AppointmentTitle,
+                StartDateTime: StartDateTime,
+                EndDateTime: EndDateTime,
+                UserID: UserID
+            })
+            .then((response) => {
+                return response.data;
+            });
     }
 }
 
