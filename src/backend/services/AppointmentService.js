@@ -48,7 +48,14 @@ class AppointmentService {
         const appointments = await DataAccess.getAllAppointmentSlotsForProvider(service.ServiceID);
         return appointments;
     }
+
+    async getAllAvailableAppointments() {
+        const appointments = await DataAccess.getAllAvailableAppointments();
+        return appointments;
+    }
 }
+
+
 
 const appointmentServiceInstance = Object.freeze(new AppointmentService());
 module.exports = appointmentServiceInstance;

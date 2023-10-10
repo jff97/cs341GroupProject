@@ -37,6 +37,25 @@ const appointmentService = {
             }).then((response) => {
                 return response.data;
             });
+    },
+
+    getAvailableAppointments: async (ProviderID) => {
+        return await api
+            .get(APPOINTMENT_ENDPOINT + "/available")
+            .then((response) => {
+                return response.data;
+            });
+    },
+
+    bookAppointment: async (AppointmentID, ClientUserID) => {
+        return await api
+            .put(APPOINTMENT_ENDPOINT + "/book", {
+                AppointmentID: AppointmentID,
+                ClientUserID: ClientUserID
+            })
+            .then((response) => {
+                return response.data;
+            });
     }
 }
 

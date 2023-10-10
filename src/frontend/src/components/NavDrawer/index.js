@@ -42,7 +42,7 @@ export default function NavDrawer() {
                 <Divider />
                 <List>
                     {RoleID === 1 && 
-                    <Link to="/dashboard/tasks" style={linkStyles}>
+                    <Link to="/dashboard/book" style={linkStyles}>
                         <ListItem disablePadding>
                             <ListItemButton>
                                 <ListItemIcon>

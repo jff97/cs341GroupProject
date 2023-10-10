@@ -36,7 +36,6 @@ class ProviderService {
       }
       DataAccess.modifyProvidedService(ServiceID, ServiceTitle, ServiceInfo, Category);
    }
-   
 }
 
 const providerServiceInstance = Object.freeze(new ProviderService());

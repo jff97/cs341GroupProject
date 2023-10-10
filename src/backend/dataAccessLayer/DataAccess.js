@@ -131,6 +131,24 @@ class DataAccess {
          }
       })
    }
+
+   getAllAvailableAppointments() {
+      return models.AppointmentSlot.findAll({
+         where: {
+            ClientUserID: null
+         }, 
+         nest: false,
+         raw: true,
+         include: [{
+            model: models.Service,
+            attributes: ['ServiceTitle', 'Category']
+         }]
+      })
+   }
+}
+
+getAppointmentsByUserId(userId) {
+   
 }
 
 // Singleton instance of DataAccess for "Dependency Injection"

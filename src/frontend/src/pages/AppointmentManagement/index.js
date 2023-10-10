@@ -35,9 +35,19 @@ export default function AppointmentManagement() {
 
   return (
     <Box sx={{height: '93%'}}>
-        <CustomAppBar pageTitle="Appointment Management" />
-        <CreateAppointmentSlotDialog open={createAppointmentSlotDialogOpen} handleClose={onCreateAppointmentSlotDialogClose} />
-        <AppointmentManageTable appointmentSlots={appointmentSlots} getAppointmentSlotsForProvider={getAppointmentSlotsForProvider} openCreateAppointmentSlotDialog={setCreateAppointmentSlotDialogOpen} onDeleteAppointmentSlot={onDeleteAppointmentSlot}/>
+        <CustomAppBar 
+            pageTitle="Appointment Management" 
+        />
+        <CreateAppointmentSlotDialog 
+            open={createAppointmentSlotDialogOpen} 
+            handleClose={onCreateAppointmentSlotDialogClose} 
+        />
+        <AppointmentManageTable 
+            appointmentSlots={appointmentSlots} 
+            getAppointmentSlotsForProvider={getAppointmentSlotsForProvider} 
+            openCreateAppointmentSlotDialog={setCreateAppointmentSlotDialogOpen} 
+            onDeleteAppointmentSlot={onDeleteAppointmentSlot}
+        />
     </Box>
   );
 }
