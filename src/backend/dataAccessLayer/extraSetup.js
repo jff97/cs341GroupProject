@@ -45,6 +45,14 @@ function applyAssociations(sequelize) {
         },
 
     });
+
+    AppointmentSlot.belongsTo(Service, {
+        foreignKey: {
+            name: 'ServiceID',
+            allowNull: false
+        }
+    });
+
 }
 
 /**

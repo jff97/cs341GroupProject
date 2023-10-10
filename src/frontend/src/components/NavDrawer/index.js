@@ -42,7 +42,7 @@ export default function NavDrawer() {
                 <Divider />
                 <List>
                     {RoleID === 1 && 
-                    <Link to="/dashboard/tasks" style={linkStyles}>
+                    <Link to="/dashboard/book" style={linkStyles}>
                         <ListItem disablePadding>
                             <ListItemButton>
                                 <ListItemIcon>
@@ -61,6 +61,18 @@ export default function NavDrawer() {
                                     <CalendarMonthOutlined />
                                 </ListItemIcon>
                                 <ListItemText primary="Create Appointment" />
+                            </ListItemButton>
+                        </ListItem>
+                        </Link>
+                    }
+                    {RoleID === 1 && 
+                        <Link to="/dashboard/myAppointment" style={linkStyles}>
+                        <ListItem disablePadding>
+                            <ListItemButton>
+                                <ListItemIcon>
+                                    <CalendarMonthOutlined />
+                                </ListItemIcon>
+                                <ListItemText primary="My Appointments" />
                             </ListItemButton>
                         </ListItem>
                         </Link>

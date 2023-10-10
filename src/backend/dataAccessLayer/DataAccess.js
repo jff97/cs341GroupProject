@@ -76,10 +76,10 @@ class DataAccess {
       })
    }
                                     
-   cancelAppointment(AppointmentID, ClientUserID) {
+   cancelAppointment(AppointmentID) {
       return models.AppointmentSlot.update({ClientUserID: null}, {
          where: {
-            AppointmentID, ClientUserID
+            AppointmentID: AppointmentID
          }
       })
    }
@@ -99,7 +99,7 @@ class DataAccess {
    modifyAppointmentTime(AppointmentID, StartDateTime, EndDateTime) {
       return models.AppointmentSlot.update({StartDateTime: StartDateTime, EndDateTime: EndDateTime}, {
          where: {
-            AppointmentID
+            AppointmentID: AppointmentID
          }
       })
    }
@@ -131,7 +131,37 @@ class DataAccess {
          }
       })
    }
+
+   getAllAvailableAppointments() {
+      return models.AppointmentSlot.findAll({
+         where: {
+            ClientUserID: null
+         }, 
+         nest: false,
+         raw: true,
+         include: [{
+            model: models.Service,
+            attributes: ['ServiceTitle', 'Category']
+         }]
+      })
+   }
+
+   getAppointmentsByUserId(UserID) {
+      return models.AppointmentSlot.findAll({
+         where: {
+            ClientUserID: UserID
+         }, 
+         nest: false,
+         raw: true,
+         include: [{
+            model: models.Service,
+            attributes: ['ServiceTitle', 'Category']
+         }]
+      })
+   }
 }
+
+
 
 // Singleton instance of DataAccess for "Dependency Injection"
 const dataAccessInstance = Object.freeze(new DataAccess())
