@@ -30,8 +30,8 @@ class AppointmentService {
         await DataAccess.bookAppointment(AppointmentID, ClientUserID);
     }
 
-    async cancelAppointment({AppointmentID, ClientUserID}) {
-        await DataAccess.cancelAppointment(AppointmentID, ClientUserID);
+    async cancelAppointment({AppointmentID}) {
+        await DataAccess.cancelAppointment(AppointmentID);
     }
 
     async modifyAppointmentTime({AppointmentID, StartDateTime, EndDateTime}) {
@@ -50,9 +50,17 @@ class AppointmentService {
     }
 
     async getAllAvailableAppointments() {
-        const appointments = await DataAccess.getAllAvailableAppointments();
-        return appointments;
+        return await DataAccess.getAllAvailableAppointments();
     }
+    async getAppointmentsByUser(UserID) {
+        if(!UserID) {
+            const err = new Error('Missing UserID for appointment slot retrieval!');
+            err.code = 400;
+            throw err;
+        }
+        return await DataAccess.getAppointmentsByUserId(UserID);
+    }
+
 }
 
 

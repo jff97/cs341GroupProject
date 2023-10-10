@@ -3,9 +3,9 @@ import { Routes, Route, Navigate } from "react-router-dom";
 import NavDrawer from "src/components/NavDrawer";
 import { Box } from "@mui/material";
 import { NotificationProvider } from "src/components/NotificationProvider";
-import CustomAppBar from "src/components/CustomAppBar";
 import AppointmentManagement from "src/pages/AppointmentManagement";
 import { BookAppointmentPage } from "src/pages/BookAppointmentPage";
+import { MyAppointmentPage } from "src/pages/MyAppointmentPage";
 import useUserStore from "src/utils/stores";
 import styled from "@mui/material/styles/styled";
 
@@ -25,7 +25,9 @@ export function Dashboard() {
                     <Offset />
                     <Routes>
                         <Route path="/book" element={<BookAppointmentPage />} />
+                        {/*TODO: refactor the appointment path to make more sense*/}
                         <Route path="/appointment" element={<AppointmentManagement />} />
+                        <Route path="/myAppointment" element={<MyAppointmentPage />} />
                         {RoleID === 1 && <Route path="/" element={<Navigate to="/dashboard/book" />}/>}
                         {RoleID === 2 && <Route path="/" element={<Navigate to="/dashboard/appointment" />}/>}
                     </Routes>

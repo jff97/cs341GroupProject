@@ -66,10 +66,13 @@ async function getAllAvailableAppointments(req, res, next) {
 
 async function getAppointmentsByUser(req, res, next) {
     try {
-        const data = await AppointmentService.
+        const data = await AppointmentService.getAppointmentsByUser(req.query.UserID);
+        res.status(200).send(data);
+    } catch (err) {
+        next(err);
     }
 }
 
 module.exports = {
-    createAppointment, deleteAppointment, bookAppointment, cancelAppointment, modifyAppointmentTime, getAppointmentSlotsForProvider, getAllAvailableAppointments
+    createAppointment, deleteAppointment, bookAppointment, cancelAppointment, modifyAppointmentTime, getAppointmentSlotsForProvider, getAllAvailableAppointments, getAppointmentsByUser
 };

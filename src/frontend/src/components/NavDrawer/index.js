@@ -65,6 +65,18 @@ export default function NavDrawer() {
                         </ListItem>
                         </Link>
                     }
+                    {RoleID === 1 && 
+                        <Link to="/dashboard/myAppointment" style={linkStyles}>
+                        <ListItem disablePadding>
+                            <ListItemButton>
+                                <ListItemIcon>
+                                    <CalendarMonthOutlined />
+                                </ListItemIcon>
+                                <ListItemText primary="My Appointments" />
+                            </ListItemButton>
+                        </ListItem>
+                        </Link>
+                    }
               
                 </List>
                 <Toolbar />

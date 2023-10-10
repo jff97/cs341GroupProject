@@ -56,6 +56,27 @@ const appointmentService = {
             .then((response) => {
                 return response.data;
             });
+    },
+    unBookAppointment: async (AppointmentID) => {
+        return await api
+            .put(APPOINTMENT_ENDPOINT + "/cancel", {
+                AppointmentID: AppointmentID
+            })
+            .then((response) => {
+                return response.data;
+            });
+    },
+
+    getUsersAppointments: async (UserID) => {
+        return await api
+            .get(APPOINTMENT_ENDPOINT + "/usersAppointments", {
+                params: {
+                    UserID: UserID
+                }
+            })
+            .then((response) => {
+                return response.data;
+            });
     }
 }
 
