@@ -8,8 +8,8 @@ import { useNotification } from "../NotificationProvider";
 
 function CreateAppointmentSlotDialog({ open, handleClose }) {
     const [appointmentTitle, setAppointmentTitle] = useState('')
-    const [appointmentStart, setAppointmentStart] = useState(dayjs());
-    const [appointmentEnd, setAppointmentEnd] =  useState(dayjs());
+    const [appointmentStart, setAppointmentStart] = useState(dayjs().set('second', 0));
+    const [appointmentEnd, setAppointmentEnd] =  useState(dayjs().set('second', 0));
     const UserID = useUserStore(state => state.UserID);
     const { createNotification } = useNotification();
 
@@ -25,8 +25,8 @@ function CreateAppointmentSlotDialog({ open, handleClose }) {
 
     const closeDialog = () => {
         setAppointmentTitle('');
-        setAppointmentStart(dayjs());
-        setAppointmentEnd(dayjs());
+        setAppointmentStart(dayjs().set('second', 0));
+        setAppointmentEnd(dayjs().set('second', 0));
         handleClose();
     }
 
@@ -54,7 +54,7 @@ function CreateAppointmentSlotDialog({ open, handleClose }) {
             <DateTimePicker 
                 label="Start Time" 
                 value={appointmentStart}
-                onChange={(newValue) => setAppointmentStart(newValue)}
+                onChange={(newValue) => setAppointmentStart(newValue.second(0))}
             />
         </FormControl>
         <FormControl sx={{ m: 1, minWidth: 475 }}>
@@ -62,7 +62,7 @@ function CreateAppointmentSlotDialog({ open, handleClose }) {
                 label="End Time" 
                 value={appointmentEnd}
                 sx={{'&::-webkit-scrollbar': {display: 'none'}}}
-                onChange={(newValue) => setAppointmentEnd(newValue)}
+                onChange={(newValue) => setAppointmentEnd(newValue.second(0))}
             />
         </FormControl>
         </DialogContent>
