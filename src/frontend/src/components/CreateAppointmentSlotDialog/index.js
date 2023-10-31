@@ -19,17 +19,22 @@ function CreateAppointmentSlotDialog({ open, handleClose }) {
 
     const onSubmit = () => {
         console.log("appointment title = <" + appointmentTitle + ">");
-        //if (appointmentTitle === '') {
-            //createNotification("Appointment Title Cannot Be Empty!", "error");
-            //return;
-        //}
-        appointmentService.createNewAppointmentSlot(appointmentStart, appointmentEnd, UserID, appointmentTitle)
+        if (appointmentTitle === '') {
+            createNotification("Appointment Title Cannot Be Empty!", "error");
+            return;
+        } else if (appointmentStart.isBefore(dayjs())) {
+            createNotification("Appointment Must Be In The Future!", "error");
+            return;
+        } else {
+            appointmentService
+            .createNewAppointmentSlot(appointmentStart, appointmentEnd, UserID, appointmentTitle)
             .then((response) => {
                 createNotification("Appointment Slot Successfully Created!");
                 closeDialog();
             }).catch((error) => {
                 createNotification("Error Creating Appointment Slot!", "error");
             });
+        }
     }
 
     const closeDialog = () => {
@@ -38,6 +43,7 @@ function CreateAppointmentSlotDialog({ open, handleClose }) {
         setAppointmentEnd(dayjs());
         handleClose();
     }
+    
 
     return (
         <Dialog
@@ -75,8 +81,11 @@ function CreateAppointmentSlotDialog({ open, handleClose }) {
                 value={duration}
                 label="Duration"
                 onChange={(newValue) => {
-                    setDuration(newValue.target.value);
-                    createNotification("end time = " + appointmentEnd.format("YYYY-MM-DD HH:mm:ss"));
+                    const newDuration = newValue.target.value;
+                    setDuration(newDuration); // Update the duration
+                    // Calculate and update the end time based on the new duration
+                    const newEndTime = appointmentStart.add(newDuration, 'minute');
+                    setAppointmentEnd(newEndTime);
                 }}
             >
                 <MenuItem value={15}>15</MenuItem>
@@ -91,6 +100,7 @@ function CreateAppointmentSlotDialog({ open, handleClose }) {
                 label="End Time" 
                 value={appointmentStart.add(duration, 'minute')}
                 sx={{'&::-webkit-scrollbar': {display: 'none'}}}
+                onChange={(newValue) => setAppointmentEnd(newValue)}
                 disabled
             />
         </FormControl>
