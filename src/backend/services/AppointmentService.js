@@ -7,6 +7,11 @@ class AppointmentService {
             err.code = 400;
             throw err;
         }
+        if (AppointmentTitle === '') {
+            const err = new Error('Appointment Title Cannot Be Empty!');
+            err.code = 400;
+            throw err;
+        }
 
         // Get Service ID from UserID
         const service = await DataAccess.getServiceIDByUserID(UserID);
@@ -14,7 +19,7 @@ class AppointmentService {
         const appointmentData = {
             StartDateTime,
             EndDateTime,
-            AppointmentTitle: AppointmentTitle || 'Appointment',
+            AppointmentTitle: AppointmentTitle,
             ClientUserID: null,
             ServiceID: service.ServiceID,
         };
