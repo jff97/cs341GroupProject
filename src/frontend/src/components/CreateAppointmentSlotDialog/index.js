@@ -102,7 +102,7 @@ function CreateAppointmentSlotDialog({ open, handleClose }) {
         <FormControl sx={{ m: 1, minWidth: 475 }}>
             <DateTimePicker 
                 label="End Time" 
-                value={appointmentStart.add(duration, 'minute')}
+                value={appointmentEnd}
                 sx={{'&::-webkit-scrollbar': {display: 'none'}}}
                 onChange={(newValue) => setAppointmentEnd(newValue)}
                 disabled
