@@ -13,25 +13,8 @@ class AppointmentService {
             throw err;
         }
 
-        // Check for conflicts
-        // Get all appointments for the service
-
         // Get Service ID from UserID
         const service = await DataAccess.getServiceIDByUserID(UserID);
-        const appointments = await DataAccess.getAllAppointmentSlotsForProvider(service.ServiceID);
-
-        // Check for conflicts
-        appointments.forEach((appointment) => {
-            if (StartDateTime >= appointment.StartDateTime && StartDateTime <= appointment.EndDateTime) {
-                const err = new Error('Appointment Start Time Conflicts With Another Appointment!');
-                err.code = 400;
-                throw err;
-            } else if (EndDateTime >= appointment.StartDateTime && EndDateTime <= appointment.EndDateTime) {
-                const err = new Error('Appointment End Time Conflicts With Another Appointment!');
-                err.code = 400;
-                throw err;
-            }
-        });
 
         const appointmentData = {
             StartDateTime,
