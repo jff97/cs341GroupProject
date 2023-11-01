@@ -1,5 +1,5 @@
-import React, { useState} from 'react';
-import { Button, Dialog, DialogActions, DialogTitle, DialogContent, FormControl, TextField, Select, Menu } from '@mui/material';
+import React, { useState, useEffect } from 'react';
+import { Button, Dialog, DialogActions, DialogTitle, DialogContent, FormControl, TextField, Select } from '@mui/material';
 import { DateTimePicker } from '@mui/x-date-pickers/DateTimePicker';
 import MenuItem from '@mui/material/MenuItem';
 import InputLabel from '@mui/material/InputLabel';
@@ -7,7 +7,6 @@ import appointmentService from 'src/services/appointment.service';
 import useUserStore from 'src/utils/stores';
 import dayjs from 'dayjs';
 import { useNotification } from "../NotificationProvider";
-import { create } from '@mui/material/styles/createTransitions';
 
 function CreateAppointmentSlotDialog({ open, handleClose }) {
     const [appointmentTitle, setAppointmentTitle] = useState('')
@@ -16,6 +15,10 @@ function CreateAppointmentSlotDialog({ open, handleClose }) {
     const [duration, setDuration] = useState(30);
     const UserID = useUserStore(state => state.UserID);
     const { createNotification } = useNotification();
+
+    useEffect(() => {
+        setAppointmentEnd(appointmentStart.add(duration, 'minute'));
+    }, [appointmentStart, duration]);
 
     const onSubmit = () => {
         console.log("appointment title = <" + appointmentTitle + ">");
@@ -68,6 +71,7 @@ function CreateAppointmentSlotDialog({ open, handleClose }) {
         <FormControl sx={{ m: 1, minWidth: 475 }}>
             <DateTimePicker 
                 label="Start Time" 
+                color="info"
                 value={appointmentStart}
                 onChange={(newValue) => setAppointmentStart(newValue)}
             />
@@ -88,17 +92,18 @@ function CreateAppointmentSlotDialog({ open, handleClose }) {
                     setAppointmentEnd(newEndTime);
                 }}
             >
-                <MenuItem value={15}>15</MenuItem>
-                <MenuItem value={30}>30</MenuItem>
-                <MenuItem value={45}>45</MenuItem>
-                <MenuItem value={60}>60</MenuItem>
-                <MenuItem value={90}>90</MenuItem>
+                <MenuItem value={15}>15 minutes</MenuItem>
+                <MenuItem value={30}>30 minutes</MenuItem>
+                <MenuItem value={45}>45 minutes</MenuItem>
+                <MenuItem value={60}>60 minutes</MenuItem>
+                <MenuItem value={90}>90 minutes</MenuItem>
+                <MenuItem value={120}>120 minutes</MenuItem>
             </Select>
         </FormControl>
         <FormControl sx={{ m: 1, minWidth: 475 }}>
             <DateTimePicker 
                 label="End Time" 
-                value={appointmentStart.add(duration, 'minute')}
+                value={appointmentEnd}
                 sx={{'&::-webkit-scrollbar': {display: 'none'}}}
                 onChange={(newValue) => setAppointmentEnd(newValue)}
                 disabled

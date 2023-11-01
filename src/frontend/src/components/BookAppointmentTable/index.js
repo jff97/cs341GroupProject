@@ -18,6 +18,7 @@ const columns = [
     { field: 'AppointmentTitle', headerName: 'Appointment Title', width: 200 },
     { field: 'Service.Category', headerName: 'Category', width: 200 },
     { field: 'Service.ServiceTitle', headerName: 'Provider', width: 200},
+    { field: 'Service.ServiceInfo', headerName: 'Qualification', width: 200},
     { field: 'StartDateTime', headerName: 'Appointment Start', type: 'dateTime', width: 200, valueGetter: (params) => {
         return new Date(params.value)
     }},

@@ -148,7 +148,7 @@ class DataAccess {
          raw: true,
          include: [{
             model: models.Service,
-            attributes: ['ServiceTitle', 'Category']
+            attributes: ['ServiceTitle', 'Category', 'ServiceInfo']
          }]
       })
    }
