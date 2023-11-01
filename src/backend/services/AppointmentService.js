@@ -32,8 +32,41 @@ class AppointmentService {
     }
 
     async bookAppointment({AppointmentID, ClientUserID}) {
+        
+        //check if user allready has an appointment overlapping
+        const possibleAppt = await DataAccess.getApptByApptID(AppointmentID);
+        const appointments = await DataAccess.getAppointmentsByUserId(ClientUserID);
+        //console.log(possibleAppt)
+        //console.log(appointments)
+        for (let i = 0; i < appointments.length; i++) {
+            if (this.#isApptsOverlapping(possibleAppt, appointments[i])) {
+                console.log('overlapping')
+                const err = new Error('Appointment Overlaps with another appointment!');
+                err.code = 400;
+                throw err;
+            }
+        }
         await DataAccess.bookAppointment(AppointmentID, ClientUserID);
     }
+    #isApptsOverlapping(appointment1, appointment2) {
+        //return appointment1.StartDateTime <= appointment2.EndDateTime && appointment1.EndDateTime >= appointment2.StartDateTime
+        let oneIntwo = this.#isInRange(appointment1.StartDateTime, appointment2) || this.#isInRange(appointment1.EndDateTime, appointment2);
+        console.log("one in two = " + oneIntwo)
+        let twoInone = this.#isInRange(appointment2.StartDateTime, appointment1) || this.#isInRange(appointment2.EndDateTime, appointment1);
+        console.log("two in one = " + twoInone)
+        return oneIntwo || twoInone;
+    }
+    #isInRange(date, appointment) {
+        const start = appointment.StartDateTime.getTime();
+        const end = appointment.EndDateTime.getTime();
+        date = date.getTime();
+        //log all three dates with lables
+        console.log("date  = " + date)
+        console.log("start = " + start)
+        console.log("end   = " + end)
+        return start <= date && date <= end;
+    }
+
 
     async cancelAppointment({AppointmentID}) {
         await DataAccess.cancelAppointment(AppointmentID);

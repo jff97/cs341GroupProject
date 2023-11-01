@@ -108,6 +108,13 @@ class DataAccess {
    getUsersBookedAppointments(userID) {
       
    }
+   getApptByApptID(AppointmentID) {
+      return models.AppointmentSlot.findOne({
+         where: {
+            AppointmentID
+         }
+      })
+   }
 
    //create a service and link it to the user with the given userID
    createProvidedService(serviceData) {

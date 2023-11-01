@@ -43,6 +43,9 @@ export default function BookAppointmentTable({availableAppointmentsData, loadAva
             .then((response) => {
                 loadAvailableAppointments();
                 createNotification('Booked appointment successfully!', 'success');
+            })
+            .catch((error) => {
+                createNotification(error.toString(), 'error');
             });
     }
 
