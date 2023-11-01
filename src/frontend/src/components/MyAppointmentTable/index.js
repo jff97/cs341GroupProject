@@ -43,6 +43,8 @@ export default function MyAppointmentTable({appointmentsData, loadUserAppointmen
             .then((response) => {
                 loadUserAppointments();
                 createNotification('Canceled appointment successfully!', 'success');
+            }).catch((error) => {
+                createNotification(error.response.data, "error");
             });
     }
 

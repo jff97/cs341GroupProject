@@ -21,23 +21,14 @@ function CreateAppointmentSlotDialog({ open, handleClose }) {
     }, [appointmentStart, duration]);
 
     const onSubmit = () => {
-        console.log("appointment title = <" + appointmentTitle + ">");
-        if (appointmentTitle === '') {
-            createNotification("Appointment Title Cannot Be Empty!", "error");
-            return;
-        } else if (appointmentStart.isBefore(dayjs())) {
-            createNotification("Appointment Must Be In The Future!", "error");
-            return;
-        } else {
-            appointmentService
-            .createNewAppointmentSlot(appointmentStart, appointmentEnd, UserID, appointmentTitle)
-            .then((response) => {
-                createNotification("Appointment Slot Successfully Created!");
-                closeDialog();
-            }).catch((error) => {
-                createNotification("Error Creating Appointment Slot!", "error");
-            });
-        }
+        appointmentService
+        .createNewAppointmentSlot(appointmentStart, appointmentEnd, UserID, appointmentTitle)
+        .then((response) => {
+            createNotification("Appointment Slot Successfully Created!");
+            closeDialog();
+        }).catch((error) => {
+            createNotification(error.response.data, "error");
+        });
     }
 
     const closeDialog = () => {

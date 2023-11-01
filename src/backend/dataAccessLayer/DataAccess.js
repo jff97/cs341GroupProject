@@ -108,10 +108,11 @@ class DataAccess {
    getUsersBookedAppointments(userID) {
       
    }
-   getApptByApptID(AppointmentID) {
+
+   getAppointmentByID(AppointmentID) {
       return models.AppointmentSlot.findOne({
          where: {
-            AppointmentID
+            AppointmentID: AppointmentID
          }
       })
    }
