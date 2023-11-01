@@ -22,13 +22,16 @@ const columns = [
         return params.value ? (params.value.FirstName + ' ' + params.value.LastName) : 'None'
     }
      },
-    { field: 'StartDateTime', headerName: 'Appointment Start', type: 'dateTime', width: 200, valueGetter: (params) => {
-        return new Date(params.value)
+    { field: 'StartDateTime', headerName: 'Appointment Start', type: 'string', width: 250, valueGetter: (params) => {
+        // Return date as string in the format of DAY MONTH DATE YEAR HH:MM AM/PM
+        const date = new Date(params.value);
+        return date.toLocaleString('en-US', {weekday: 'short', month: 'short', day: 'numeric', year: 'numeric', hour: 'numeric', minute: 'numeric', hour12: true})
     }},
-    { field: 'EndDateTime', headerName: 'Appointment End', type: 'dateTime', width: 200, valueGetter: (params) => {
-        return new Date(params.value)
+    { field: 'EndDateTime', headerName: 'Appointment End', type: 'string', width: 250, valueGetter: (params) => {
+        const date = new Date(params.value);
+        return date.toLocaleString('en-US', {weekday: 'short', month: 'short', day: 'numeric', year: 'numeric', hour: 'numeric', minute: 'numeric', hour12: true})
     }},
-    { field: 'LastModifiedDateTime', headerName: 'Last Modified', type: 'dateTime', width: 200, valueGetter: (params) => {
+    { field: 'LastModifiedDateTime', headerName: 'Last Modified', type: 'string', width: 250, valueGetter: (params) => {
         return new Date(params.value)
     }},
     { field: 'Actions', headerName: 'Actions', width: 200, headerAlign: 'center',  renderCell: (params) => {

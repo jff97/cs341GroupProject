@@ -109,6 +109,14 @@ class DataAccess {
       
    }
 
+   getAppointmentByID(AppointmentID) {
+      return models.AppointmentSlot.findOne({
+         where: {
+            AppointmentID: AppointmentID
+         }
+      })
+   }
+
    //create a service and link it to the user with the given userID
    createProvidedService(serviceData) {
       //add the userid to link the service to the user
@@ -141,7 +149,7 @@ class DataAccess {
          raw: true,
          include: [{
             model: models.Service,
-            attributes: ['ServiceTitle', 'Category']
+            attributes: ['ServiceTitle', 'Category', 'ServiceInfo']
          }]
       })
    }
