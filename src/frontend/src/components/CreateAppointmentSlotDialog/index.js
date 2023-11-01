@@ -1,4 +1,4 @@
-import React, { useState} from 'react';
+import React, { useState, useEffect } from 'react';
 import { Button, Dialog, DialogActions, DialogTitle, DialogContent, FormControl, TextField, Select, Menu } from '@mui/material';
 import { DateTimePicker } from '@mui/x-date-pickers/DateTimePicker';
 import MenuItem from '@mui/material/MenuItem';
@@ -16,6 +16,10 @@ function CreateAppointmentSlotDialog({ open, handleClose }) {
     const [duration, setDuration] = useState(30);
     const UserID = useUserStore(state => state.UserID);
     const { createNotification } = useNotification();
+
+    useEffect(() => {
+        setAppointmentEnd(appointmentStart.add(duration, 'minute'));
+    }, [appointmentStart, duration]);
 
     const onSubmit = () => {
         console.log("appointment title = <" + appointmentTitle + ">");
