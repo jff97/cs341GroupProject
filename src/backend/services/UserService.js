@@ -13,6 +13,17 @@ class UserService {
             throw err;
         }
 
+        // Check for username conflicts
+        let users = DataAccess.getAllUsernames();
+        if (UserName in users) {
+            const err = new Error('Username already taken');
+            err.code = 400;
+            throw err;
+        }
+
+        //Check if user is over 18
+
+
         if(!this.isPasswordValid(Password)) {
             const err = new Error('Password must contain at least 8 characters, 1 uppercase, 1 lowercase, and 1 number!');
             err.code = 406;

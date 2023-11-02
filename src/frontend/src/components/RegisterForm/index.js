@@ -5,6 +5,7 @@ import { Avatar, Button, CssBaseline, TextField, MenuItem, Box, Alert, Typograph
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import AppConfig from "src/config/config";
 import AppRegistrationIcon from '@mui/icons-material/AppRegistration';
+import {useNotification} from "../NotificationProvider";
 
 function ConfirmationDialog({open, handleClose}) {
     return (
@@ -52,6 +53,12 @@ function RegisterForm() {
 
     const handleSubmit = (event) => {
         event.preventDefault();
+
+        const { createNotification } = useNotification();
+        if (firstname === "" || lastname === "" || username === "" || password === "" || serviceTitle === "" || serviceInfo === "") {
+            createNotification('Missing fields required for account creation', 'error');
+            return;
+        }
         userService.createUser(firstname, lastname, username, password, birthdate, role, serviceTitle, serviceInfo, category).then(response => {
             setOpen(true);
             setError(null);

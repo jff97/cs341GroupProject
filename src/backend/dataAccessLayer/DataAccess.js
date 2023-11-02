@@ -167,6 +167,12 @@ class DataAccess {
          }]
       })
    }
+
+   getAllUsernames() {
+      return models.User.findAll({
+         attributes: ['UserName']
+      });
+   }
 }
 
 
