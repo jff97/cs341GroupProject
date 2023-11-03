@@ -1,7 +1,7 @@
 // Routes for appointment
 const express = require('express');
 
-const { createAppointment, deleteAppointment, bookAppointment, cancelAppointment, modifyAppointmentTime, getAppointmentSlotsForProvider, getAllAvailableAppointments, getAppointmentsByUser } = require('../controllers/AppointmentController');
+const { createAppointment, deleteAppointment, bookAppointment, cancelAppointment, modifyAppointmentTime, getAppointmentSlotsForProvider, getAllAvailableAppointments, getAppointmentsByUser, getAllSystemAppointments } = require('../controllers/AppointmentController');
 
 const router = express.Router();
 
@@ -13,5 +13,6 @@ router.put('/cancel', cancelAppointment);
 router.post('/modify', modifyAppointmentTime);
 router.get('/available', getAllAvailableAppointments);
 router.get('/usersAppointments', getAppointmentsByUser)
+router.get('/systemAppointments', getAllSystemAppointments);
 
 module.exports = router;

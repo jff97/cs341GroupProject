@@ -167,6 +167,17 @@ class DataAccess {
          }]
       })
    }
+
+   getAllSystemAppointments() {
+      return models.AppointmentSlot.findAll({
+         nest: false,
+         raw: true,
+         include: [{
+            model: models.Service,
+            attributes: ['ServiceTitle', 'Category']
+         }]
+      })
+   }
 }
 
 
