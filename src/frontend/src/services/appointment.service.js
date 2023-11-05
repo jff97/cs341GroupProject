@@ -77,6 +77,11 @@ const appointmentService = {
             .then((response) => {
                 return response.data;
             });
+    },
+
+    getAllSystemAppointments: async () => {
+        return await api 
+            .get(APPOINTMENT_ENDPOINT + '/systemAppointments')
     }
 }
 

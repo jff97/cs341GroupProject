@@ -16,18 +16,18 @@ module.exports = (sequelize) => {
             allowNull: false
         },
         FullName: {
-        type: DataTypes.VIRTUAL,
-        get() {
-            return `${this.FirstName} ${this.LastName}`;
-        },
-        set() {
-            throw new Error('Do not try to set the `FullName` value!');
-        }
+            type: DataTypes.VIRTUAL,
+            get() {
+                return `${this.FirstName} ${this.LastName}`;
+            },
+            set() {
+                throw new Error('Do not try to set the `FullName` value!');
+            }
         },
         UserName: {
             type: DataTypes.STRING(50),
             allowNull: false,
-            unique: true
+            unique: 'UserName'
         },
         HashedPassword: {
             type: DataTypes.STRING(255),
