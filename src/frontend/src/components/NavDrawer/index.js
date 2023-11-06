@@ -77,6 +77,16 @@ export default function NavDrawer() {
                         </ListItem>
                         </Link>
                     }
+                     <Link to="/dashboard/admin" style={linkStyles}>
+                        <ListItem disablePadding>
+                            <ListItemButton>
+                                <ListItemIcon>
+                                    <CalendarMonthOutlined />
+                                </ListItemIcon>
+                                <ListItemText primary="Admin" />
+                            </ListItemButton>
+                        </ListItem>
+                        </Link>
               
                 </List>
                 <Toolbar />

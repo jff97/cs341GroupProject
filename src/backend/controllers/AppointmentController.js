@@ -57,7 +57,7 @@ async function modifyAppointmentTime(req, res, next) {
 
 async function getAllSystemAppointments(req, res, next) {
     try {
-        const data = await AppointmentService.getAllSystemAppointments();
+        const data = await AppointmentService.getAllSystemAppointments(req.query.filterDate);
         res.status(200).send(data);
     } catch (err) {
         next(err);

@@ -1,52 +1,37 @@
 import React, { useEffect, useState } from 'react';
-import AppointmentManageTable from 'src/components/AppointmentManageTable';
+import AdminAppointmentsTable from 'src/components/AdminAppointmentsTable';
 import appointmentService from 'src/services/appointment.service';
-import useUserStore from 'src/utils/stores';
 import CustomAppBar from 'src/components/CustomAppBar';
-import CreateAppointmentSlotDialog from 'src/components/CreateAppointmentSlotDialog';
 import { Box } from '@mui/material';
+import dayjs from 'dayjs';
 
-export default function AppointmentManagement() {
-    const [appointmentSlots, setAppointmentSlots] = useState([]);
-    const [createAppointmentSlotDialogOpen, setCreateAppointmentSlotDialogOpen] = useState(false);
-    const UserID = useUserStore(state => state.UserID);
+export default function AdminPage() {
+    const [systemAppointmentSlots, setSystemAppointmentSlots] = useState([]);
+    const [filterDate, setFilterDate] = useState(dayjs());
+    
 
-    const onCreateAppointmentSlotDialogClose = () => {
-        setCreateAppointmentSlotDialogOpen(false);
-        getAppointmentSlotsForProvider();
-    }
-
-    const onDeleteAppointmentSlot = () => {
-        getAppointmentSlotsForProvider();
-    }
-
-    const getAppointmentSlotsForProvider = async () => {
-        appointmentService.getAllSystemAppointments()
-            .then((response) => {
-                setAppointmentSlots(response);
-            }).catch((error) => {
-                console.log(error);
-            });
+    const getAllSystemAppointments= async () => {
+        appointmentService.getAllSystemAppointments(filterDate)
+        .then((response) => {
+            setSystemAppointmentSlots(response.data);
+        }).catch((error) => {
+            console.log(error);
+        })
      }
 
     useEffect(() => {
-        getAppointmentSlotsForProvider();
-    }, []);
+        getAllSystemAppointments();
+    }, [filterDate]);
 
   return (
     <Box sx={{height: '93%'}}>
         <CustomAppBar 
             pageTitle="Admin Appointment Management" 
         />
-        <CreateAppointmentSlotDialog 
-            open={createAppointmentSlotDialogOpen} 
-            handleClose={onCreateAppointmentSlotDialogClose} 
-        />
-        <AppointmentManageTable 
-            appointmentSlots={appointmentSlots} 
-            getAppointmentSlotsForProvider={getAppointmentSlotsForProvider} 
-            openCreateAppointmentSlotDialog={setCreateAppointmentSlotDialogOpen} 
-            onDeleteAppointmentSlot={onDeleteAppointmentSlot}
+        <AdminAppointmentsTable
+            systemAppointmentSlots={systemAppointmentSlots}
+            filterDate={filterDate}
+            setFilterDate={setFilterDate}
         />
     </Box>
   );

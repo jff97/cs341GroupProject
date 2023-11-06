@@ -1,4 +1,5 @@
 const { models } = require('../dataAccessLayer')
+const { Op, Sequelize } = require('sequelize')
 class DataAccess {
 
    // For User Services
@@ -168,8 +169,22 @@ class DataAccess {
       })
    }
 
-   getAllSystemAppointments() {
+   getAllSystemAppointments(filterDate) {
+      const targetDate = new Date(filterDate);
+      const startOfDay = new Date(targetDate);
+      const endOfDay = new Date(targetDate);
+
+      startOfDay.setHours(0, 0, 0, 0); // Set time to 00:00:00.000
+      endOfDay.setHours(23, 59, 59, 999); // Set time to 23:59:59.999
       return models.AppointmentSlot.findAll({
+         where: {
+            StartDateTime: {
+               [Op.between]: [
+                  Sequelize.literal(`DATE('${startOfDay.toISOString()}')`),
+                  Sequelize.literal(`DATE('${endOfDay.toISOString()}')`)
+                ]
+            }
+         }, 
          nest: false,
          raw: true,
          include: [{
@@ -179,8 +194,6 @@ class DataAccess {
       })
    }
 }
-
-
 
 // Singleton instance of DataAccess for "Dependency Injection"
 const dataAccessInstance = Object.freeze(new DataAccess())
