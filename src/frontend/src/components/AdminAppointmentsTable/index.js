@@ -22,10 +22,11 @@ function CustomToolbar({filterDate, setFilterDate}) {
 
 const columns = [
     { field: 'AppointmentTitle', headerName: 'Appointment Title', width: 200 },
+    { field: 'Service.ServiceTitle', headerName: 'Provider', width: 200},
     { field: 'User', headerName: 'Client', width: 200, valueGetter: (params) => {
         return params.value ? (params.value.FirstName + ' ' + params.value.LastName) : 'None'
     }
-     },
+    },
     { field: 'StartDateTime', headerName: 'Appointment Start', type: 'string', width: 250, valueGetter: (params) => {
         // Return date as string in the format of DAY MONTH DATE YEAR HH:MM AM/PM
         const date = new Date(params.value);
