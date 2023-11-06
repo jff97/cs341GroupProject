@@ -1,7 +1,7 @@
 import React from 'react';
+import CustomNoRowsOverlay from 'src/components/CustomNoRowsOverlay';
 import { DatePicker } from '@mui/x-date-pickers';
 import { DataGrid, GridToolbarContainer } from '@mui/x-data-grid';
-import dayjs from 'dayjs';
 
 
 function CustomToolbar({filterDate, setFilterDate}) {
@@ -52,6 +52,7 @@ export default function AdminAppointmentsTable({ systemAppointmentSlots, filterD
             disableRowSelectionOnClick
             slots={{
                 toolbar: CustomToolbar,
+                noRowsOverlay: CustomNoRowsOverlay,
             }}
             slotProps={{toolbar: {filterDate, setFilterDate}}}
             sx={{
