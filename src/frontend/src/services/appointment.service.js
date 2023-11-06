@@ -77,6 +77,15 @@ const appointmentService = {
             .then((response) => {
                 return response.data;
             });
+    },
+
+    getAllSystemAppointments: async (filterDate) => {
+        return await api 
+            .get(APPOINTMENT_ENDPOINT + '/systemAppointments', {
+                params: {
+                    filterDate: filterDate
+                }
+            })
     }
 }
 

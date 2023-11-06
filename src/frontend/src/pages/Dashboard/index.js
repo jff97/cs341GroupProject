@@ -6,6 +6,7 @@ import { NotificationProvider } from "src/components/NotificationProvider";
 import AppointmentManagement from "src/pages/AppointmentManagement";
 import { BookAppointmentPage } from "src/pages/BookAppointmentPage";
 import { MyAppointmentPage } from "src/pages/MyAppointmentPage";
+import AdminPage from "src/pages/AdminPage";
 import useUserStore from "src/utils/stores";
 import styled from "@mui/material/styles/styled";
 
@@ -28,8 +29,11 @@ export function Dashboard() {
                         {/*TODO: refactor the appointment path to make more sense*/}
                         <Route path="/appointment" element={<AppointmentManagement />} />
                         <Route path="/myAppointment" element={<MyAppointmentPage />} />
+                        <Route path="/admin" element={<AdminPage />} />
                         {RoleID === 1 && <Route path="/" element={<Navigate to="/dashboard/book" />}/>}
                         {RoleID === 2 && <Route path="/" element={<Navigate to="/dashboard/appointment" />}/>}
+                        {RoleID === 3 && <Route path="/" element={<Navigate to="/dashboard/admin" />}/>}
+
                     </Routes>
                 </Box>
             </Box>

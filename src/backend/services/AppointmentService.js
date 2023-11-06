@@ -95,6 +95,9 @@ class AppointmentService {
         return await DataAccess.getAppointmentsByUserId(UserID);
     }
 
+    async getAllSystemAppointments(filterDate) {
+        return await DataAccess.getAllSystemAppointments(filterDate);
+    }
 }
 
 

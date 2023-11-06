@@ -5,6 +5,7 @@ import EventIcon from '@mui/icons-material/Event';
 import { CalendarMonthOutlined } from '@mui/icons-material';
 import { Link } from 'react-router-dom';
 import { useLocation } from 'react-router-dom';
+import AdminPanelSettingsIcon from '@mui/icons-material/AdminPanelSettings';
 import AppConfig from 'src/config/config';
 import useUserStore from 'src/utils/stores';
 
@@ -77,7 +78,18 @@ export default function NavDrawer() {
                         </ListItem>
                         </Link>
                     }
-              
+                    {RoleID === 3 &&
+                     <Link to="/dashboard/admin" style={linkStyles}>
+                        <ListItem disablePadding>
+                            <ListItemButton>
+                                <ListItemIcon>
+                                    <AdminPanelSettingsIcon />
+                                </ListItemIcon>
+                                <ListItemText primary="System Administration" />
+                            </ListItemButton>
+                        </ListItem>
+                        </Link>
+                    }
                 </List>
                 <Toolbar />
             </Drawer>
