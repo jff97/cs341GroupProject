@@ -171,25 +171,22 @@ class DataAccess {
 
    getAllSystemAppointments(filterDate) {
       const targetDate = new Date(filterDate);
-      const startOfDay = new Date(targetDate);
-      const endOfDay = new Date(targetDate);
-
-      startOfDay.setHours(0, 0, 0, 0); // Set time to 00:00:00.000
-      endOfDay.setHours(23, 59, 59, 999); // Set time to 23:59:59.999
+      
+      // Get all appointments that fall on the target date
       return models.AppointmentSlot.findAll({
          where: {
             StartDateTime: {
-               [Op.between]: [
-                  Sequelize.literal(`DATE('${startOfDay.toISOString()}')`),
-                  Sequelize.literal(`DATE('${endOfDay.toISOString()}')`)
-                ]
+               [Op.between]: [targetDate, new Date(targetDate.getTime() + 86400000)] // Add 24 hours to target date
             }
-         }, 
+         },
          nest: false,
          raw: true,
          include: [{
             model: models.Service,
             attributes: ['ServiceTitle', 'Category']
+         }, {
+            model: models.User,
+            attributes: ['FirstName', 'LastName']
          }]
       })
    }
