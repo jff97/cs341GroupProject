@@ -9,6 +9,7 @@ const sequelize = require('./dataAccessLayer');
 const swaggerJsdoc = require('swagger-jsdoc');
 const swaggerUi = require('swagger-ui-express');
 const swagger_options = require('./configs/swagger');
+const path = require('path');
 
 //our API routes
 const userRoutes = require('./routes/UserRoutes');
@@ -50,6 +51,14 @@ async function init() {
     app.use('/api/auth', authRoutes);
     app.use('/api/appointment', appointmentRoutes);
     app.use('/api/notification', notificationRoutes);
+
+    // Serve static files from the "public" directory
+    app.use(express.static(path.join(__dirname, 'public')));
+
+    // Serve the index.html file for any other requests
+    app.get('*', (req, res) => {
+        res.sendFile(path.join(__dirname, 'public', 'index.html'));
+    });
 
     // Swagger Integration
     const specs = swaggerJsdoc(swagger_options);
