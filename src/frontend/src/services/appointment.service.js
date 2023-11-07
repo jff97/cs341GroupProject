@@ -28,6 +28,20 @@ const appointmentService = {
             });
     },
 
+    modifyAppointmentSlot: async (AppointmentID, StartDateTime, EndDateTime, UserID, AppointmentTitle) => {
+        return await api
+            .put(APPOINTMENT_ENDPOINT + "/modify", {
+                AppointmentID: AppointmentID,
+                AppointmentTitle: AppointmentTitle,
+                StartDateTime: StartDateTime,
+                EndDateTime: EndDateTime,
+                UserID: UserID
+            })
+            .then((response) => {
+                return response.data;
+            });
+    },
+
     deleteAppointmentSlot: async (AppointmentID) => {
         return await api
             .delete(APPOINTMENT_ENDPOINT + "/delete", {
