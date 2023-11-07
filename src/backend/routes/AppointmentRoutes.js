@@ -1,11 +1,12 @@
 // Routes for appointment
 const express = require('express');
+const { enforceAuthentication } = require('../middlewares/auth_middleware');
 
 const { createAppointment, deleteAppointment, bookAppointment, cancelAppointment, modifyAppointmentTime, getAppointmentSlotsForProvider, getAllAvailableAppointments, getAppointmentsByUser, getAllSystemAppointments } = require('../controllers/AppointmentController');
 
 const router = express.Router();
 
-router.get('/provider', getAppointmentSlotsForProvider);
+router.get('/provider', enforceAuthentication, getAppointmentSlotsForProvider);
 router.post('/create', createAppointment);
 router.delete('/delete', deleteAppointment);
 router.put('/book', bookAppointment);

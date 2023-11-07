@@ -28,6 +28,7 @@ const modelDefiners = [
     require('./models/Service'),
     require('./models/Role'),
     require('./models/AppointmentSlot'),
+    require('./models/Notification'),
 ];
 
 // Instantiate the models through dependency injection with sequelize
