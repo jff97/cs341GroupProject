@@ -117,6 +117,24 @@ class AppointmentService {
     async getAllSystemAppointments(filterDate) {
         return await DataAccess.getAllSystemAppointments(filterDate);
     }
+
+    async modifyAppointment({AppointmentID, StartDateTime, EndDateTime, AppointmentTitle}) {
+        if(!StartDateTime || !EndDateTime || !AppointmentID) {
+            const err = new Error('Missing required fields for appointment creation!');
+            err.code = 400;
+            throw err;
+        } else if (AppointmentTitle === '') {
+            const err = new Error('Appointment Title Cannot Be Empty!');
+            err.code = 400;
+            throw err;
+        } else if (new Date(StartDateTime) < new Date()) {
+            const err = new Error('Appointment Must Be In The Future!');
+            err.code = 400;
+            throw err;
+        }
+
+        await DataAccess.modifyAppointment(AppointmentID, StartDateTime, EndDateTime, AppointmentTitle);
+    }
 }
 
 

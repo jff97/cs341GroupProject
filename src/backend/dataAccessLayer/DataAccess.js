@@ -236,6 +236,14 @@ class DataAccess {
          }
       })
    }
+
+   modifyAppointment(AppointmentID, StartDateTime, EndDateTime, AppointmentTitle) {
+      return models.AppointmentSlot.update({StartDateTime: StartDateTime, EndDateTime: EndDateTime, AppointmentTitle: AppointmentTitle}, {
+         where: {
+            AppointmentID: AppointmentID
+         }
+      })
+   }
 }
 
 // Singleton instance of DataAccess for "Dependency Injection"
