@@ -193,6 +193,49 @@ class DataAccess {
          }]
       })
    }
+
+   getAllNotificationsForUser(UserID) {
+      return models.Notification.findAll({
+         where: {
+            UserID: UserID
+         }
+      })
+   }
+
+   createNotification(NotificationTitle, NotificationMessage, NotificationDate, NotificationType, UserID) {
+      return models.Notification.create({ 
+         NotificationTitle: NotificationTitle, 
+         NotificationMessage: NotificationMessage, 
+         NotificationDate: NotificationDate, 
+         NotificationType: NotificationType, 
+         NotificationRead: false, 
+         UserID: UserID
+      })
+   }
+
+   deleteNotification(NotificationID) {
+      return models.Notification.destroy({
+         where: {
+            NotificationID: NotificationID
+         }
+      })
+   }
+
+   toggleNotificationRead(NotificationID) {
+      return models.Notification.update({NotificationRead: Sequelize.literal('NOT NotificationRead')}, {
+         where: {
+            NotificationID: NotificationID
+         }
+      })
+   }
+
+   getServiceByID(ServiceID) {
+      return models.Service.findOne({
+         where: {
+            ServiceID: ServiceID
+         }
+      })
+   }
 }
 
 // Singleton instance of DataAccess for "Dependency Injection"

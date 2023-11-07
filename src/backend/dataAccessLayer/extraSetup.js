@@ -7,7 +7,7 @@ const { logger } = require("../logging");
  * @param {Sequelize} sequelize - Sequelize/DB instance
  */
 function applyAssociations(sequelize) {
-    const { User, Service, Role, AppointmentSlot } = sequelize.models;
+    const { User, Service, Role, AppointmentSlot, Notification } = sequelize.models;
 
     // One role serves many users
     Role.hasMany(User, {
@@ -53,6 +53,20 @@ function applyAssociations(sequelize) {
         }
     });
 
+    // One user has many notifications
+    User.hasMany(Notification, {
+        foreignKey: {
+            name: 'UserID',
+            allowNull: false
+        }
+    });
+
+    Notification.belongsTo(User, {
+        foreignKey: {
+            name: 'UserID',
+            allowNull: false
+        }
+    });
 }
 
 /**

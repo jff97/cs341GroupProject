@@ -15,6 +15,7 @@ const userRoutes = require('./routes/UserRoutes');
 const serviceProviderRoutes = require('./routes/ServiceProviderRoutes');
 const appointmentRoutes = require('./routes/AppointmentRoutes');
 const authRoutes = require('./routes/AuthRoutes');
+const notificationRoutes = require('./routes/NotificationRoutes');
 const { logger } = require('./logging');
 
 // Ensure the express app uses these modules
@@ -48,6 +49,7 @@ async function init() {
     app.use('/api/serviceprovider', serviceProviderRoutes);
     app.use('/api/auth', authRoutes);
     app.use('/api/appointment', appointmentRoutes);
+    app.use('/api/notification', notificationRoutes);
 
     // Swagger Integration
     const specs = swaggerJsdoc(swagger_options);

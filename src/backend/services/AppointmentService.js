@@ -1,5 +1,6 @@
 const DataAccess = require('../dataAccessLayer/DataAccess');
 const appSettings = require('../configs/tunableAppSettings.js');
+const notificationServiceInstance = require('./NotificationService.js');
 
 class AppointmentService {
     async createAppointment({StartDateTime, EndDateTime, UserID, AppointmentTitle}) {
@@ -64,7 +65,25 @@ class AppointmentService {
             err.code = 400;
             throw err;
         }
+
         await DataAccess.cancelAppointment(AppointmentID);
+
+        // Get Service Provider's UserID
+        const service = await DataAccess.getServiceByID(apptToCancel.ServiceID);
+        const serviceProviderUserID = service.UserID;
+
+        // Format StartDateTime
+        const startDateTime = new Date(apptToCancel.StartDateTime);
+        const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric', hour: 'numeric', minute: 'numeric' };
+        const startDateTimeString = startDateTime.toLocaleString('en-US', options);
+
+        notificationServiceInstance.createNotification({
+            UserID: serviceProviderUserID,
+            NotificationTitle: "Appointment Canceled",
+            NotificationMessage: "Your appointment \"" + apptToCancel.AppointmentTitle + "\" for " + startDateTimeString + " has been canceled.",
+            NotificationDate: new Date(),
+            NotificationType: "Appointment"
+        });
     }
 
     async modifyAppointmentTime({AppointmentID, StartDateTime, EndDateTime}) {
