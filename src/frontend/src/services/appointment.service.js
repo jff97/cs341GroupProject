@@ -94,10 +94,11 @@ const appointmentService = {
     },
 
     getAllSystemAppointments: async (filterDate) => {
+        console.log(filterDate)
         return await api 
             .get(APPOINTMENT_ENDPOINT + '/systemAppointments', {
                 params: {
-                    filterDate: filterDate
+                    filterDate: filterDate.set('second', 0).set('minute', 0).set('hour', 0)
                 }
             })
     }

@@ -5,6 +5,13 @@ import CustomAppBar from 'src/components/CustomAppBar';
 import { Box } from '@mui/material';
 import dayjs from 'dayjs';
 
+import utc from 'dayjs/plugin/utc';
+import timezone from 'dayjs/plugin/timezone';
+
+dayjs.extend(utc);
+dayjs.extend(timezone);
+
+
 export default function AdminPage() {
     const [systemAppointmentSlots, setSystemAppointmentSlots] = useState([]);
     const [filterDate, setFilterDate] = useState(dayjs());
