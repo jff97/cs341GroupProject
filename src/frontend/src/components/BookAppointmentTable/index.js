@@ -5,6 +5,7 @@ import BookmarkAddIcon from '@mui/icons-material/BookmarkAdd';
 import appointmentService from 'src/services/appointment.service';
 import useUserStore from 'src/utils/stores';
 import { useNotification } from '../NotificationProvider';
+import CustomNoRowsOverlay from 'src/components/CustomNoRowsOverlay';
 
 function CustomToolbar() {
     return (
@@ -75,6 +76,7 @@ export default function BookAppointmentTable({availableAppointmentsData, loadAva
         }}
         slots={{
             toolbar: CustomToolbar,
+            noRowsOverlay: CustomNoRowsOverlay,
         }}
     />
   )

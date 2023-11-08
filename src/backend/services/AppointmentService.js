@@ -31,6 +31,20 @@ class AppointmentService {
     }
 
     async deleteAppointment({AppointmentID}) {
+        const appointment = await DataAccess.getAppointmentByID(AppointmentID);
+        
+        // Format StartDateTime
+        const startDateTime = new Date(appointment.StartDateTime);
+        const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric', hour: 'numeric', minute: 'numeric' };
+        const startDateTimeString = startDateTime.toLocaleString('en-US', options);
+        notificationServiceInstance.createNotification({
+            UserID: appointment.ClientUserID,
+            NotificationTitle: "Appointment Deleted",
+            NotificationMessage: "Your appointment \"" + appointment.AppointmentTitle + "\" for " + startDateTimeString + " has been canceled.",
+            NotificationDate: new Date(),
+            NotificationType: "Appointment"
+        });
+
         await DataAccess.deleteAppointment(AppointmentID);
     }
 
