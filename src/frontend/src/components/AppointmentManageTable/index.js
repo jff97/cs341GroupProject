@@ -4,6 +4,7 @@ import { Add, Edit, Delete } from '@mui/icons-material';
 import { DataGrid, GridToolbarContainer } from '@mui/x-data-grid';
 import appointmentService from 'src/services/appointment.service';
 import { useNotification } from '../NotificationProvider';
+import CustomNoRowsOverlay from 'src/components/CustomNoRowsOverlay';
 
 function CustomToolbar({ openCreateAppointmentSlotDialog }) {
     return (
@@ -95,6 +96,7 @@ export default function AppointmentManageTable({ appointmentSlots, openCreateApp
             disableRowSelectionOnClick
             slots={{
                 toolbar: CustomToolbar,
+                noRowsOverlay: CustomNoRowsOverlay,
             }}
 
             slotProps={{ toolbar: { openCreateAppointmentSlotDialog }, row: { deleteAppointment } }}
