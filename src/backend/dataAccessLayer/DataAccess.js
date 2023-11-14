@@ -241,6 +241,21 @@ class DataAccess {
          }
       })
    }
+
+   //get all booked appointments that were within the given time frame and where a clientUserid of not null means booked
+   getAppointmentsInTimeFrame(ServiceID, StartDateTime, EndDateTime) {
+      return models.AppointmentSlot.findAll({
+         where: {
+            ServiceID: ServiceID,
+            StartDateTime: {
+               [Op.between]: [StartDateTime, EndDateTime]
+            },
+            ClientUserID: {
+               [Op.not]: null
+            }
+         }
+      })
+   }
 }
 
 // Singleton instance of DataAccess for "Dependency Injection"

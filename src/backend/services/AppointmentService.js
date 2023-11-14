@@ -149,8 +149,21 @@ class AppointmentService {
 
         await DataAccess.modifyAppointment(AppointmentID, StartDateTime, EndDateTime, AppointmentTitle);
     }
-}
 
+    #appointmentsToTrends(appointments) {
+        let appointmentTrends = [0, 0, 0, 0, 0, 0, 0]
+        for (let i = 0; i < appointments.length; i++) {
+            let day = new Date(appointments[i].StartDateTime).getDay();
+            appointmentTrends[day] = appointmentTrends[day] + 1;
+        }
+        return appointmentTrends;
+    }
+    async getAppointmentTrends(ServiceProviderUserID, StartDateTime, EndDateTime) {
+        const serviceId = await DataAccess.getServiceIDByUserID(ServiceProviderUserID);
+        const appointments = await DataAccess.getAppointmentsInTimeFrame(serviceId, StartDateTime, EndDateTime);
+        return this.#appointmentsToTrends(appointments);
+    }
+}
 
 
 const appointmentServiceInstance = Object.freeze(new AppointmentService());
