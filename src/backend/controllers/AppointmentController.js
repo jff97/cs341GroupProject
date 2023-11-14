@@ -93,7 +93,7 @@ async function modifyAppointment(req, res, next) {
 
 async function getAppointmentTrends(req, res, next) {
     try {
-        const data = await AppointmentService.getAppointmentTrends(req.query.UserID, req.query.StartDateTime, req.query.EndDateTime);
+        const data = await AppointmentService.getAppointmentTrends(req.query.ProviderID, req.query.StartDateTime, req.query.EndDateTime);
         res.status(200).send(data);
     } catch (err) {
         next(err);
