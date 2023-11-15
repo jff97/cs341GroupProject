@@ -68,7 +68,7 @@ class DataAccess {
       })
    }
 
-
+   //return just the service id attribute of the user associated with the userid
    getServiceIDByUserID(UserID) {
       return models.Service.findOne({
          where: {

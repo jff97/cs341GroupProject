@@ -154,16 +154,15 @@ class AppointmentService {
         let appointmentTrends = [0, 0, 0, 0, 0, 0, 0]
         for (let i = 0; i < appointments.length; i++) {
             let day = new Date(appointments[i].StartDateTime).getDay();
+            console.log(day);
             appointmentTrends[day] = appointmentTrends[day] + 1;
         }
         return appointmentTrends;
     }
+    
     async getAppointmentTrends(ServiceProviderUserID, StartDateTime, EndDateTime) {
-        /*console.log("ServiceProviderUserID: " + ServiceProviderUserID)
-        console.log("StartDateTime: " + StartDateTime)
-        console.log("EndDateTime: " + EndDateTime)*/
-        const serviceId = await DataAccess.getServiceIDByUserID(ServiceProviderUserID);
-        const appointments = await DataAccess.getAppointmentsInTimeFrame(serviceId, StartDateTime, EndDateTime);
+        const service = await DataAccess.getServiceIDByUserID(ServiceProviderUserID);
+        const appointments = await DataAccess.getAppointmentsInTimeFrame(service.ServiceID, StartDateTime, EndDateTime);
         return this.#appointmentsToTrends(appointments);
     }
 }

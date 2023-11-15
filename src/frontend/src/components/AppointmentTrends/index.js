@@ -7,26 +7,23 @@ import dayjs from 'dayjs';
 import {DatePicker} from "@mui/x-date-pickers/DatePicker";
 
 export default function AppointmentTrends() {
-    const [apiData, setApiData] = useState([]);
+    const [trends, setApiData] = useState([]);
     const [startDateTime, setStartDateTime] = useState(dayjs().set('second', 0));
-    const [endDateTime, setEndDateTime] = useState(dayjs().set('second', 0).add(6, 'day'));
+    const [endDateTime, setEndDateTime] = useState(dayjs());
     const ProviderID = useUserStore(state => state.UserID);
 
     const fetchData = async (providerID, startDate, endDate) => {
         try {
-            const trends = await appointmentService.getAppointmentTrends(providerID, startDate, endDate);
-            setApiData(trends);
+            const weekTrends = await appointmentService.getAppointmentTrends(providerID, startDate, endDate);
+            setApiData(weekTrends);
         } catch (error) {
             console.error('Error fetching data:', error);
         }
     };
 
-    const daysOfWeek = [];
-    for (let i = 0; i < 7; i++) {
-        const day = startDateTime.add(i, 'day').format('MM-DD-YYYY');
-        daysOfWeek.push(day);
-    }
-    const data = apiData.map((value, index) => {
+    const daysOfWeek = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+    
+    const data = trends.map((value, index) => {
         return { day: daysOfWeek[index], 'Number of Appointments': value };
     });
 
@@ -34,13 +31,6 @@ export default function AppointmentTrends() {
     useEffect(() => {
         fetchData(ProviderID, startDateTime, endDateTime);
     }, [ProviderID, startDateTime, endDateTime]);
-
-    const handleDateTimeChange = (newValue) => {
-        const updatedStartDateTime = dayjs(newValue);
-        const updatedEndDateTime = updatedStartDateTime.add(6, 'day');
-        setStartDateTime(updatedStartDateTime);
-        setEndDateTime(updatedEndDateTime);
-    }
 
     return (
         <div>
@@ -59,7 +49,13 @@ export default function AppointmentTrends() {
                     renderInput={(props) => <TextField {...props} />}
                     label="Start Date Time"
                     value={startDateTime}
-                    onChange={(newValue) => /*setStartDateTime(newValue.second(0))*/handleDateTimeChange(newValue)}
+                    onChange={(newValue) => setStartDateTime(newValue.second(0))}
+                />
+                <DatePicker
+                    renderInput={(props) => <TextField {...props} />}
+                    label="End Date Time"
+                    value={endDateTime}
+                    onChange={(newValue) => setEndDateTime(newValue.second(0))}
                 />
             </div>
         </div>
