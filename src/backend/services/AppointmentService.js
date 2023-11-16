@@ -165,6 +165,10 @@ class AppointmentService {
         const appointments = await DataAccess.getAppointmentsInTimeFrame(service.ServiceID, StartDateTime, EndDateTime);
         return this.#appointmentsToTrends(appointments);
     }
+
+    async getAllServiceProviders() {
+        return await DataAccess.getAllServiceProviders();
+    }
 }
 
 

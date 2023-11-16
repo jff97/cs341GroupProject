@@ -22,7 +22,6 @@ export default function AppointmentTrends() {
     };
 
     const daysOfWeek = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
-    
     const data = trends.map((value, index) => {
         return { day: daysOfWeek[index], 'Number of Appointments': value };
     });

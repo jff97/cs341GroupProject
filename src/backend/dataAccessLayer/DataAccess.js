@@ -256,6 +256,14 @@ class DataAccess {
          }
       })
    }
+
+   getAllServiceProviders() {
+      return models.User.findAll({
+         where: {
+            RoleID: 2
+         }
+      })
+   }
 }
 
 // Singleton instance of DataAccess for "Dependency Injection"

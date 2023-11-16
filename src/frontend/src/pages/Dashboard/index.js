@@ -7,6 +7,7 @@ import AppointmentManagement from "src/pages/AppointmentManagement";
 import { BookAppointmentPage } from "src/pages/BookAppointmentPage";
 import { MyAppointmentPage } from "src/pages/MyAppointmentPage";
 import AppointmentTrends from "src/pages/AppointmentTrends";
+import AdminAppointmentTrends from "src/pages/AdminAppointmentTrends";
 import AdminPage from "src/pages/AdminPage";
 import useUserStore from "src/utils/stores";
 import styled from "@mui/material/styles/styled";
@@ -32,6 +33,7 @@ export function Dashboard() {
                         <Route path="/myAppointment" element={<MyAppointmentPage />} />
                         <Route path="/admin" element={<AdminPage />} />
                         <Route path="/trends" element={<AppointmentTrends />} />
+                        <Route path="/adminTrends" element={<AdminAppointmentTrends />} />
                         {RoleID === 1 && <Route path="/" element={<Navigate to="/dashboard/book" />}/>}
                         {RoleID === 2 && <Route path="/" element={<Navigate to="/dashboard/appointment" />}/>}
                         {RoleID === 3 && <Route path="/" element={<Navigate to="/dashboard/admin" />}/>}
