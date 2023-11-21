@@ -3,15 +3,23 @@ import CustomNoRowsOverlay from 'src/components/CustomNoRowsOverlay';
 import { DatePicker } from '@mui/x-date-pickers';
 import { DataGrid, GridToolbarContainer } from '@mui/x-data-grid';
 
-function CustomToolbar({filterDate, setFilterDate}) {
+function CustomToolbar({filterStartDate, filterEndDate, setFilterStartDate, setFilterEndDate}) {
     return (
       <GridToolbarContainer>
         <h2>System Appointment Slots</h2>
         <DatePicker
-            label="Appointment Date"
-            value={filterDate}
+            label="Appointment Start Date"
+            value={filterStartDate}
             onChange={(newValue) => {
-                setFilterDate(newValue);
+                setFilterStartDate(newValue);
+            }}
+            sx={{color: 'white', marginLeft: 'auto', mt: 2, mr: 2}}
+        />
+        <DatePicker
+            label="Appointment End Date"
+            value={filterEndDate}
+            onChange={(newValue) => {
+                setFilterEndDate(newValue);
             }}
             sx={{color: 'white', marginLeft: 'auto', mt: 2, mr: 2}}
         />
@@ -40,7 +48,7 @@ const columns = [
     }},
 ];
 
-export default function AdminAppointmentsTable({ systemAppointmentSlots, filterDate, setFilterDate }) {
+export default function AdminAppointmentsTable({ systemAppointmentSlots, filterStartDate, filterEndDate, setFilterStartDate, setFilterEndDate }) {
     return (
         <DataGrid 
             rows={systemAppointmentSlots} 
@@ -53,7 +61,7 @@ export default function AdminAppointmentsTable({ systemAppointmentSlots, filterD
                 toolbar: CustomToolbar,
                 noRowsOverlay: CustomNoRowsOverlay,
             }}
-            slotProps={{toolbar: {filterDate, setFilterDate}}}
+            slotProps={{toolbar: {filterStartDate, setFilterStartDate, filterEndDate, setFilterEndDate}}}
             sx={{
                 boxShadow: 2,
                 border: 2,

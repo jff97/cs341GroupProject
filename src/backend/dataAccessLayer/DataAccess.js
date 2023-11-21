@@ -169,14 +169,15 @@ class DataAccess {
       })
    }
 
-   getAllSystemAppointments(filterDate) {
-      const targetDate = new Date(filterDate);
+   getAppointmentsInRange(filterStartDate, filterEndDate) {
+      const targetStartDate = new Date(filterStartDate);
+      const targetEndDate = new Date(filterEndDate);
       
       // Get all appointments that fall on the target date
       return models.AppointmentSlot.findAll({
          where: {
             StartDateTime: {
-               [Op.between]: [targetDate, new Date(targetDate.getTime() + 86400000)] // Add 24 hours to target date
+               [Op.between]: [targetStartDate, targetEndDate] // Add 24 hours to target date
             }
          },
          nest: false,

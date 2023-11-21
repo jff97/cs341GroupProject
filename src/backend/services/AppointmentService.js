@@ -128,8 +128,8 @@ class AppointmentService {
         return await DataAccess.getAppointmentsByUserId(UserID);
     }
 
-    async getAllSystemAppointments(filterDate) {
-        return await DataAccess.getAllSystemAppointments(filterDate);
+    async getAppointmentsInRange(filterStartDate, filterEndDate) {
+        return await DataAccess.getAppointmentsInRange(filterStartDate, filterEndDate);
     }
 
     async modifyAppointment({AppointmentID, StartDateTime, EndDateTime, AppointmentTitle}) {

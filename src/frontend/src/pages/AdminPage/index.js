@@ -14,11 +14,12 @@ dayjs.extend(timezone);
 
 export default function AdminPage() {
     const [systemAppointmentSlots, setSystemAppointmentSlots] = useState([]);
-    const [filterDate, setFilterDate] = useState(dayjs());
+    const [filterStartDate, setFilterStartDate] = useState(dayjs());
+    const [filterEndDate, setFilterEndDate] = useState(dayjs());
     
 
-    const getAllSystemAppointments= async () => {
-        appointmentService.getAllSystemAppointments(filterDate)
+    const getAppointmentsInRange= async () => {
+        appointmentService.getAppointmentsInRange(filterStartDate, filterEndDate)
         .then((response) => {
             setSystemAppointmentSlots(response.data);
         }).catch((error) => {
@@ -27,8 +28,8 @@ export default function AdminPage() {
      }
 
     useEffect(() => {
-        getAllSystemAppointments();
-    }, [filterDate]);
+        getAppointmentsInRange();
+    }, [filterStartDate, filterEndDate]);
 
   return (
     <Box sx={{height: '93%'}}>
@@ -37,8 +38,10 @@ export default function AdminPage() {
         />
         <AdminAppointmentsTable
             systemAppointmentSlots={systemAppointmentSlots}
-            filterDate={filterDate}
-            setFilterDate={setFilterDate}
+            filterStartDate={filterStartDate}
+            filterEndDate={filterEndDate}
+            setFilterStartDate={setFilterStartDate}
+            setFilterEndDate={setFilterEndDate}
         />
     </Box>
   );

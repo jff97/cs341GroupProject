@@ -114,12 +114,12 @@ const appointmentService = {
             });
     },
 
-    getAllSystemAppointments: async (filterDate) => {
-        console.log(filterDate)
+    getAppointmentsInRange: async (filterStartDate, filterEndDate) => {
         return await api 
             .get(APPOINTMENT_ENDPOINT + '/systemAppointments', {
                 params: {
-                    filterDate: filterDate.set('second', 0).set('minute', 0).set('hour', 0)
+                    filterStartDate: filterStartDate.set('second', 0).set('minute', 0).set('hour', 0),
+                    filterEndDate:   filterEndDate.set('second', 0).set('minute', 0).set('hour', 0)
                 }
             })
     }
