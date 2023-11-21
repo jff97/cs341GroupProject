@@ -1,7 +1,11 @@
 import React from 'react';
+import { Button, Box } from '@mui/material';
+import { Edit, Cancel } from '@mui/icons-material';
 import CustomNoRowsOverlay from 'src/components/CustomNoRowsOverlay';
 import { DatePicker } from '@mui/x-date-pickers';
 import { DataGrid, GridToolbarContainer } from '@mui/x-data-grid';
+import appointmentService from 'src/services/appointment.service';
+import { useNotification } from '../NotificationProvider';
 
 function CustomToolbar({filterStartDate, filterEndDate, setFilterStartDate, setFilterEndDate}) {
     return (
@@ -25,14 +29,16 @@ function CustomToolbar({filterStartDate, filterEndDate, setFilterStartDate, setF
         />
       </GridToolbarContainer>
     );
-  }
-
+}
 const columns = [
     { field: 'AppointmentTitle', headerName: 'Appointment Title', width: 200 },
     { field: 'Service.ServiceTitle', headerName: 'Provider', width: 200},
-    { field: 'User', headerName: 'Client', width: 200, valueGetter: (params) => {
-        return params.value ? (params.value.FirstName + ' ' + params.value.LastName) : 'None'
-    }
+    { 
+        field: 'User', headerName: 'Client', width: 200, 
+        valueGetter: (params) => {
+            console.log(params);
+            return params.row.ClientUserID ? (params.row["User.FirstName"] + ' ' + params.row["User.LastName"]) : 'None'
+        }
     },
     { field: 'StartDateTime', headerName: 'Appointment Start', type: 'string', width: 250, valueGetter: (params) => {
         // Return date as string in the format of DAY MONTH DATE YEAR HH:MM AM/PM
@@ -46,11 +52,48 @@ const columns = [
     { field: 'LastModifiedDateTime', headerName: 'Last Modified', type: 'string', width: 250, valueGetter: (params) => {
         return new Date(params.value)
     }},
+    {
+        field: 'Actions', headerName: 'Actions', width: 200, headerAlign: 'center', renderCell: (params) => {
+            return (
+                <div>
+                    <Button variant="contained" color="info" size="small" sx={{ color: 'white', marginLeft: 'auto', mr: 2 }}
+                        onClick={() => {
+                            const appointmentToEdit = params.row;
+                            //show something for the user to edit the appointment data
+
+                            //upsert the new appointment data with modifyAppointmentSlot front end service
+                        }}
+                        endIcon={<Edit />}>
+                        Edit
+                    </Button>
+                    <Button 
+                        disabled={params.row.ClientUserID ? false : true}
+                        variant="contained" color="error" size="small" sx={{ color: 'white', marginLeft: 'auto', mr: 2 }}
+                        onClick={() => {
+                            const appointmentToCancel = params.row;
+                            //cancel the appointment
+                            try {
+                                appointmentService.unBookAppointment(appointmentToCancel.AppointmentID);
+                            }
+                            catch (err) {
+                                // TODO1234: show error message with create notification i cant figure out how to use the notification provider here
+                                console.log(err);
+                            }
+                            //make the grid reload
+                            // TODO1234: make the grid reload
+                        }}
+                        endIcon={<Cancel />}>
+                        Cancel
+                    </Button>
+                </div>)
+        }
+    },
 ];
 
 export default function AdminAppointmentsTable({ systemAppointmentSlots, filterStartDate, filterEndDate, setFilterStartDate, setFilterEndDate }) {
     return (
-        <DataGrid 
+        <Box sx={{height: '93%'}}>
+            <DataGrid 
             rows={systemAppointmentSlots} 
             columns={columns} 
             pageSize={5} 
@@ -69,5 +112,6 @@ export default function AdminAppointmentsTable({ systemAppointmentSlots, filterS
                 borderColor: 'primary.light',
             }}
             />
+        </Box>
     );
 }
