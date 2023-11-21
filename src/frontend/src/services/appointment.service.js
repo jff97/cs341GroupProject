@@ -60,7 +60,28 @@ const appointmentService = {
                 return response.data;
             });
     },
+    getAppointmentTrends: async (ProviderID, StartDateTime, EndDateTime) => {
+        return await api
+            .get(APPOINTMENT_ENDPOINT + "/trends", {
+                params: {
+                    ProviderID: ProviderID,
+                    StartDateTime: StartDateTime,
+                    EndDateTime: EndDateTime
+                }
+            })
+            .then((response) => {
+                return response.data;
+            });
+    },
+    getAppointmentProviders: async () => {
+        return await api
+            .get(APPOINTMENT_ENDPOINT + "/adminTrends", {
 
+            })
+            .then((response) => {
+                return response.data;
+            });
+    },
     bookAppointment: async (AppointmentID, ClientUserID) => {
         return await api
             .put(APPOINTMENT_ENDPOINT + "/book", {

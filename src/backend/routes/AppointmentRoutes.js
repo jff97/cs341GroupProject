@@ -2,7 +2,7 @@
 const express = require('express');
 const { enforceAuthentication } = require('../middlewares/auth_middleware');
 
-const { createAppointment, deleteAppointment, bookAppointment, cancelAppointment, modifyAppointmentTime, getAppointmentSlotsForProvider, getAllAvailableAppointments, getAppointmentsByUser, getAllSystemAppointments, modifyAppointment } = require('../controllers/AppointmentController');
+const { createAppointment, deleteAppointment, bookAppointment, cancelAppointment, modifyAppointmentTime, getAppointmentSlotsForProvider, getAllAvailableAppointments, getAppointmentsByUser, getAllSystemAppointments, modifyAppointment, getAppointmentTrends, getAllServiceProviders } = require('../controllers/AppointmentController');
 
 const router = express.Router();
 
@@ -16,5 +16,7 @@ router.get('/available', getAllAvailableAppointments);
 router.get('/usersAppointments', getAppointmentsByUser)
 router.get('/systemAppointments', getAllSystemAppointments);
 router.put('/modify', modifyAppointment);
+router.get('/trends', getAppointmentTrends)
+router.get('/adminTrends', getAllServiceProviders)
 
 module.exports = router;

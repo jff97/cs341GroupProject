@@ -91,6 +91,24 @@ async function modifyAppointment(req, res, next) {
     }
 }
 
+async function getAppointmentTrends(req, res, next) {
+    try {
+        const data = await AppointmentService.getAppointmentTrends(req.query.ProviderID, req.query.StartDateTime, req.query.EndDateTime);
+        res.status(200).send(data);
+    } catch (err) {
+        next(err);
+    }
+}
+
+async function getAllServiceProviders(req, res, next) {
+    try {
+        const data = await AppointmentService.getAllServiceProviders();
+        res.status(200).send(data);
+    } catch (err) {
+        next(err);
+    }
+}
+
 module.exports = {
-    createAppointment, deleteAppointment, bookAppointment, cancelAppointment, modifyAppointmentTime, getAppointmentSlotsForProvider, getAllAvailableAppointments, getAppointmentsByUser, getAllSystemAppointments, modifyAppointment
+    createAppointment, deleteAppointment, bookAppointment, cancelAppointment, modifyAppointmentTime, getAppointmentSlotsForProvider, getAllAvailableAppointments, getAppointmentsByUser, getAllSystemAppointments, modifyAppointment, getAppointmentTrends, getAllServiceProviders
 };

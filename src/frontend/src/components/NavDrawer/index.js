@@ -90,6 +90,30 @@ export default function NavDrawer() {
                         </ListItem>
                         </Link>
                     }
+                    {RoleID === 2 &&
+                     <Link to="/dashboard/trends" style={linkStyles}>
+                        <ListItem disablePadding>
+                            <ListItemButton>
+                                <ListItemIcon>
+                                    <AdminPanelSettingsIcon />
+                                </ListItemIcon>
+                                <ListItemText primary="Appointment Trends" />
+                            </ListItemButton>
+                        </ListItem>
+                        </Link>
+                    }
+                    {RoleID === 3 &&
+                        <Link to="/dashboard/adminTrends" style={linkStyles}>
+                            <ListItem disablePadding>
+                                <ListItemButton>
+                                    <ListItemIcon>
+                                        <AdminPanelSettingsIcon />
+                                    </ListItemIcon>
+                                    <ListItemText primary="Admin Appointment Trends" />
+                                </ListItemButton>
+                            </ListItem>
+                        </Link>
+                    }
                 </List>
                 <Toolbar />
             </Drawer>
