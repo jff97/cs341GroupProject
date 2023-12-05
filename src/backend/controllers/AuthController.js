@@ -1,3 +1,6 @@
+//Author: Creed Zagrzebski
+//Date: October 6 2023
+//Class & Methods Explained: This class is used to contorl functions relatin to authtication using AuthService
 const AuthService = require('../services/AuthService');
 
 async function login(req, res, next) {

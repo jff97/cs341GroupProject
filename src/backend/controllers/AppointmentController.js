@@ -1,3 +1,8 @@
+//Author: Creed Zagrzebski, John Fox, Alex Cappel, Peter Xiong
+//Date Created: October 4 2023 
+//Dates Modified: October 5, 8, 10, 14
+//                November 3, 5, 6, 14, 16
+//Class & Methods Explained: This class is used to handle various operations relating to appointments they act as the middle ground for handling requests and interation
 const AppointmentService = require('../services/AppointmentService');
 
 async function createAppointment(req, res, next) {

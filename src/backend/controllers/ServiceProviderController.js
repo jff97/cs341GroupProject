@@ -1,3 +1,7 @@
+//Author: John Fox, Alex Cappel, Peter Xiong
+//Date Created: October 5 2023 
+//Dates Modified: October 5, 7
+//Class & Methods Explained: This class is used to handle various operations relating to provided services
 const ProvidedServiceService = require('../services/ProviderService');
 
 async function createProvidedService(req, res, next) {

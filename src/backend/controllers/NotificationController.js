@@ -1,3 +1,6 @@
+//Author: Creed Zagrzebski
+//Date: November 6 2023
+//Class & Methods Explained: This class is used to do functions relating to notifications using NotificationService
 const NotificationService = require('../services/NotificationService');
 
 // For testing purposes. This endpoint should never be used in production.

@@ -1,3 +1,6 @@
+//Author: Creed Zagrzebski
+//Date: October 4 2023
+//Class & Methods Explained: This class is used to control functions realting to user management using a service called UserService
 const UserService = require('../services/UserService');
 
 async function createUser(req, res, next) {
