@@ -1,3 +1,6 @@
+//Author: Creed Zagrzebski
+//Date: October 4 2023
+//Class & Methods Explained: This class is used to setup configuration for documenting
 const options = {
     definition: {
       openapi: "3.1.0",

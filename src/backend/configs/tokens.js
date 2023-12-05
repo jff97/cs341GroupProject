@@ -1,4 +1,6 @@
-
+//Author: Creed Zagrzebski
+//Date: October 6 2023
+//Class & Methods Explained: This class is used to define tokenManager object  which is responsible for managing access and refresh tokens for authentication
 const logger = require('../logging').logger;
 const crypto = require("crypto");
 
