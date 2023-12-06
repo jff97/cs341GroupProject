@@ -1,3 +1,6 @@
+//Author: Creed Zagrzebski
+//Date Created: October 7  2023 
+//Class & Methods Explained: This class is used to setup interactions with userStore to manage user authentication
 import useUserStore from "../utils/stores";
 import jwt from "jwt-decode";
 

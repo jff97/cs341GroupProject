@@ -1,3 +1,6 @@
+//Author: Creed Zagrzebski
+//Date Created: October 7  2023 
+//Class & Methods Explained: This class is used to setup interactions with the backend regarding userServices
 import api from './api';
 
 const USER_ENDPOINT = '/api/user/';

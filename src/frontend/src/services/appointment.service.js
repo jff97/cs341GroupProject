@@ -1,3 +1,8 @@
+//Author: Creed Zagrzebski, John Fox, Alex Cappel, Peter Xiong
+//Date Created: October 8  2023 
+//Dates Modified: October 9, 10 
+//                November 5, 6, 7, 14, 16 
+//Class & Methods Explained: This class is used to setup interaction with the backend regarind appointments
 import api from './api';
 
 const APPOINTMENT_ENDPOINT = '/api/appointment/';

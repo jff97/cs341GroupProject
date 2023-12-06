@@ -1,3 +1,6 @@
+//Author: Creed Zagrzebski
+//Date Created: October 7  2023 
+//Class & Methods Explained: This class is used to make http requests to the backend
 import axios from "axios"
 import authService from "../auth.service"
 import tokenService from "../token.service"

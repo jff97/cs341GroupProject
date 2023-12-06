@@ -1,3 +1,6 @@
+//Author: Creed Zagrzebski
+//Date Created: October 7  2023 
+//Class & Methods Explained: This class is used to setup interactions with the backend regarding authentication
 import api from './api';
 import tokenService from './token.service';
 

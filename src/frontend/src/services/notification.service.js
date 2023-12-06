@@ -1,3 +1,6 @@
+//Author: Creed Zagrzebski
+//Date Created: November 6  2023 
+//Class & Methods Explained: This class is used to setup interactions with the backend regarding notifications
 import api from './api';
 
 const NOTIFICATION_ENDPOINT = '/api/notification/';
