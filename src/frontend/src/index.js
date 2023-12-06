@@ -1,3 +1,7 @@
+//Author: Creed Zagrzebski
+//Date Created: September 8  2023
+//Date Modified: October 7, November 7 
+//Class & Methods Explained: This class is used to apply a custom theme to the progame 
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';

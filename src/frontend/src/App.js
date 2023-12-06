@@ -1,3 +1,7 @@
+//Author: Creed Zagrzebski
+//Date Created: September 8  2023 
+//Dates Modified: October 7, 9
+//Class & Methods Explained: This class is used as an entry point into the program
 import { useEffect } from 'react';
 import './App.css';
 import authService from 'src/services/auth.service';
