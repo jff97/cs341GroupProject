@@ -1,3 +1,6 @@
+//Author: Creed Zagrzebski
+//Date Created: October 7  2023 
+//Class & Methods Explained: This class is used to setup a store for managing global state 
 import { create } from 'zustand';
 
 // Stores the global state of the user
