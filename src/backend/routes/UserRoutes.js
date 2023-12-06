@@ -1,3 +1,7 @@
+//Author: Creed Zagrzebski
+//Date Created: October 4 2023
+//Date Modified: October 5            
+//Class & Methods Explained: This class is used to define routes for user related operations
 const express = require('express');
 const { createUser, deleteUser } = require('../controllers/UserController');
 

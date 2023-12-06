@@ -1,3 +1,9 @@
+//Author: Creed Zagrzebski, John Fox, Alex Cappel, Peter Xiong
+//Date Created: October 5 2023 
+//Dates Modified: October 7, 8, 10, 14
+//                November 5, 6, 8, 14, 16
+//Class & Methods Explained: This class is used to define routes for appointment related operations
+
 // Routes for appointment
 const express = require('express');
 const { enforceAuthentication } = require('../middlewares/auth_middleware');

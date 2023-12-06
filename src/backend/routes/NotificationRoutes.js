@@ -1,3 +1,7 @@
+//Author: Creed Zagrzebski
+//Date Created: November 6 2023            
+//Class & Methods Explained: This class is used to define routes for notification related operations
+
 // Routes for appointment
 const express = require('express');
 const { createNotification, getAllNotificationsForUser, deleteNotification, toggleNotificationRead } = require('../controllers/NotificationController');
