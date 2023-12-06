@@ -1,3 +1,6 @@
+//Author: Creed Zagrzebski
+//Date Created: November 6 2023         
+//Class & Methods Explained: This class is used to define a sequelize model for Notification 
 const { DataTypes } = require('sequelize');
 
 module.exports = (sequelize) => {

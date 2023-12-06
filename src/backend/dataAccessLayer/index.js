@@ -1,3 +1,7 @@
+//Author: Creed Zagrzebski
+//Date Created: October 4 2023 
+//Dates Modified: October 5, 8, 9, November 6            
+//Class & Methods Explained: This class is used to configure and setup sequelize for the project
 const Sequelize = require('sequelize');
 const connection = require('../configs/connection');
 const { applyAssociations, synchronizeDatabase } = require('./extraSetup')

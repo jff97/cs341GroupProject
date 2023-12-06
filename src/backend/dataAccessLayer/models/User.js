@@ -1,3 +1,7 @@
+//Author: Creed Zagrzebski
+//Date Created: October 4 2023 
+//Dates Modified: October 5, Novemeber 5           
+//Class & Methods Explained: This class is used to define a sequelize model for Users
 const { DataTypes } = require('sequelize');
 
 module.exports = (sequelize) => {

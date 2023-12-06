@@ -1,3 +1,7 @@
+//Author: Creed Zagrzebski
+//Date Created: October 4 2023 
+//Dates Modified: October 5, 6, 8           
+//Class & Methods Explained: This class is used to setup sequelize associations and synchronizing the database
 const { Sequelize } = require("sequelize");
 const { logger } = require("../logging");
 

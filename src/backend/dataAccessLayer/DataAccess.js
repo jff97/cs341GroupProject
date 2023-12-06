@@ -1,3 +1,8 @@
+//Author: Creed Zagrzebski, John Fox, Alex Cappel, Peter Xiong
+//Date Created: October 4 2023 
+//Dates Modified: October 5, 8, 10
+//                November 3, 5, 7, 8
+//Class & Methods Explained: This class is used to hold/access all data from program relating to users and appointments 
 const { models } = require('../dataAccessLayer')
 const { Op, Sequelize } = require('sequelize')
 class DataAccess {
