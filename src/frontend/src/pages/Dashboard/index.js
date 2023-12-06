@@ -1,3 +1,8 @@
+//Author: Creed Zagrzebski, John Fox
+//Date Created: October 7 2023 
+//Dates Modified: October 8, 9, 10
+//                November 5, 14, 16
+//Class & Methods Explained: This class is used to make the main dashboard layout of the program
 import React from "react";
 import { Routes, Route, Navigate } from "react-router-dom";
 import NavDrawer from "src/components/NavDrawer";

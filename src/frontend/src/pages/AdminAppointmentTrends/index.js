@@ -1,3 +1,6 @@
+//Author: Alex Cappel
+//Date Created: November 16  2023 
+//Class & Methods Explained: This class is used to represent a page and view appoinments 
 import React, { useEffect, useState } from 'react';
 import CustomAppBar from 'src/components/CustomAppBar';
 import { Box } from '@mui/material';

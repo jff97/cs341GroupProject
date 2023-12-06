@@ -1,3 +1,6 @@
+//Author: John Fox
+//Date Created: November 14  2023 
+//Class & Methods Explained: This class is used to populate a page that displays appoinment history 
 import React, { useEffect, useState } from 'react';
 import CustomAppBar from 'src/components/CustomAppBar';
 import AppointmentTrends from 'src/components/AppointmentTrends';

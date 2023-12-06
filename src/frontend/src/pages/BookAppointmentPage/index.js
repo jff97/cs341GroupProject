@@ -1,3 +1,6 @@
+//Author: Creed Zagrzebski
+//Date Created: October 10 2023 
+//Class & Methods Explained: This class is used to create a page for booking appointments
 import React, { useState, useEffect } from 'react';
 import { Box } from '@mui/material';
 import CustomAppBar from 'src/components/CustomAppBar';

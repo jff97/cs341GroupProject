@@ -1,3 +1,7 @@
+//Author: Creed Zagrzebski
+//Date Created: October 8 2023 
+//Dates Modified: October 9, 10 , November 6
+//Class & Methods Explained: This class is used as a page manage appointments slots
 import React, { useEffect, useState } from 'react';
 import AppointmentManageTable from 'src/components/AppointmentManageTable';
 import appointmentService from 'src/services/appointment.service';

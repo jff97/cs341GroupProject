@@ -1,3 +1,7 @@
+//Author: Creed Zagrzebski
+//Date Created: November 3  2023 
+//Dates Modified: November 5, 7
+//Class & Methods Explained: This class is used to manage appointments via the Admin user 
 import React, { useEffect, useState } from 'react';
 import AdminAppointmentsTable from 'src/components/AdminAppointmentsTable';
 import appointmentService from 'src/services/appointment.service';

@@ -1,3 +1,6 @@
+//Author: Creed Zagrzebski
+//Date Created: October 7  2023 
+//Class & Methods Explained: This class is used to make the login page of the program
 import React, { useCallback } from 'react';
 import LoginForm from '../../components/LoginForm';
 import { Grid } from '@mui/material';

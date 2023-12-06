@@ -1,3 +1,6 @@
+//Author: Creed Zagrzebski
+//Date Created: October 7  2023 
+//Class & Methods Explained: This class is used to represent a page that includes the registration form and a particle animation
 import React, { useCallback } from 'react';
 import { Grid } from '@mui/material';
 import Particles from "react-particles";
