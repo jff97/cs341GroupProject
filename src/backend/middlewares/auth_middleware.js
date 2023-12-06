@@ -1,4 +1,7 @@
- const jwt = require("jsonwebtoken");
+//Author: Creed Zagrzebski
+//Date Created: October 6 2023 
+//Class & Methods Explained: This class is used to enforce authentication by validating an access token
+const jwt = require("jsonwebtoken");
  
  /**
  * Middleware for Access Token Validation
