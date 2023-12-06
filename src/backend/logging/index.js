@@ -1,3 +1,6 @@
+//Author: Creed Zagrzebski
+//Date Created: October 6 2023           
+//Class & Methods Explained: This class is used to setup the logging system using the Winston library
 const winston = require("winston");
 const DailyRotateFile = require("winston-daily-rotate-file");
 
