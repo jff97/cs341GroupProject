@@ -1,3 +1,8 @@
+//Author: Creed Zagrzebski, John Fox, Alex Cappel, Peter Xiong
+//Date Created: October 5 2023 
+//Dates Modified: October 7, 8, 10, 14
+//                November 1, 5, 6, 8, 14
+//Class & Methods Explained: This class is used handle the service layer of appointments 
 const DataAccess = require('../dataAccessLayer/DataAccess');
 const appSettings = require('../configs/tunableAppSettings.js');
 const notificationServiceInstance = require('./NotificationService.js');

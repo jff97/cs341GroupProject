@@ -1,3 +1,7 @@
+//Author: Creed Zagrzebski
+//Date Created: October 4 2023 
+//Date Modified: October 5, 6, 7               
+//Class & Methods Explained: This class is used to provide functionality to user managements 
 const DataAccess = require('../dataAccessLayer/DataAccess');
 const bcrypt = require('bcrypt');
 const logger = require('../logging')

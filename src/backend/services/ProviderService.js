@@ -1,3 +1,7 @@
+//Author: John Fox, Alex Cappel
+//Date Created: October 5 2023     
+//Date Modified: October 7         
+//Class & Methods Explained: This class is used to manage servies provided by users 
 const DataAccess = require('../dataAccessLayer/DataAccess');
 
 class ProviderService {

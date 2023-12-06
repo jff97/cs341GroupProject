@@ -1,3 +1,6 @@
+//Author: Creed Zagrzebski
+//Date Created: October 6 2023            
+//Class & Methods Explained: This class is used to handle authentication related operations
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken')
 const DataAccess = require('../dataAccessLayer/DataAccess');

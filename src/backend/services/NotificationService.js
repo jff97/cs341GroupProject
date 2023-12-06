@@ -1,3 +1,6 @@
+//Author: Creed Zagrzebski
+//Date Created: November 6 2023            
+//Class & Methods Explained: This class is used to provide an interface for notification service 
 const DataAccess = require('../dataAccessLayer/DataAccess');
 
 const logger = require('../logging')
