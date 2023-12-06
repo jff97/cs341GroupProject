@@ -1,3 +1,8 @@
+//Author: Creed Zagrzebski, John Fox, Alex Cappel, Peter Xiong
+//Date Created: September 8 2023 
+//Dates Modified: October 4, 5, 8
+//                November 7
+//Class & Methods Explained: This class is used to setup the application 
 const express = require('express');
 const cors = require('cors');
 const helmet = require('helmet');
