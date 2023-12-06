@@ -1,3 +1,6 @@
+//Author: Creed Zagrzebski
+//Date Created: November 6  2023 
+//Class & Methods Explained: This class is used to create or edit appointment slots
 import React, { useState, useEffect } from 'react';
 import { Button, Dialog, DialogActions, DialogTitle, DialogContent, FormControl, TextField, Select } from '@mui/material';
 import { DateTimePicker } from '@mui/x-date-pickers/DateTimePicker';

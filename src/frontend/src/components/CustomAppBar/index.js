@@ -1,3 +1,7 @@
+//Author: Creed Zagrzebski
+//Date Created: October 6  2023 
+//Dates Modified: October 7, November 6
+//Class & Methods Explained: This class is used to create a custom app bar for the notifications
 import React, { useState, useEffect } from "react";
 import { AppBar, Toolbar, Typography, Divider, Badge, Tooltip, Dialog, DialogTitle, DialogContent, DialogActions, Button } from "@mui/material";
 import { Grid, MenuItem, Menu, IconButton } from "@mui/material";

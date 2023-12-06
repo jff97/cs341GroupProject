@@ -1,3 +1,7 @@
+//Author: Creed Zagrzebski, John Fox
+//Date Created: Ocotber 10  2023 
+//Dates Modified: November 1, 7
+//Class & Methods Explained: This class is used to display a table of available appointments with the option to book an appointment 
 import React from 'react';
 import { Button } from '@mui/material';
 import { DataGrid, GridToolbarContainer } from '@mui/x-data-grid';

@@ -1,3 +1,7 @@
+//Author: Creed Zagrzebski
+//Date Created: November 5  2023 
+//Dates Modified: November 6
+//Class & Methods Explained: This class is used to manage appointments and service providers that are part of the program 
 import React from 'react';
 import CustomNoRowsOverlay from 'src/components/CustomNoRowsOverlay';
 import { DatePicker } from '@mui/x-date-pickers';

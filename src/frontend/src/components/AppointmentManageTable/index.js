@@ -1,3 +1,7 @@
+//Author: Creed Zagrzebski
+//Date Created: October 8  2023 
+//Dates Modified: October 9, November 6, 7
+//Class & Methods Explained: This class is used to manage a table for managing appointment slots
 import React, { useState } from 'react';
 import { Button } from '@mui/material';
 import { Add, Edit, Delete } from '@mui/icons-material';

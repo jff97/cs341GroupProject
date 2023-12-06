@@ -1,3 +1,6 @@
+//Author: Alex Cappel
+//Date Created: November 16  2023 
+//Class & Methods Explained: This class is used to manage and displa apoointments for service providers
 import React, { useEffect, useState, useCallback } from 'react';
 import {Select, MenuItem, FormControl, TextField} from '@mui/material';
 import InputLabel from '@mui/material/InputLabel';

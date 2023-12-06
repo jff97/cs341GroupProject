@@ -1,3 +1,6 @@
+//Author: Creed Zagrzebski
+//Date Created: October 7  2023 
+//Class & Methods Explained: This class is used to manage and display notifications in the program
 import React, { createContext, useState, useContext } from "react";
 import { Snackbar, Alert } from "@mui/material";
 

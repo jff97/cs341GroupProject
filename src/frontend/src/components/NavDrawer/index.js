@@ -1,3 +1,8 @@
+//Author: Creed Zagrzebski, John Fox, Alex Cappel, Peter Xiong
+//Date Created: Ocotber 7 2023 
+//Dates Modified: October 8, 9, 10 
+//                November 5, 7, 14, 16 
+//Class & Methods Explained: This class is used to create a navigation drawer for the program
 import * as React from 'react';
 import { Box, Drawer, CssBaseline, Toolbar, List, Typography, Divider, ListItem, ListItemButton, ListItemIcon, ListItemText } from '@mui/material';
 import TasksIcon from '@mui/icons-material/Task';

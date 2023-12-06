@@ -1,3 +1,6 @@
+//Author: Creed Zagrzebski
+//Date Created: November 7  2023 
+//Class & Methods Explained: This class is used to make a login form when creating account 
 import React, { useState } from "react";
 import authService from "../../services/auth.service";
 import { useNavigate, Link } from "react-router-dom";

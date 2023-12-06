@@ -1,3 +1,6 @@
+//Author: Creed Zagrzebski
+//Date Created: Ocotber 7  2023 
+//Class & Methods Explained: This class is used to guard to protect routes 
 import React from "react";
 import useUserStore from "src/utils/stores";
 import { CircularProgress, Box } from "@mui/material";

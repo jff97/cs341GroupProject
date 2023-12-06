@@ -1,3 +1,6 @@
+//Author: Creed Zagrzebski
+//Date Created: October 7  2023 
+//Class & Methods Explained: This class is used to make a registration form when making an account
 import React, { useState } from "react";
 import userService from "../../services/user.service";
 import { useNavigate, Link } from "react-router-dom";

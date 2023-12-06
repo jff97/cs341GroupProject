@@ -1,3 +1,7 @@
+//Author: John Fox, Alex Cappel
+//Date Created: November 14  2023 
+//Dates Modified: November 15
+//Class & Methods Explained: This class is used to display a bar chart that represents the number of appointments over a specfic date range
 import React, { useEffect, useState } from 'react';
 import appointmentService from 'src/services/appointment.service';
 import useUserStore from '../../utils/stores';

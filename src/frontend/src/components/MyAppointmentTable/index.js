@@ -1,3 +1,7 @@
+//Author: Creed Zagrzebski, John Fox
+//Date Created: October 10  2023 
+//Dates Modified: November 1, 7
+//Class & Methods Explained: This class is used to make a grid for displaying users appointments 
 import React from 'react';
 import { Button } from '@mui/material';
 import { DataGrid, GridToolbarContainer } from '@mui/x-data-grid';
