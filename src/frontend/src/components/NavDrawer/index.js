@@ -114,6 +114,18 @@ export default function NavDrawer() {
                             </ListItem>
                         </Link>
                     }
+                    {RoleID === 3 &&
+                        <Link to="/dashboard/adminUserManagement" style={linkStyles}>
+                            <ListItem disablePadding>
+                                <ListItemButton>
+                                    <ListItemIcon>
+                                        <AdminPanelSettingsIcon />
+                                    </ListItemIcon>
+                                    <ListItemText primary="Admin User Management" />
+                                </ListItemButton>
+                            </ListItem>
+                        </Link>
+                    }
                 </List>
                 <Toolbar />
             </Drawer>

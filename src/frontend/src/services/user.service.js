@@ -18,6 +18,13 @@ const userService = {
                 ServiceInfo,
                 Category: categories[ServiceCategoryID]
             })
+    },
+    //just return a hard coded json test value for the front end for now TODO
+    //field User = john Fox
+    //field UserName = jfox
+    //dont hit the api just return a mock value
+    getAllNormalUsers: () => {
+        return api.get(USER_ENDPOINT + "getnormalusers")
     }
 }
 
