@@ -17,7 +17,16 @@ async function deleteUser(req, res, next) {
         next(err);
     }
 }
+async function getAllNormalUsers(req, res, next) {
+    try {
+        const users = await UserService.getAllNormalUsers();
+        res.status(200).send(users);
+    } catch (err) {
+        next(err);
+    }
+
+}
 
 module.exports = {
-    createUser, deleteUser
+    createUser, deleteUser, getAllNormalUsers
 };

@@ -47,6 +47,10 @@ class UserService {
     async deleteUser({UserID}) {
         await DataAccess.deleteUser(UserID);
     }
+
+    async getAllNormalUsers() {
+        return await DataAccess.getUsersByRoleID(1);
+    }
 }
 
 const userServiceInstance = Object.freeze(new UserService());

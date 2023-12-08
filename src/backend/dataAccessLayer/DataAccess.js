@@ -264,6 +264,13 @@ class DataAccess {
          }
       })
    }
+   getUsersByRoleID(RoleID) {
+      return models.User.findAll({
+         where: {
+            RoleID: RoleID
+         }
+      })
+   }
 }
 
 // Singleton instance of DataAccess for "Dependency Injection"
