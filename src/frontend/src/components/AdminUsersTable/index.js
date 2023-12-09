@@ -1,7 +1,11 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import CustomNoRowsOverlay from 'src/components/CustomNoRowsOverlay';
 import { DatePicker } from '@mui/x-date-pickers';
 import { DataGrid, GridToolbarContainer } from '@mui/x-data-grid';
+import userService from "../../services/user.service";
+import UserManagement from "../../pages/AdminUserManagement";
+import UserService from "../../services/user.service";
+import AppointmentService from "../../services/appointment.service";
 
 function CustomToolbar({filterDate, setFilterDate}) {
     return (
@@ -17,16 +21,53 @@ function CustomToolbar({filterDate, setFilterDate}) {
         />
       </GridToolbarContainer>
     );
-  }
+}
 
-const columns = [
-    { field: 'User', headerName: 'Client', width: 200, valueGetter: (params) => {
-        return params.value ? (params.value.FirstName + ' ' + params.value.LastName) : 'None'}
-    },
-    {field: "UserName", headerName: "UserName", width: 200},
-];
+async function getAppointmentsForUser(userID) {
+    return await AppointmentService.getUsersAppointments(userID);
+}
 
-export default function AdminUsersTable({ users }) {
+export default function AdminUsersTable({ users, setUsers }) {
+    const columns = [
+        { field: 'User', headerName: 'Client', width: 200, valueGetter: (params) => {
+                //console.log(params.row.FullName);
+                // Messy, but working
+                return params.row.FullName}
+        },
+        {field: "UserName", headerName: "UserName", width: 200},
+        {
+            field: 'delete',
+            headerName: 'Delete',
+            width: 100,
+            renderCell: (params) => (
+                <button onClick={() => handleDelete(params.row.UserID)}>Delete</button>
+            ),
+        },
+    ];
+
+    const handleDelete = async (userID) => {
+        try {
+            const appointments = await getAppointmentsForUser(userID);
+
+            // Unbook appointments associated with user
+            const unBookPromises = appointments.map(appointment => {
+                console.log(appointment.AppointmentID);
+                return AppointmentService.unBookAppointment(appointment.AppointmentID, userID)
+                    .then(r => console.log("UNBOOKED APPOINTMENT: " + appointment.AppointmentID));
+            });
+            await Promise.all(unBookPromises);
+
+            // Delete user
+            await userService.deleteUser(userID);
+
+            // Filter out the deleted user from the current state
+            const updatedUsers = users.filter(user => user.UserID !== userID);
+            setUsers(updatedUsers);
+        } catch (error) {
+            console.error("Error deleting user: ", error);
+        }
+    };
+
     return (
         <DataGrid 
             rows={users} 

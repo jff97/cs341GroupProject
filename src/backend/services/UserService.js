@@ -51,6 +51,10 @@ class UserService {
     async getAllNormalUsers() {
         return await DataAccess.getUsersByRoleID(1);
     }
+
+    async getAllServiceProvidersWithService() {
+        return await DataAccess.getAllServiceProvidersWithService();
+    }
 }
 
 const userServiceInstance = Object.freeze(new UserService());

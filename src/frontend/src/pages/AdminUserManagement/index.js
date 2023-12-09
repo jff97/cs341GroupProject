@@ -11,6 +11,7 @@ export default function UserManagement() {
       UserService.getAllNormalUsers()
       .then((response) => {
           setSystemUsers(response.data);
+          //console.log(response.data)
       }).catch((error) => {
           console.log(error);
       })
@@ -25,7 +26,7 @@ export default function UserManagement() {
         <CustomAppBar 
             pageTitle="User Management" 
         />
-        <AdminUsersTable users={systemUsers}/>
+        <AdminUsersTable users={systemUsers} setUsers={setSystemUsers} />
     </Box>
   );
 }

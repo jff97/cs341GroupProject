@@ -25,6 +25,20 @@ const userService = {
     //dont hit the api just return a mock value
     getAllNormalUsers: () => {
         return api.get(USER_ENDPOINT + "getnormalusers")
+    },
+
+    getAllServiceProviders: () => {
+        return api.get(USER_ENDPOINT + "getsp")
+    },
+
+    deleteUser: (UserID) => {
+        return api.delete(USER_ENDPOINT + "delete", {
+            params: {
+                UserID: UserID
+            }
+        })/*.then((response) => {
+            return response.data;
+        });*/
     }
 }
 

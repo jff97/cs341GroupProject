@@ -27,6 +27,15 @@ async function getAllNormalUsers(req, res, next) {
 
 }
 
+async function getAllServiceProvidersWithService(req, res, next) {
+    try {
+        const users = await UserService.getAllServiceProvidersWithService();
+        res.status(200).send(users);
+    } catch (err) {
+        next(err);
+    }
+}
+
 module.exports = {
-    createUser, deleteUser, getAllNormalUsers
+    createUser, deleteUser, getAllNormalUsers, getAllServiceProvidersWithService
 };
