@@ -74,11 +74,11 @@ class AppointmentService {
         const currentDate = new Date();
         var numOfMilliseconds = 1000 * 60 * 60 * allowedCancellationHours;
         var cancelableCutoffDate = new Date(currentDate.getTime() + numOfMilliseconds);
-        if (new Date(apptToCancel.StartDateTime) < cancelableCutoffDate) {
+        /*if (new Date(apptToCancel.StartDateTime) < cancelableCutoffDate) {
             const err = new Error("Appointment can only be canceled " + allowedCancellationHours + " hours before the appointment!");
             err.code = 400;
             throw err;
-        }
+        }*/
 
         await DataAccess.cancelAppointment(AppointmentID);
 

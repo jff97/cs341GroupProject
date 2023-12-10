@@ -264,6 +264,28 @@ class DataAccess {
          }
       })
    }
+   getUsersByRoleID(RoleID) {
+      return models.User.findAll({
+         where: {
+            RoleID: RoleID
+         }
+      })
+   }
+
+   getAllServiceProvidersWithService() {
+      return models.User.findAll({
+         include: [{
+            model: models.Service,
+            required: true, // Ensures it's an INNER JOIN
+            /*on: {
+               UserId: models.Sequelize.c('User.UserId') // ON condition
+            }*/
+         }],
+         where: {
+            RoleID: 2
+         }
+      })
+   }
 }
 
 // Singleton instance of DataAccess for "Dependency Injection"
