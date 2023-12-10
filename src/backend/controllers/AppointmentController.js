@@ -55,9 +55,9 @@ async function modifyAppointmentTime(req, res, next) {
     }
 }
 
-async function getAllSystemAppointments(req, res, next) {
+async function getAppointmentsInRange(req, res, next) {
     try {
-        const data = await AppointmentService.getAllSystemAppointments(req.query.filterDate);
+        const data = await AppointmentService.getAppointmentsInRange(req.query.filterStartDate, req.query.filterEndDate);
         res.status(200).send(data);
     } catch (err) {
         next(err);
@@ -110,5 +110,5 @@ async function getAllServiceProviders(req, res, next) {
 }
 
 module.exports = {
-    createAppointment, deleteAppointment, bookAppointment, cancelAppointment, modifyAppointmentTime, getAppointmentSlotsForProvider, getAllAvailableAppointments, getAppointmentsByUser, getAllSystemAppointments, modifyAppointment, getAppointmentTrends, getAllServiceProviders
+    createAppointment, deleteAppointment, bookAppointment, cancelAppointment, modifyAppointmentTime, getAppointmentSlotsForProvider, getAllAvailableAppointments, getAppointmentsByUser, getAppointmentsInRange, modifyAppointment, getAppointmentTrends, getAllServiceProviders
 };

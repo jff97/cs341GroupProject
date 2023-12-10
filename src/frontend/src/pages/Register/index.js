@@ -4,9 +4,7 @@ import Particles from "react-particles";
 import { loadFull } from "tsparticles";
 import RegisterForm from 'src/components/RegisterForm'
 
-
-
-export function Register() {
+export default function Register() {
   const particlesInit = useCallback(async engine => {
     console.log(engine);
     // you can initiate the tsParticles instance (engine) here, adding custom shapes or presets

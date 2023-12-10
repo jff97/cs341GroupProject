@@ -18,6 +18,11 @@ function applyAssociations(sequelize) {
         foreignKey: 'UserID',
         onDelete: 'CASCADE'
     });
+
+    Service.belongsTo(User, {
+        foreignKey: 'UserID',
+        onDelete: 'CASCADE'
+    });
     
     // A user books multiple appointments
     User.hasMany(AppointmentSlot, {

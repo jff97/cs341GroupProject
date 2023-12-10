@@ -80,6 +80,13 @@ class AppointmentService {
             throw err;
         }*/
 
+        //prevent the appointment from trying to cancel if it is already canceled
+        if (apptToCancel.ClientUserID == null) {
+            const err = new Error("Appointment is already canceled!");
+            err.code = 400;
+            throw err;
+        }
+
         await DataAccess.cancelAppointment(AppointmentID);
 
         // Get Service Provider's UserID
@@ -128,8 +135,8 @@ class AppointmentService {
         return await DataAccess.getAppointmentsByUserId(UserID);
     }
 
-    async getAllSystemAppointments(filterDate) {
-        return await DataAccess.getAllSystemAppointments(filterDate);
+    async getAppointmentsInRange(filterStartDate, filterEndDate) {
+        return await DataAccess.getAppointmentsInRange(filterStartDate, filterEndDate);
     }
 
     async modifyAppointment({AppointmentID, StartDateTime, EndDateTime, AppointmentTitle}) {
