@@ -7,5 +7,6 @@ import AdminAppointmentTrends from "src/pages/AdminAppointmentTrends";
 import AdminManageAppointments from "src/pages/AdminManageAppointments";
 import ProviderAppointmentManagement from "src/pages/ProviderAppointmentManagement";
 import AppointmentTrends from "src/components/AppointmentTrends";
+import AdminUserManagement from "./AdminUserManagement";
 
-export { Dashboard, Login, Register, UserBookedAppointments, BookAppointment, AdminAppointmentTrends, AppointmentTrends, AdminManageAppointments, ProviderAppointmentManagement};
+export { Dashboard, Login, Register, UserBookedAppointments, BookAppointment, AdminAppointmentTrends, AppointmentTrends, AdminManageAppointments, AdminUserManagement, ProviderAppointmentManagement};

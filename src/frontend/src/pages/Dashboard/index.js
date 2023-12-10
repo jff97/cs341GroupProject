@@ -3,7 +3,7 @@ import { Routes, Route, Navigate } from "react-router-dom";
 import NavDrawer from "src/components/NavDrawer";
 import { Box } from "@mui/material";
 import { NotificationProvider } from "src/components/NotificationProvider";
-import { ProviderAppointmentManagement, BookAppointment, UserBookedAppointments, AppointmentTrends, AdminAppointmentTrends, AdminManageAppointments } from "src/pages";
+import { ProviderAppointmentManagement, BookAppointment, UserBookedAppointments, AppointmentTrends, AdminAppointmentTrends, AdminManageAppointments, AdminUserManagement } from "src/pages";
 import useUserStore from "src/utils/stores";
 import styled from "@mui/material/styles/styled";
 
