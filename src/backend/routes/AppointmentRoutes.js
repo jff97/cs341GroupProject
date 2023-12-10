@@ -7,15 +7,15 @@ const { createAppointment, deleteAppointment, bookAppointment, cancelAppointment
 const router = express.Router();
 
 router.get('/provider', enforceAuthentication, getAppointmentSlotsForProvider);
-router.post('/create', createAppointment);
-router.delete('/delete', deleteAppointment);
-router.put('/book', bookAppointment);
-router.put('/cancel', cancelAppointment);
-router.get('/available', getAllAvailableAppointments);
-router.get('/usersAppointments', getAppointmentsByUser)
-router.get('/systemAppointments', getAppointmentsInRange);
-router.put('/modify', modifyAppointment);
-router.get('/trends', getAppointmentTrends)
-router.get('/adminTrends', getAllServiceProviders)
+router.post('/create', enforceAuthentication, createAppointment);
+router.delete('/delete', enforceAuthentication, deleteAppointment);
+router.put('/book', enforceAuthentication, bookAppointment);
+router.put('/cancel', enforceAuthentication, cancelAppointment);
+router.get('/available', enforceAuthentication, getAllAvailableAppointments);
+router.get('/usersAppointments', enforceAuthentication, getAppointmentsByUser)
+router.get('/systemAppointments', enforceAuthentication, getAppointmentsInRange);
+router.put('/modify', enforceAuthentication, modifyAppointment);
+router.get('/trends', enforceAuthentication, getAppointmentTrends)
+router.get('/adminTrends', enforceAuthentication, getAllServiceProviders)
 
 module.exports = router;
