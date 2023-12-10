@@ -39,7 +39,7 @@ async function getAppointmentSlotsForProvider(req, res, next) {
 
 async function cancelAppointment(req, res, next) {
     try {
-        await AppointmentService.cancelAppointment(req.body);
+        await AppointmentService.cancelAppointment(req.body, req.UserID);
         res.status(201).send("Appointment cancelled successfully!");
     } catch (err) {
         next(err);

@@ -34,7 +34,7 @@ class DataAccess {
             UserID: userID
          },
          include: [{
-            model: Role,
+            model: models.Role,
             required: true
          }]
       })

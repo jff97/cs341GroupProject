@@ -67,19 +67,23 @@ class AppointmentService {
         return appointment1.StartDateTime <= appointment2.EndDateTime && appointment1.EndDateTime >= appointment2.StartDateTime;
     }
    
-    async cancelAppointment({AppointmentID}) {
+    async cancelAppointment({AppointmentID}, UserID) {
         //prevent the user from canceling the appointment if it is not x many hours away
         const apptToCancel = await DataAccess.getAppointmentByID(AppointmentID)
         const allowedCancellationHours = appSettings.cancelationCutoffHours;
         const currentDate = new Date();
         var numOfMilliseconds = 1000 * 60 * 60 * allowedCancellationHours;
         var cancelableCutoffDate = new Date(currentDate.getTime() + numOfMilliseconds);
-        /*if (new Date(apptToCancel.StartDateTime) < cancelableCutoffDate) {
+
+
+        // Get User Role for requesting user
+        const user = await DataAccess.getUsersRole(UserID);
+        if(user.RoleID == 1 && new Date(apptToCancel.StartDateTime) < cancelableCutoffDate) {
             const err = new Error("Appointment can only be canceled " + allowedCancellationHours + " hours before the appointment!");
             err.code = 400;
             throw err;
-        }*/
-
+        }
+     
         //prevent the appointment from trying to cancel if it is already canceled
         if (apptToCancel.ClientUserID == null) {
             const err = new Error("Appointment is already canceled!");

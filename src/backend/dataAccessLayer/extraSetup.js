@@ -13,6 +13,11 @@ function applyAssociations(sequelize) {
     Role.hasMany(User, {
         foreignKey: 'RoleID',
     });
+
+    User.belongsTo(Role, {
+        foreignKey: 'RoleID',
+    });
+
     // One user offers one service
     User.hasOne(Service, {
         foreignKey: 'UserID',
