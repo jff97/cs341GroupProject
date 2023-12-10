@@ -29,6 +29,7 @@ export function Dashboard() {
                         <Route path="/admin" element={<AdminManageAppointments />} />
                         <Route path="/trends" element={<AppointmentTrends />} />
                         <Route path="/adminTrends" element={<AdminAppointmentTrends />} />
+                        <Route path="/adminUserManagement" element={<AdminUserManagement />} />
                         {RoleID === 1 && <Route path="/" element={<Navigate to="/dashboard/book" />}/>}
                         {RoleID === 2 && <Route path="/" element={<Navigate to="/dashboard/appointment" />}/>}
                         {RoleID === 3 && <Route path="/" element={<Navigate to="/dashboard/admin" />}/>}

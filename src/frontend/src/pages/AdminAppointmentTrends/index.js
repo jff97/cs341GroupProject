@@ -1,19 +1,67 @@
 import React, { useEffect, useState } from 'react';
 import CustomAppBar from 'src/components/CustomAppBar';
-import { Box } from '@mui/material';
+import {Box, Button, Tab, Tabs} from '@mui/material';
 import AdminAppointmentTrends from "../../components/AdminAppointmentTrends";
+import AllAppointmentTrends from "../../components/AllAppointmentTrends";
+import AllTrendsByCategory from "../../components/AllTrendsByCategory";
+import { createTheme, ThemeProvider } from '@mui/material/styles';
+
+const tabTheme = createTheme({
+    palette: {
+        mode: 'dark',
+        primary: {
+            main: '#90caf9', // Replace with your preferred primary color for dark mode tabs
+        },
+    },
+    components: {
+        MuiTabs: {
+            styleOverrides: {
+                root: {
+                    backgroundColor: '#424242', // Background color for the tabs bar in dark mode
+                },
+            },
+        },
+        MuiTab: {
+            styleOverrides: {
+                root: {
+                    color: '#ffffff', // Text color for tabs in dark mode
+                    '&.Mui-selected': {
+                        color: '#90caf9', // Text color for selected tab in dark mode
+                    },
+                },
+            },
+        },
+    },
+});
 
 export default function AdminAppointmentHistory() {
+    const [selectedTab, setSelectedTab] = useState(0);
 
-    useEffect(() => {
-    }, []);
+    const handleTabChange = (event, newValue) => {
+        setSelectedTab(newValue);
+    };
 
     return (
-        <Box sx={{height: '93%'}}>
+        <Box sx={{ height: '93%' }}>
             <CustomAppBar
-                pageTitle="Admin Appointment Trends"
+                pageTitle={
+                    selectedTab === 0
+                        ? 'Admin Appointment Trends'
+                        : selectedTab === 1
+                            ? 'All Appointment Trends'
+                            : 'By Category'
+                }
             />
-            <AdminAppointmentTrends />
+            <ThemeProvider theme={tabTheme}>
+                <Tabs value={selectedTab} onChange={handleTabChange}>
+                    <Tab label="Admin Trends" value={0} />
+                    <Tab label="All Trends" value={1} />
+                    <Tab label="By Category" value={2} />
+                </Tabs>
+            </ThemeProvider>
+            {selectedTab === 0 && <AdminAppointmentTrends />}
+            {selectedTab === 1 && <AllAppointmentTrends />}
+            {selectedTab === 2 && <AllTrendsByCategory />}
         </Box>
     );
 }
