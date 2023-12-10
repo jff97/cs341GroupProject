@@ -16,7 +16,7 @@ function CustomToolbar({ filterStartDate, filterEndDate, setFilterStartDate, set
         <GridToolbarContainer>
             <h2>Manage System Appointments</h2>
             <FormControlLabel
-                sx={{ marginLeft: 'auto' }}
+                sx={{ marginLeft: 'auto', mt: 2 }}
                 control={
                     <Checkbox
                         checked={showAllAppointments}
