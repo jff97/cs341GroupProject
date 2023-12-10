@@ -6,9 +6,6 @@ import { Box } from '@mui/material';
 import dayjs from 'dayjs';
 import CreateEditAppointmentSlotDialog from 'src/components/CreateEditAppointmentSlotDialog';
 
-dayjs.extend(require('dayjs/plugin/utc'));
-dayjs.extend(require('dayjs/plugin/timezone'));
-
 export default function AdminManageAppointments() {
     const [appointmentSlots, setAppointmentSlots] = useState([]);
     const [filterStartDate, setFilterStartDate] = useState(dayjs());
@@ -35,7 +32,7 @@ export default function AdminManageAppointments() {
      }
 
   return (
-    <Box sx={{height: '93%'}}>
+    <Box sx={{height: '98%'}}>
         <CustomAppBar 
             pageTitle="Admin Appointment Management" 
         />
@@ -47,6 +44,7 @@ export default function AdminManageAppointments() {
             setFilterEndDate={setFilterEndDate}
             setSelectedAppointment={setSelectedAppointment}
             openCreateAppointmentSlotDialog={setCreateAppointmentSlotDialogOpen}
+            onDeleteAppointmentSlot={getAppointmentsInRange}
         />
         <CreateEditAppointmentSlotDialog
             open={createAppointmentSlotDialogOpen}

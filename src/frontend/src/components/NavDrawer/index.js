@@ -2,7 +2,8 @@ import * as React from 'react';
 import { Box, Drawer, CssBaseline, Toolbar, List, Typography, Divider, ListItem, ListItemButton, ListItemIcon, ListItemText } from '@mui/material';
 import TasksIcon from '@mui/icons-material/Task';
 import EventIcon from '@mui/icons-material/Event';
-import { CalendarMonthOutlined } from '@mui/icons-material';
+import EditCalendarIcon from '@mui/icons-material/EditCalendar';
+import CalendarMonthOutlined from '@mui/icons-material/CalendarMonthOutlined';
 import { Link } from 'react-router-dom';
 import { useLocation } from 'react-router-dom';
 import AdminPanelSettingsIcon from '@mui/icons-material/AdminPanelSettings';
@@ -83,7 +84,7 @@ export default function NavDrawer() {
                         <ListItem disablePadding>
                             <ListItemButton>
                                 <ListItemIcon>
-                                    <AdminPanelSettingsIcon />
+                                    <EditCalendarIcon />
                                 </ListItemIcon>
                                 <ListItemText primary="Manage Appointments" />
                             </ListItemButton>

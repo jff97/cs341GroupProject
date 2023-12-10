@@ -3,12 +3,8 @@ import ProviderAppointmentManageTable from 'src/components/ProviderAppointmentMa
 import appointmentService from 'src/services/appointment.service';
 import useUserStore from 'src/utils/stores';
 import CustomAppBar from 'src/components/CustomAppBar';
-import dayjs from 'dayjs';
 import CreateEditAppointmentSlotDialog from 'src/components/CreateEditAppointmentSlotDialog';
 import { Box } from '@mui/material';
-
-dayjs.extend(require('dayjs/plugin/utc'));
-dayjs.extend(require('dayjs/plugin/timezone'));
 
 export default function AppointmentManagement() {
     const [appointmentSlots, setAppointmentSlots] = useState([]);

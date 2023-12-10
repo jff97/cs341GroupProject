@@ -172,6 +172,8 @@ class DataAccess {
    getAppointmentsInRange(filterStartDate, filterEndDate) {
       const targetStartDate = new Date(filterStartDate);
       const targetEndDate = new Date(filterEndDate);
+
+      // Get all appoinemtents, including the first and lastname of the service provider
       
       // Get all appointments that fall on the target date
       return models.AppointmentSlot.findAll({
@@ -184,7 +186,11 @@ class DataAccess {
          raw: true,
          include: [{
             model: models.Service,
-            attributes: ['ServiceTitle', 'Category']
+            attributes: ['ServiceTitle', 'Category'],
+            include: [{
+               model: models.User,
+               attributes: ['FirstName', 'LastName']
+            }]
          }, {
             model: models.User,
             attributes: ['FirstName', 'LastName']

@@ -119,7 +119,7 @@ const appointmentService = {
             .get(APPOINTMENT_ENDPOINT + '/systemAppointments', {
                 params: {
                     filterStartDate: filterStartDate.set('second', 0).set('minute', 0).set('hour', 0),
-                    filterEndDate:   filterEndDate.set('second', 0).set('minute', 0).set('hour', 0)
+                    filterEndDate:   filterEndDate.set('second', 59).set('minute', 59).set('hour', 23)
                 }
             })
     }
