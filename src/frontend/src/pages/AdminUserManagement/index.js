@@ -4,7 +4,7 @@ import AdminUsersTable from 'src/components/AdminUsersTable';
 import UserService from 'src/services/user.service';
 import { Box } from '@mui/material';
 
-export default function UserManagement() {
+export default function AdminUserManagement() {
    const [systemUsers, setSystemUsers] = useState([]);
 
    const getAllSystemUsers= async () => {
