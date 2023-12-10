@@ -8,7 +8,7 @@ import useUserStore from 'src/utils/stores';
 import dayjs from 'dayjs';
 import { useNotification } from "../NotificationProvider";
 
-export default function CreateEditAppointmentSlotDialog({ open, handleClose, selectedAppointment, setSelectedAppointment }) {
+export default function CreateEditAppointmentSlotDialog({ open, onDialogClose, selectedAppointment, setSelectedAppointment }) {
     const [appointmentTitle, setAppointmentTitle] = useState('');
     const [appointmentStart, setAppointmentStart] = useState(dayjs().set('second', 0));
     const [appointmentEnd, setAppointmentEnd] = useState(dayjs().set('second', 0));
@@ -53,7 +53,7 @@ export default function CreateEditAppointmentSlotDialog({ open, handleClose, sel
     }
 
     const closeDialog = () => {
-        handleClose();
+        onDialogClose();
         setAppointmentTitle('');
         setAppointmentStart(dayjs().set('second', 0));
         setAppointmentEnd(dayjs().set('second', 0));

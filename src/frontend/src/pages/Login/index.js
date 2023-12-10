@@ -4,7 +4,7 @@ import { Grid } from '@mui/material';
 import Particles from "react-particles";
 import { loadFull } from "tsparticles";
 
-export function Login() {
+export default function Login() {
   const particlesInit = useCallback(async engine => {
     console.log(engine);
     // you can initiate the tsParticles instance (engine) here, adding custom shapes or presets

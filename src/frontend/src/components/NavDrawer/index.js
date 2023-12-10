@@ -85,7 +85,7 @@ export default function NavDrawer() {
                                 <ListItemIcon>
                                     <AdminPanelSettingsIcon />
                                 </ListItemIcon>
-                                <ListItemText primary="System Administration" />
+                                <ListItemText primary="Manage Appointments" />
                             </ListItemButton>
                         </ListItem>
                         </Link>
