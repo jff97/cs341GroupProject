@@ -7,7 +7,6 @@ import appointmentService from "../../services/appointment.service";
 
 export default function AdminAppointmentTrends() {
     const [trends, setApiData] = useState([]);
-    const [providers, setProviders] = useState([]);
     const [startDateTime, setStartDateTime] = useState(dayjs().set('second', 0));
     const [endDateTime, setEndDateTime] = useState(dayjs());
 
@@ -15,24 +14,16 @@ export default function AdminAppointmentTrends() {
         const fetchData = async () => {
             try {
                 const serviceProviders = await appointmentService.getAppointmentProviders();
-                setProviders(serviceProviders);
-                console.log(serviceProviders)
-
                 const sum = [0, 0, 0, 0, 0, 0, 0]
 
-                // Get trends for each
+                // Get trend data from each provider and calculate running sum
                 for (const provider of serviceProviders) {
-                    console.log(provider.UserID);
                     const weekTrends = await appointmentService.getAppointmentTrends(provider.UserID, startDateTime, endDateTime)
                     for (let i = 0; i < 7; i++) {
-                        // this feels dirty
-                        sum.push(sum[i] + weekTrends[i]);
-                        sum.shift()
+                        sum[i] = sum[i] + weekTrends[i];
                     }
-                    console.log(weekTrends)
-                    setApiData(sum)
                 }
-                console.log("SUM: " + sum)
+                setApiData(sum)
                 /*const weekTrends = await appointmentService.getAppointmentTrends(providerID, startDateTime, endDateTime);
                 setApiData(weekTrends);*/
             } catch (error) {

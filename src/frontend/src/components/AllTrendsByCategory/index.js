@@ -2,14 +2,13 @@ import UserService from "../../services/user.service";
 import React, {useEffect, useState} from "react";
 import {Bar, BarChart, CartesianGrid, Legend, ResponsiveContainer, Tooltip, XAxis, YAxis} from "recharts";
 import {DatePicker} from "@mui/x-date-pickers/DatePicker";
-import {Button, FormControl, MenuItem, Select, TextField} from "@mui/material";
+import {FormControl, MenuItem, Select, TextField} from "@mui/material";
 import dayjs from "dayjs";
 import InputLabel from "@mui/material/InputLabel";
 import appointmentService from "../../services/appointment.service";
 
 export default function AllTrendsByCategory() {
     const [trends, setApiData] = useState([]);
-    const [systemUsers, setSystemUsers] = useState([]);
     const [startDateTime, setStartDateTime] = useState(dayjs().set('second', 0));
     const [endDateTime, setEndDateTime] = useState(dayjs());
     const [selectedCategory, setSelectedCategory] = useState(0);
@@ -17,40 +16,30 @@ export default function AllTrendsByCategory() {
     const getAllSystemUsers= async () => {
         UserService.getAllServiceProviders()
             .then(async (response) => {
-                setSystemUsers(response.data);
                 const sum = [0, 0, 0, 0, 0, 0, 0]
+
+                // Get trend data from each provider and calculate running sum
                 for (const provider of response.data) {
                     if (provider.Service.Category === "Beauty" && selectedCategory === 0) {
-                        /*console.log(provider.UserID);
-                        console.log(provider.Service.Category);*/
-
                         const weekTrends = await appointmentService.getAppointmentTrends(provider.UserID, startDateTime, endDateTime)
                         for (let i = 0; i < 7; i++) {
-                            // this feels dirty
-                            sum.push(sum[i] + weekTrends[i]);
-                            sum.shift()
+                            sum[i] = sum[i] + weekTrends[i];
                         }
-                        //console.log(weekTrends)
                     } else if (provider.Service.Category === "Fitness" && selectedCategory === 1) {
                         const weekTrends = await appointmentService.getAppointmentTrends(provider.UserID, startDateTime, endDateTime)
                         for (let i = 0; i < 7; i++) {
-                            // this feels dirty
-                            sum.push(sum[i] + weekTrends[i]);
-                            sum.shift()
+                            sum[i] = sum[i] + weekTrends[i];
                         }
                     } else if (provider.Service.Category === "Health" && selectedCategory === 2) {
                         const weekTrends = await appointmentService.getAppointmentTrends(provider.UserID, startDateTime, endDateTime)
                         for (let i = 0; i < 7; i++) {
-                            // this feels dirty
-                            sum.push(sum[i] + weekTrends[i]);
-                            sum.shift()
+                            sum[i] = sum[i] + weekTrends[i];
                         }
                     } else {
 
                     }
-                    setApiData(sum)
-                    console.log("SUM: " + sum)
                 }
+                setApiData(sum);
             }).catch((error) => {
             console.log(error);
         })
