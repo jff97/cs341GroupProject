@@ -4,11 +4,14 @@ import TasksIcon from '@mui/icons-material/Task';
 import EventIcon from '@mui/icons-material/Event';
 import EditCalendarIcon from '@mui/icons-material/EditCalendar';
 import CalendarMonthOutlined from '@mui/icons-material/CalendarMonthOutlined';
+import HelpIcon from '@mui/icons-material/Help';
 import { Link } from 'react-router-dom';
 import { useLocation } from 'react-router-dom';
+import TimelineIcon from '@mui/icons-material/Timeline';
 import AdminPanelSettingsIcon from '@mui/icons-material/AdminPanelSettings';
 import AppConfig from 'src/config/config';
 import useUserStore from 'src/utils/stores';
+import config from 'src/config/config';
 
 const drawerWidth = 240;
 
@@ -108,7 +111,7 @@ export default function NavDrawer() {
                             <ListItem disablePadding>
                                 <ListItemButton>
                                     <ListItemIcon>
-                                        <AdminPanelSettingsIcon />
+                                        <TimelineIcon />
                                     </ListItemIcon>
                                     <ListItemText primary="Admin Appointment Trends" />
                                 </ListItemButton>
@@ -127,8 +130,23 @@ export default function NavDrawer() {
                             </ListItem>
                         </Link>
                     }
+                    <ListItem disablePadding 
+                        onClick={() => {
+                            window.open('https://github.com/jff97/cs341GroupProject/blob/soft-delete/projectManagement/userManual/User%20Manual.pdf')
+                        }}>
+                        <ListItemButton>
+                            <ListItemIcon>
+                                <HelpIcon />
+                            </ListItemIcon>
+                            <ListItemText primary="User Help Guide" />
+                        </ListItemButton>
+                    </ListItem>
                 </List>
+             
                 <Toolbar />
+                <div style={{marginTop: 'auto', textAlign:'center'}}>
+                    <p>Production Build {config.appVersion}</p>
+                </div>
             </Drawer>
         </Box>
     );

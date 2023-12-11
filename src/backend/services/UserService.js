@@ -49,11 +49,19 @@ class UserService {
     }
 
     async getAllNormalUsers() {
-        return await DataAccess.getUsersByRoleID(1);
+        return await DataAccess.getUsers();
     }
 
     async getAllServiceProvidersWithService() {
         return await DataAccess.getAllServiceProvidersWithService();
+    }
+
+    async disableUser({UserID}) {
+        await DataAccess.disableUser(UserID);
+    }
+    
+    async enableUser({UserID}) {
+        await DataAccess.enableUser(UserID);
     }
 }
 

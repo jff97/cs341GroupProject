@@ -26,7 +26,7 @@ export default function AdminUserManagement() {
         <CustomAppBar 
             pageTitle="User Management" 
         />
-        <AdminUsersTable users={systemUsers} setUsers={setSystemUsers} />
+        <AdminUsersTable users={systemUsers} setUsers={setSystemUsers} getAllSystemUsers={getAllSystemUsers}/>
     </Box>
   );
 }

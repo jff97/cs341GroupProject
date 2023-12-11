@@ -150,7 +150,11 @@ class DataAccess {
          raw: true,
          include: [{
             model: models.Service,
-            attributes: ['ServiceTitle', 'Category', 'ServiceInfo']
+            attributes: ['ServiceTitle', 'Category', 'ServiceInfo'],
+            include: [{
+               model: models.User,
+               attributes: ['FirstName', 'LastName']
+            }]
          }]
       })
    }
@@ -164,7 +168,11 @@ class DataAccess {
          raw: true,
          include: [{
             model: models.Service,
-            attributes: ['ServiceTitle', 'Category']
+            attributes: ['ServiceTitle', 'Category'],
+            include: [{
+               model: models.User,
+               attributes: ['FirstName', 'LastName']
+            }]
          }]
       })
    }
@@ -279,6 +287,11 @@ class DataAccess {
       })
    }
 
+   getUsers() {
+      // Get all users except for the admin
+      return models.User.findAll()
+   }
+
    getAllServiceProvidersWithService() {
       return models.User.findAll({
          include: [{
@@ -290,6 +303,22 @@ class DataAccess {
          }],
          where: {
             RoleID: 2
+         }
+      })
+   }
+
+   async disableUser(UserID) {
+      await models.User.update({Active: false}, {
+         where: {
+            UserID
+         }
+      })
+   }
+
+   async enableUser(UserID) {
+      await models.User.update({Active: true}, {
+         where: {
+            UserID
          }
       })
    }

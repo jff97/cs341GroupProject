@@ -36,6 +36,24 @@ async function getAllServiceProvidersWithService(req, res, next) {
     }
 }
 
+async function disableUser(req, res, next) {
+    try {
+        await UserService.disableUser(req.query);
+        res.status(200).send("User successfully disabled!");
+    } catch (err) {
+        next(err);
+    }
+}
+
+async function enableUser(req, res, next) {
+    try {
+        await UserService.enableUser(req.query);
+        res.status(200).send("User successfully enabled!");
+    } catch (err) {
+        next(err);
+    }
+}
+
 module.exports = {
-    createUser, deleteUser, getAllNormalUsers, getAllServiceProvidersWithService
+    createUser, deleteUser, getAllNormalUsers, getAllServiceProvidersWithService, disableUser, enableUser
 };
