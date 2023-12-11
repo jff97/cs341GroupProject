@@ -127,16 +127,7 @@ export default function NavDrawer() {
                             </ListItem>
                         </Link>
                     }
-                    <Link to="https://github.com/jff97/cs341GroupProject/tree/soft-delete/projectManagement/userManual" style={linkStyles}>
-                            <ListItem disablePadding>
-                                <ListItemButton>
-                                    <ListItemIcon>
-                                        <AdminPanelSettingsIcon />
-                                    </ListItemIcon>
-                                    <ListItemText primary="User Manual" />
-                                </ListItemButton>
-                            </ListItem>
-                        </Link>
+
                 </List>
                 <Toolbar />
             </Drawer>
