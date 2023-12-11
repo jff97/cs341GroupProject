@@ -55,6 +55,14 @@ class UserService {
     async getAllServiceProvidersWithService() {
         return await DataAccess.getAllServiceProvidersWithService();
     }
+
+    async disableUser({UserID}) {
+        await DataAccess.disableUser(UserID);
+    }
+    
+    async enableUser({UserID}) {
+        await DataAccess.enableUser(UserID);
+    }
 }
 
 const userServiceInstance = Object.freeze(new UserService());

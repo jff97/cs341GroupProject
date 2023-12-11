@@ -39,6 +39,22 @@ const userService = {
         })/*.then((response) => {
             return response.data;
         });*/
+    },
+
+    disableUser: (UserID) => {
+        return api.get(USER_ENDPOINT + "disable", {
+            params: {
+                UserID: UserID
+            }
+        })
+    },
+
+    enableUser: (UserID) => {
+        return api.get(USER_ENDPOINT + "enable", {
+            params: {
+                UserID: UserID
+            }
+        })
     }
 }
 

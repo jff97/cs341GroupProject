@@ -17,6 +17,12 @@ class AuthService {
             throw err;
         }
 
+        if(user.Active == 0) {
+            const err = new Error('User is not active!');
+            err.code = 401;
+            throw err;
+        }
+
         // Compare password to stored hash
         const isValidPassword = bcrypt.compareSync(Password, user.HashedPassword);
 

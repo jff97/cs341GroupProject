@@ -10,15 +10,7 @@ import AppointmentService from "../../services/appointment.service";
 function CustomToolbar({filterDate, setFilterDate}) {
     return (
       <GridToolbarContainer>
-        <h2>System Appointment Slots</h2>
-        <DatePicker
-            label="Appointment Date"
-            value={filterDate}
-            onChange={(newValue) => {
-                setFilterDate(newValue);
-            }}
-            sx={{color: 'white', marginLeft: 'auto', mt: 2, mr: 2}}
-        />
+        <h2>User Table</h2>
       </GridToolbarContainer>
     );
 }
@@ -27,12 +19,15 @@ async function getAppointmentsForUser(userID) {
     return await AppointmentService.getUsersAppointments(userID);
 }
 
-export default function AdminUsersTable({ users, setUsers }) {
+export default function AdminUsersTable({ users, setUsers, getAllSystemUsers }) {
     const columns = [
         { field: 'User', headerName: 'Client', width: 200, valueGetter: (params) => {
                 //console.log(params.row.FullName);
                 // Messy, but working
                 return params.row.FullName}
+        },
+        {field: 'Active', headerName: 'Active', width: 100, valueGetter: (params) => {
+                return params.row.Active ? "Yes" : "No"}
         },
         {field: "UserName", headerName: "UserName", width: 200},
         {
@@ -43,6 +38,28 @@ export default function AdminUsersTable({ users, setUsers }) {
                 <button onClick={() => handleDelete(params.row.UserID)}>Delete</button>
             ),
         },
+        {
+            field: 'disable',
+            headerName: 'Disable Account',
+            width: 200,
+            renderCell: (params) => (
+                <button onClick={() => {
+                    UserService.disableUser(params.row.UserID);
+                    getAllSystemUsers();
+                }}>Disable</button>
+            ),
+        },
+        {
+            field: 'enable',
+            headerName: 'Enable Account',
+            width: 200,
+            renderCell: (params) => (
+                <button onClick={() => { 
+                    UserService.enableUser(params.row.UserID)
+                    getAllSystemUsers();
+                }}>Enable</button>
+            ),
+        }
     ];
 
     const handleDelete = async (userID) => {

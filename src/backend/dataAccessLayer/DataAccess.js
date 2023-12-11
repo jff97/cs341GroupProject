@@ -293,6 +293,22 @@ class DataAccess {
          }
       })
    }
+
+   async disableUser(UserID) {
+      await models.User.update({Active: false}, {
+         where: {
+            UserID
+         }
+      })
+   }
+
+   async enableUser(UserID) {
+      await models.User.update({Active: true}, {
+         where: {
+            UserID
+         }
+      })
+   }
 }
 
 // Singleton instance of DataAccess for "Dependency Injection"
