@@ -1,11 +1,10 @@
 import React, {useEffect, useState} from 'react';
 import CustomNoRowsOverlay from 'src/components/CustomNoRowsOverlay';
-import { DatePicker } from '@mui/x-date-pickers';
 import { DataGrid, GridToolbarContainer } from '@mui/x-data-grid';
 import userService from "../../services/user.service";
-import UserManagement from "../../pages/AdminUserManagement";
 import UserService from "../../services/user.service";
 import AppointmentService from "../../services/appointment.service";
+import { Button } from '@mui/material';
 
 function CustomToolbar({filterDate, setFilterDate}) {
     return (
@@ -22,44 +21,43 @@ async function getAppointmentsForUser(userID) {
 export default function AdminUsersTable({ users, setUsers, getAllSystemUsers }) {
     const columns = [
         { field: 'User', headerName: 'Client', width: 200, valueGetter: (params) => {
-                //console.log(params.row.FullName);
-                // Messy, but working
                 return params.row.FullName}
         },
+        {field: "UserName", headerName: "Username", width: 200},
         {field: 'Active', headerName: 'Active', width: 100, valueGetter: (params) => {
-                return params.row.Active ? "Yes" : "No"}
+            return params.row.Active ? "Yes" : "No"}
         },
-        {field: "UserName", headerName: "UserName", width: 200},
-        {
-            field: 'delete',
-            headerName: 'Delete',
-            width: 100,
-            renderCell: (params) => (
-                <button onClick={() => handleDelete(params.row.UserID)}>Delete</button>
-            ),
+        {field: 'Actions', headerName: 'Actions', width: 300, headerAlign: 'center', renderCell: (params) => {
+                return (
+                    <div>
+                        <Button variant="contained" color="info" size="small" sx={{ color: 'white', marginLeft: 'auto', mr: 2 }}
+                            onClick={() => {
+                                handleDelete(params.row.UserID);
+                            }}
+                            >
+                            Delete
+                        </Button>
+                        <Button
+                            disabled={params.row.Active}
+                            variant="contained" color="success" size="small" sx={{ color: 'white', marginLeft: 'auto', mr: 2 }}
+                            onClick={() => {
+                                handleEnable(params.row.UserID);
+                            }}
+                            >
+                            Enable 
+                        </Button>
+                        <Button
+                            disabled={!params.row.Active}
+                            variant="contained" color="error" size="small" sx={{ color: 'white', marginLeft: 'auto', mr: 2 }}
+                            onClick={() => {
+                                handleDisable(params.row.UserID);
+                            }}
+                            >
+                            Disable
+                        </Button>
+                    </div>)
+            }
         },
-        {
-            field: 'disable',
-            headerName: 'Disable Account',
-            width: 200,
-            renderCell: (params) => (
-                <button onClick={() => {
-                    UserService.disableUser(params.row.UserID);
-                    getAllSystemUsers();
-                }}>Disable</button>
-            ),
-        },
-        {
-            field: 'enable',
-            headerName: 'Enable Account',
-            width: 200,
-            renderCell: (params) => (
-                <button onClick={() => { 
-                    UserService.enableUser(params.row.UserID)
-                    getAllSystemUsers();
-                }}>Enable</button>
-            ),
-        }
     ];
 
     const handleDelete = async (userID) => {
@@ -77,13 +75,29 @@ export default function AdminUsersTable({ users, setUsers, getAllSystemUsers }) 
             // Delete user
             await userService.deleteUser(userID);
 
-            // Filter out the deleted user from the current state
-            const updatedUsers = users.filter(user => user.UserID !== userID);
-            setUsers(updatedUsers);
+            getAllSystemUsers();
         } catch (error) {
             console.error("Error deleting user: ", error);
         }
     };
+
+    const handleEnable = async (userID) => {
+        try {
+            await userService.enableUser(userID);
+            getAllSystemUsers();
+        } catch (error) {
+            console.error("Error enabling user: ", error);
+        }
+    };
+
+    const handleDisable = async (userID) => {
+        try {
+            await userService.disableUser(userID);
+            getAllSystemUsers();
+        } catch (error) {
+            console.error("Error disabling user: ", error);
+        }
+    }
 
     return (
         <DataGrid 

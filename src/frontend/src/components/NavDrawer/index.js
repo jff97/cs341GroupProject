@@ -4,8 +4,10 @@ import TasksIcon from '@mui/icons-material/Task';
 import EventIcon from '@mui/icons-material/Event';
 import EditCalendarIcon from '@mui/icons-material/EditCalendar';
 import CalendarMonthOutlined from '@mui/icons-material/CalendarMonthOutlined';
+import HelpIcon from '@mui/icons-material/Help';
 import { Link } from 'react-router-dom';
 import { useLocation } from 'react-router-dom';
+import TimelineIcon from '@mui/icons-material/Timeline';
 import AdminPanelSettingsIcon from '@mui/icons-material/AdminPanelSettings';
 import AppConfig from 'src/config/config';
 import useUserStore from 'src/utils/stores';
@@ -108,7 +110,7 @@ export default function NavDrawer() {
                             <ListItem disablePadding>
                                 <ListItemButton>
                                     <ListItemIcon>
-                                        <AdminPanelSettingsIcon />
+                                        <TimelineIcon />
                                     </ListItemIcon>
                                     <ListItemText primary="Admin Appointment Trends" />
                                 </ListItemButton>
@@ -133,7 +135,7 @@ export default function NavDrawer() {
                         }}>
                         <ListItemButton>
                             <ListItemIcon>
-                                <AdminPanelSettingsIcon />
+                                <HelpIcon />
                             </ListItemIcon>
                             <ListItemText primary="User Help" />
                         </ListItemButton>

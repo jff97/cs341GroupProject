@@ -27,6 +27,7 @@ export default function AdminManageAppointments() {
         .then((response) => {
             setAppointmentSlots(response.data);
         }).catch((error) => {
+            setAppointmentSlots([]);
             console.log(error);
         })
      }

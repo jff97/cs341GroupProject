@@ -150,7 +150,11 @@ class DataAccess {
          raw: true,
          include: [{
             model: models.Service,
-            attributes: ['ServiceTitle', 'Category', 'ServiceInfo']
+            attributes: ['ServiceTitle', 'Category', 'ServiceInfo'],
+            include: [{
+               model: models.User,
+               attributes: ['FirstName', 'LastName']
+            }]
          }]
       })
    }
@@ -164,7 +168,11 @@ class DataAccess {
          raw: true,
          include: [{
             model: models.Service,
-            attributes: ['ServiceTitle', 'Category']
+            attributes: ['ServiceTitle', 'Category'],
+            include: [{
+               model: models.User,
+               attributes: ['FirstName', 'LastName']
+            }]
          }]
       })
    }

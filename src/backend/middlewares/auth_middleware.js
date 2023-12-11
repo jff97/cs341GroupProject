@@ -7,13 +7,6 @@ async function enforceAuthentication(req, res, next) {
     const authHeader = req.headers["authorization"];
     const token = authHeader && authHeader.split(" ")[1];
 
-    // TODO: WARNING!!!! THIS IS REALLY BAD FOR SECURITY. THIS MUST BE REMOVED BEFORE PRODUCTION
-    // BUT THIS MAKES IT EASIER FOR DEVELOPMENT PURPOSES
-    if (process.env.NODE_ENV === "development") {
-        // Allow access to API for development purposes
-        next();
-    }
-
     //check if token exists in request
     if (token == null) return res.status(401).send("Invalid Token");
 
