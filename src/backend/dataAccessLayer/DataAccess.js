@@ -287,6 +287,11 @@ class DataAccess {
       })
    }
 
+   getUsers() {
+      // Get all users except for the admin
+      return models.User.findAll()
+   }
+
    getAllServiceProvidersWithService() {
       return models.User.findAll({
          include: [{

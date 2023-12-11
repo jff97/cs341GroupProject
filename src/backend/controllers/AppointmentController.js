@@ -75,7 +75,6 @@ async function getAllAvailableAppointments(req, res, next) {
 
 async function getAppointmentsByUser(req, res, next) {
     try {
-        console.log(req)
         const data = await AppointmentService.getAppointmentsByUser(req.query.UserID);
         res.status(200).send(data);
     } catch (err) {

@@ -16,7 +16,6 @@ class NotificationService {
     }
 
     async getAllNotificationsForUser(UserID) {
-        console.log(UserID)
         if(!UserID) {
             const err = new Error('Missing required fields for notification retrieval!');
             err.code = 400;

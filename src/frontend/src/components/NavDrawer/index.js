@@ -11,6 +11,7 @@ import TimelineIcon from '@mui/icons-material/Timeline';
 import AdminPanelSettingsIcon from '@mui/icons-material/AdminPanelSettings';
 import AppConfig from 'src/config/config';
 import useUserStore from 'src/utils/stores';
+import config from 'src/config/config';
 
 const drawerWidth = 240;
 
@@ -131,17 +132,21 @@ export default function NavDrawer() {
                     }
                     <ListItem disablePadding 
                         onClick={() => {
-                            window.location.replace('https://github.com/jff97/cs341GroupProject/blob/soft-delete/projectManagement/userManual/User%20Manual.pdf')
+                            window.open('https://github.com/jff97/cs341GroupProject/blob/soft-delete/projectManagement/userManual/User%20Manual.pdf')
                         }}>
                         <ListItemButton>
                             <ListItemIcon>
                                 <HelpIcon />
                             </ListItemIcon>
-                            <ListItemText primary="User Help" />
+                            <ListItemText primary="User Help Guide" />
                         </ListItemButton>
                     </ListItem>
                 </List>
+             
                 <Toolbar />
+                <div style={{marginTop: 'auto', textAlign:'center'}}>
+                    <p>Production Build {config.appVersion}</p>
+                </div>
             </Drawer>
         </Box>
     );

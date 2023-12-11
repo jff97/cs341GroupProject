@@ -2,7 +2,7 @@ import React, {useEffect, useState} from 'react';
 import CustomNoRowsOverlay from 'src/components/CustomNoRowsOverlay';
 import { DataGrid, GridToolbarContainer } from '@mui/x-data-grid';
 import userService from "../../services/user.service";
-import UserService from "../../services/user.service";
+import { useNotification } from '../NotificationProvider';
 import AppointmentService from "../../services/appointment.service";
 import { Button } from '@mui/material';
 
@@ -19,18 +19,42 @@ async function getAppointmentsForUser(userID) {
 }
 
 export default function AdminUsersTable({ users, setUsers, getAllSystemUsers }) {
+    const notification = useNotification();
+
     const columns = [
         { field: 'User', headerName: 'Client', width: 200, valueGetter: (params) => {
                 return params.row.FullName}
         },
         {field: "UserName", headerName: "Username", width: 200},
+        {field: 'Role', headerName: 'Role', width: 200, valueGetter: (params) => {
+                if (params.row.RoleID === 1) {
+                    return "Client";
+                } else if (params.row.RoleID === 2) {
+                    return "Provider";
+                } else if (params.row.RoleID === 3) {
+                    return "Admin";
+                }
+            }
+        },
         {field: 'Active', headerName: 'Active', width: 100, valueGetter: (params) => {
             return params.row.Active ? "Yes" : "No"}
         },
+        {
+            field: 'CreatedDateTime', headerName: 'Account Created', type: 'string', width: 250, valueGetter: (params) => {
+                // Return date as string in the format of DAY MONTH DATE YEAR HH:MM AM/PM
+                const date = new Date(params.value);
+                return date.toLocaleString('en-US', { weekday: 'short', month: 'short', day: 'numeric', year: 'numeric', hour: 'numeric', minute: 'numeric', hour12: true })
+            }
+        },
         {field: 'Actions', headerName: 'Actions', width: 300, headerAlign: 'center', renderCell: (params) => {
                 return (
-                    <div>
-                        <Button variant="contained" color="info" size="small" sx={{ color: 'white', marginLeft: 'auto', mr: 2 }}
+                    <div style={{display:"flex", justifyContent: "center"}}>
+                        <Button 
+                            disabled={params.row.RoleID === 3}
+                            variant="contained" 
+                            color="info" 
+                            size="small" 
+                            sx={{ color: 'white', mr: 2 }}
                             onClick={() => {
                                 handleDelete(params.row.UserID);
                             }}
@@ -38,8 +62,8 @@ export default function AdminUsersTable({ users, setUsers, getAllSystemUsers }) 
                             Delete
                         </Button>
                         <Button
-                            disabled={params.row.Active}
-                            variant="contained" color="success" size="small" sx={{ color: 'white', marginLeft: 'auto', mr: 2 }}
+                            disabled={params.row.Active || params.row.RoleID === 3}
+                            variant="contained" color="success" size="small" sx={{ color: 'white', mr: 2 }}
                             onClick={() => {
                                 handleEnable(params.row.UserID);
                             }}
@@ -47,8 +71,8 @@ export default function AdminUsersTable({ users, setUsers, getAllSystemUsers }) 
                             Enable 
                         </Button>
                         <Button
-                            disabled={!params.row.Active}
-                            variant="contained" color="error" size="small" sx={{ color: 'white', marginLeft: 'auto', mr: 2 }}
+                            disabled={!params.row.Active || params.row.RoleID === 3}
+                            variant="contained" color="error" size="small" sx={{ color: 'white' }}
                             onClick={() => {
                                 handleDisable(params.row.UserID);
                             }}
@@ -76,7 +100,9 @@ export default function AdminUsersTable({ users, setUsers, getAllSystemUsers }) 
             await userService.deleteUser(userID);
 
             getAllSystemUsers();
+            notification.createNotification("User deleted", "success");
         } catch (error) {
+            notification.createNotification("Error deleting user", "error");
             console.error("Error deleting user: ", error);
         }
     };
@@ -84,8 +110,10 @@ export default function AdminUsersTable({ users, setUsers, getAllSystemUsers }) 
     const handleEnable = async (userID) => {
         try {
             await userService.enableUser(userID);
+            notification.createNotification("User enabled successfully!", "success");
             getAllSystemUsers();
         } catch (error) {
+            notification.createNotification("Error enabling user", "error");
             console.error("Error enabling user: ", error);
         }
     };
@@ -93,8 +121,10 @@ export default function AdminUsersTable({ users, setUsers, getAllSystemUsers }) 
     const handleDisable = async (userID) => {
         try {
             await userService.disableUser(userID);
+            notification.createNotification("User disabled successfully!", "success");
             getAllSystemUsers();
         } catch (error) {
+            notification.createNotification("Error disabling user", "error");
             console.error("Error disabling user: ", error);
         }
     }
