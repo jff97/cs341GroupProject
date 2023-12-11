@@ -127,6 +127,16 @@ export default function NavDrawer() {
                             </ListItem>
                         </Link>
                     }
+                    <ListItem disablePadding onClick={() => {
+                            window.location.replace('https://github.com/jff97/cs341GroupProject/blob/soft-delete/projectManagement/userManual/User%20Manual.pdf')
+                    }}>
+                        <ListItemButton>
+                            <ListItemIcon>
+                                <AdminPanelSettingsIcon />
+                            </ListItemIcon>
+                            <ListItemText primary="User Help" />
+                        </ListItemButton>
+                    </ListItem>
                 </List>
                 <Toolbar />
             </Drawer>
