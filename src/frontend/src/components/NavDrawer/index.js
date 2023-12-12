@@ -98,7 +98,7 @@ export default function NavDrawer() {
                         <ListItem disablePadding>
                             <ListItemButton>
                                 <ListItemIcon>
-                                    <AdminPanelSettingsIcon />
+                                    <TimelineIcon />
                                 </ListItemIcon>
                                 <ListItemText primary="Appointment Trends" />
                             </ListItemButton>
