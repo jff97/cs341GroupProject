@@ -65,9 +65,12 @@ export default function AllTrendsByCategory() {
         <div>
             <h1>Trends By Category</h1>
             <FormControl fullWidth>
-                <InputLabel shrink={true} id="demo-simple-select-label">Categories</InputLabel>
+                <InputLabel shrink={true} color="info" id="category-label">Categories</InputLabel>
                 <Select
-                    labelId="demo-simple-select-label"
+                    labelId="category-label"
+                    label="Categories"
+                    notched={true}
+                    color="info"
                     id="demo-simple-select"
                     value={selectedCategory}
                     onChange={handleChange}
@@ -77,7 +80,7 @@ export default function AllTrendsByCategory() {
                     <MenuItem value={2}>Health</MenuItem>
                 </Select>
             </FormControl>
-            <ResponsiveContainer width="100%" height={300}>
+            <ResponsiveContainer width="100%" height={300} style={{marginTop: '30px'}}>
                 <BarChart data={data}>
                     <CartesianGrid strokeDasharray="3 3" />
                     <XAxis dataKey="day" />

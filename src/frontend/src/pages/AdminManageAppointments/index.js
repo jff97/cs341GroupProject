@@ -15,6 +15,8 @@ export default function AdminManageAppointments() {
 
     useEffect(() => {
         getAppointmentsInRange();
+
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [filterStartDate, filterEndDate]);
 
     const onDialogClose = () => {

@@ -1,16 +1,19 @@
 import React from 'react';
-import { Button } from '@mui/material';
+import { Button, Typography } from '@mui/material';
 import { DataGrid, GridToolbarContainer } from '@mui/x-data-grid';
 import BookmarkAddIcon from '@mui/icons-material/BookmarkAdd';
 import appointmentService from 'src/services/appointment.service';
 import useUserStore from 'src/utils/stores';
 import { useNotification } from '../NotificationProvider';
+import { useTheme } from '@mui/material/styles';
 import CustomNoRowsOverlay from 'src/components/CustomNoRowsOverlay';
 
 function CustomToolbar() {
     return (
       <GridToolbarContainer>
-        <h2>My Appointments</h2>
+         <Typography variant="h6" component="div" sx={{ ml: 0.5, fontWeight: 'bold', mt: 2, mb: 2 }}>
+            My Appointments
+        </Typography>
       </GridToolbarContainer>
     );
   }
@@ -31,9 +34,9 @@ const columns = [
     }},
     { field: 'Actions', headerName: 'Actions', width: 200, renderCell: (params) => {
         return (
-            <div>
+            <div style={{width: '100%'}}>
                 <Button variant="contained" color="info" size="small" sx={{color: 'white', marginLeft: 'auto', mr: 2}} onClick={() => {params.row.unBookAppointment(params.row.AppointmentID)}}  endIcon={<BookmarkAddIcon />}>
-                    UnBook
+                    Unbook
                 </Button>
             </div>)
     }},
@@ -42,6 +45,7 @@ const columns = [
 export default function MyAppointmentTable({appointmentsData, loadUserAppointments}) {
     const UserID = useUserStore(state => state.UserID);
     const { createNotification } = useNotification();
+    const theme = useTheme();
 
     const unBookAppointment = (AppointmentID) => {
         appointmentService.unBookAppointment(AppointmentID, UserID)
@@ -75,6 +79,7 @@ export default function MyAppointmentTable({appointmentsData, loadUserAppointmen
             border: 2,
             flex: 1,
             borderColor: 'primary.light',
+            backgroundColor: theme.palette.grey[900],
         }}
         slots={{
             toolbar: CustomToolbar,

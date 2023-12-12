@@ -6,12 +6,11 @@ import EditCalendarIcon from '@mui/icons-material/EditCalendar';
 import CalendarMonthOutlined from '@mui/icons-material/CalendarMonthOutlined';
 import HelpIcon from '@mui/icons-material/Help';
 import { Link } from 'react-router-dom';
-import { useLocation } from 'react-router-dom';
 import TimelineIcon from '@mui/icons-material/Timeline';
 import AdminPanelSettingsIcon from '@mui/icons-material/AdminPanelSettings';
 import AppConfig from 'src/config/config';
 import useUserStore from 'src/utils/stores';
-import config from 'src/config/config';
+import GitInfo from 'react-git-info/macro';
 
 const drawerWidth = 240;
 
@@ -21,8 +20,8 @@ const linkStyles = {
 }
 
 export default function NavDrawer() {
-    const location = useLocation();
     const RoleID = useUserStore(state => state.RoleID);
+    const gitInfo = GitInfo();
 
     return (
         <Box sx={{ display: 'flex' }}>
@@ -142,11 +141,14 @@ export default function NavDrawer() {
                         </ListItemButton>
                     </ListItem>
                 </List>
-             
                 <Toolbar />
-                <div style={{marginTop: 'auto', textAlign:'center'}}>
-                    <p>Production Build {config.appVersion}</p>
-                </div>
+                {RoleID === 3 &&
+                    (<div style={{marginTop: 'auto', textAlign:'center'}}>
+                        <p onClick={() => {
+                            window.open('https://github.com/jff97/cs341GroupProject/commit/' + gitInfo.commit.hash)
+                        }}>Production Build {gitInfo.commit.shortHash}</p>
+                        <p>Build Date: {gitInfo.commit.date}</p>
+                    </div>)}
             </Drawer>
         </Box>
     );

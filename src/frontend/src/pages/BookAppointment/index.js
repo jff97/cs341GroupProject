@@ -8,10 +8,10 @@ export default function BookAppointment() {
     const [availableAppointmentsData, setAvailableAppointmentsData] = useState([]);
 
     useEffect(() => {
-        loadAvailableAppointments();
+        getAvailableAppointments();
     }, []);
 
-    const loadAvailableAppointments = async () => {
+    const getAvailableAppointments = async () => {
         appointmentService.getAvailableAppointments()
             .then((response) => {
                 setAvailableAppointmentsData(response)
@@ -24,7 +24,7 @@ export default function BookAppointment() {
     return (
         <Box sx={{height: '93%'}}>
             <CustomAppBar pageTitle="Book Appointment" />
-            <BookAppointmentTable availableAppointmentsData={availableAppointmentsData} loadAvailableAppointments={loadAvailableAppointments} />
+            <BookAppointmentTable availableAppointmentsData={availableAppointmentsData} getAvailableAppointments={getAvailableAppointments} />
         </Box>
     )
 }

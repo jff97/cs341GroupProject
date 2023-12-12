@@ -80,21 +80,23 @@ export default function CreateEditAppointmentSlotDialog({ open, onDialogClose, s
                         onChange={(event) => setAppointmentTitle(event.target.value)}
                     />
                 </FormControl>
-                <FormControl sx={{ m: 1, minWidth: 475 }}>
+                <FormControl color="info" sx={{ m: 1, minWidth: 475 }}>
                     <DateTimePicker
                         label="Start Time"
                         color="info"
+          
                         value={appointmentStart}
                         onChange={(newValue) => setAppointmentStart(newValue.second(0))}
                     />
                 </FormControl>
 
                 <FormControl sx={{ m: 1, minWidth: 475 }}>
-                    <InputLabel id="demo-simple-select-label">Duration</InputLabel>
+                    <InputLabel color="info" id="demo-simple-select-label">Duration</InputLabel>
                     <Select
                         labelId="demo-simple-select-label"
                         id="demo-simple-select"
                         value={duration}
+                        color="info"
                         label="Duration"
                         onChange={(newValue) => {
                             const newDuration = newValue.target.value;

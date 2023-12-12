@@ -1,15 +1,18 @@
 import React, { useState } from 'react';
-import { Button } from '@mui/material';
+import { Button, Typography } from '@mui/material';
 import { Add, Edit, Delete } from '@mui/icons-material';
 import { DataGrid, GridToolbarContainer } from '@mui/x-data-grid';
 import appointmentService from 'src/services/appointment.service';
 import { useNotification } from '../NotificationProvider';
+import { useTheme } from '@mui/material/styles';
 import CustomNoRowsOverlay from 'src/components/CustomNoRowsOverlay';
 
 function CustomToolbar({ openCreateAppointmentSlotDialog }) {
     return (
         <GridToolbarContainer>
-            <h2>My Appointment Slots</h2>
+            <Typography variant="h6" component="div" sx={{ ml: 0.5, fontWeight: 'bold', mt: 2, mb: 2 }}>
+                My Appointment Slots
+            </Typography>
             <Button variant="contained" color="info" size="small" sx={{ color: 'white', marginLeft: 'auto', mr: 2 }} onClick={openCreateAppointmentSlotDialog} endIcon={<Add />}>
                 Create Appointment Slot
             </Button>
@@ -39,7 +42,8 @@ const columns = [
     },
     {
         field: 'LastModifiedDateTime', headerName: 'Last Modified', type: 'string', width: 250, valueGetter: (params) => {
-            return new Date(params.value)
+            const date = new Date(params.value);
+            return date.toLocaleString('en-US', { weekday: 'short', month: 'short', day: 'numeric', year: 'numeric', hour: 'numeric', minute: 'numeric', hour12: true })
         }
     },
     {
@@ -64,6 +68,7 @@ const columns = [
 
 export default function ProviderAppointmentManageTable({ appointmentSlots, openCreateAppointmentSlotDialog, onDeleteAppointmentSlot, setSelectedAppointment }) {
     const { createNotification } = useNotification();
+    const theme = useTheme();
 
     const deleteAppointment = (AppointmentID) => {
         appointmentService.deleteAppointmentSlot(AppointmentID).then((response) => {
@@ -104,6 +109,7 @@ export default function ProviderAppointmentManageTable({ appointmentSlots, openC
                 border: 2,
                 flex: 1,
                 borderColor: 'primary.light',
+                backgroundColor: theme.palette.grey[900],
             }}
         />
     );
