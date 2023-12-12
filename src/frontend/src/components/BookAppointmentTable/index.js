@@ -39,9 +39,11 @@ export default function BookAppointmentTable({availableAppointmentsData, getAvai
             return new Date(params.value)
         }},
         { field: 'Actions', headerName: 'Actions', width: 200, renderCell: (params) => {
+            const date = new Date(params.row.StartDateTime);
+            const isPast = date < new Date();
             return (
                 <div>
-                    <Button variant="contained" color="info" size="small" sx={{color: 'white', marginLeft: 'auto', mr: 2}} onClick={() => {bookAppointment(params.row.AppointmentID)}}  endIcon={<BookmarkAddIcon />}>
+                    <Button disabled={isPast} variant="contained" color="info" size="small" sx={{color: 'white', marginLeft: 'auto', mr: 2}} onClick={() => {bookAppointment(params.row.AppointmentID)}}  endIcon={<BookmarkAddIcon />}>
                         Book
                     </Button>
                 </div>)

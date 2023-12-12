@@ -23,8 +23,13 @@ export default function BookAppointment() {
 
     return (
         <Box sx={{height: '93%'}}>
-            <CustomAppBar pageTitle="Book Appointment" />
-            <BookAppointmentTable availableAppointmentsData={availableAppointmentsData} getAvailableAppointments={getAvailableAppointments} />
+            <CustomAppBar 
+                pageTitle="Book Appointment" 
+            />
+            <BookAppointmentTable 
+                availableAppointmentsData={availableAppointmentsData} 
+                getAvailableAppointments={getAvailableAppointments} 
+            />
         </Box>
     )
 }

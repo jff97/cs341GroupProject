@@ -20,7 +20,7 @@ export function Dashboard() {
         <NotificationProvider>
             <Box sx={rootStyle}>
                 <NavDrawer />
-                <Box sx={{height: '100vh', flexGrow: 1, p: 2, bgcolor: 'background.default' }}>
+                <Box sx={{height: '100vh', flexGrow: 1, p: 2, bgcolor: 'background.default', overflow: 'hidden' }}>
                     <Offset />
                     <Routes>
                         <Route path="/book" element={<BookAppointment />} />

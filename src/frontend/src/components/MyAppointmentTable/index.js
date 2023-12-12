@@ -18,34 +18,51 @@ function CustomToolbar() {
     );
   }
 
-const columns = [
-    { field: 'AppointmentTitle', headerName: 'Appointment Title', width: 200 },
-    { field: 'Service.Category', headerName: 'Category', width: 200 },
-    { field: 'Service.ServiceTitle', headerName: 'Provider', width: 200,
-        valueGetter: (params) => {
-            return params.row["Service.ServiceTitle"] + " (" + params.row["Service.User.FirstName"] + " " + params.row["Service.User.LastName"] + ")"
-        }
-    },
-    { field: 'StartDateTime', headerName: 'Appointment Start', type: 'dateTime', width: 200, valueGetter: (params) => {
-        return new Date(params.value)
-    }},
-    { field: 'EndDateTime', headerName: 'Appointment End', type: 'dateTime', width: 200, valueGetter: (params) => {
-        return new Date(params.value)
-    }},
-    { field: 'Actions', headerName: 'Actions', width: 200, renderCell: (params) => {
-        return (
-            <div style={{width: '100%'}}>
-                <Button variant="contained" color="info" size="small" sx={{color: 'white', marginLeft: 'auto', mr: 2}} onClick={() => {params.row.unBookAppointment(params.row.AppointmentID)}}  endIcon={<BookmarkAddIcon />}>
-                    Unbook
-                </Button>
-            </div>)
-    }},
-]
-
 export default function MyAppointmentTable({appointmentsData, loadUserAppointments}) {
     const UserID = useUserStore(state => state.UserID);
     const { createNotification } = useNotification();
     const theme = useTheme();
+
+    const columns = [
+        { field: 'AppointmentTitle', headerName: 'Appointment Title', width: 200 },
+        { field: 'Service.Category', headerName: 'Category', width: 200 },
+        { field: 'Service.ServiceTitle', headerName: 'Provider', width: 200,
+            valueGetter: (params) => {
+                return params.row["Service.ServiceTitle"] + " (" + params.row["Service.User.FirstName"] + " " + params.row["Service.User.LastName"] + ")"
+            }
+        },
+        { field: 'StartDateTime', headerName: 'Appointment Start', type: 'string', width: 200, renderCell: (params) => {
+            const date = new Date(params.value);
+            const dateStr = date.toLocaleString('en-US', { weekday: 'short', month: 'short', day: 'numeric', year: 'numeric', hour: 'numeric', minute: 'numeric', hour12: true })
+            const isPast = date < new Date();
+            return (
+                <div style={{width: '100%'}}>
+                    <p style={{color: isPast ? theme.palette.error.main : 'white'}}>{dateStr}</p>
+                </div>
+            )
+        }},
+        { field: 'EndDateTime', headerName: 'Appointment End', type: 'string', width: 200, renderCell: (params) => {
+                const date = new Date(params.value);
+                const dateStr = date.toLocaleString('en-US', { weekday: 'short', month: 'short', day: 'numeric', year: 'numeric', hour: 'numeric', minute: 'numeric', hour12: true })
+                const isPast = date < new Date();
+                return (
+                    <div style={{width: '100%'}}>
+                        <p style={{color: isPast ? theme.palette.error.main : 'white'}}>{dateStr}</p>
+                    </div>
+                )
+        }},
+        { field: 'Actions', headerName: 'Actions', width: 200, renderCell: (params) => {
+            const date = new Date(params.row.StartDateTime);
+            const isPast = date < new Date();
+            return (
+                <div style={{width: '100%'}}>
+                    <Button disabled={isPast} variant="contained" color="info" size="small" sx={{color: 'white', marginLeft: 'auto', mr: 2}} onClick={() => {unBookAppointment(params.row.AppointmentID)}}  endIcon={<BookmarkAddIcon />}>
+                        Unbook
+                    </Button>
+                </div>
+            )
+        }},
+    ]
 
     const unBookAppointment = (AppointmentID) => {
         appointmentService.unBookAppointment(AppointmentID, UserID)
@@ -57,18 +74,9 @@ export default function MyAppointmentTable({appointmentsData, loadUserAppointmen
             });
     }
 
-   // Inject a custom function into each row so it can be access
-   // by the columns list (janky, but works)
-   const modifiedAppointmentsData = appointmentsData.map(element => {
-    return {
-    ...element,
-    unBookAppointment: unBookAppointment
-    };
-   });
-
   return (
     <DataGrid
-        rows={modifiedAppointmentsData}
+        rows={appointmentsData}
         columns={columns}
         pageSize={5}
         rowsPerPageOptions={[5]}

@@ -2,7 +2,7 @@ const os = require('os');
 
 class UtilService {
     async getPlatform() {
-        return os.type() + " " + os.release();
+        return os.version() + " " + os.release() + " (" + os.arch() + ")";
     }
 }
 

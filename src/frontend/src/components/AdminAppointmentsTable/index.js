@@ -83,21 +83,26 @@ export default function AdminAppointmentsTable({ appointmentSlots, filterStartDa
                 return params.row.ClientUserID ? (params.row["User.FirstName"] + ' ' + params.row["User.LastName"]) : 'None'
             }
         },
-        {
-            field: 'StartDateTime', headerName: 'Appointment Start', type: 'string', width: 250,
-            valueGetter: (params) => {
-                // Return date as string in the format of DAY MONTH DATE YEAR HH:MM AM/PM
+        { field: 'StartDateTime', headerName: 'Appointment Start', type: 'string', width: 200, renderCell: (params) => {
+            const date = new Date(params.value);
+            const dateStr = date.toLocaleString('en-US', { weekday: 'short', month: 'short', day: 'numeric', year: 'numeric', hour: 'numeric', minute: 'numeric', hour12: true })
+            const isPast = date < new Date();
+            return (
+                <div style={{width: '100%'}}>
+                    <p style={{color: isPast ? theme.palette.error.main : 'white'}}>{dateStr}</p>
+                </div>
+            )
+        }},
+        { field: 'EndDateTime', headerName: 'Appointment End', type: 'string', width: 200, renderCell: (params) => {
                 const date = new Date(params.value);
-                return date.toLocaleString('en-US', { weekday: 'short', month: 'short', day: 'numeric', year: 'numeric', hour: 'numeric', minute: 'numeric', hour12: true })
-            }
-        },
-        {
-            field: 'EndDateTime', headerName: 'Appointment End', type: 'string', width: 250,
-            valueGetter: (params) => {
-                const date = new Date(params.value);
-                return date.toLocaleString('en-US', { weekday: 'short', month: 'short', day: 'numeric', year: 'numeric', hour: 'numeric', minute: 'numeric', hour12: true })
-            }
-        },
+                const dateStr = date.toLocaleString('en-US', { weekday: 'short', month: 'short', day: 'numeric', year: 'numeric', hour: 'numeric', minute: 'numeric', hour12: true })
+                const isPast = date < new Date();
+                return (
+                    <div style={{width: '100%'}}>
+                        <p style={{color: isPast ? theme.palette.error.main : 'white'}}>{dateStr}</p>
+                    </div>
+                )
+        }},
         {
             field: 'LastModifiedDateTime', headerName: 'Last Modified', type: 'string', width: 200, 
             valueGetter: (params) => {
