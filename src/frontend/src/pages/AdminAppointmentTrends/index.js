@@ -46,17 +46,17 @@ export default function AdminAppointmentHistory() {
             <CustomAppBar
                 pageTitle={
                     selectedTab === 0
-                        ? 'Admin Appointment Trends'
+                        ? 'Trends by Provider'
                         : selectedTab === 1
-                            ? 'All Appointment Trends'
-                            : 'By Category'
+                            ? 'Trends for all Providers'
+                            : 'By Provider Category'
                 }
             />
             <ThemeProvider theme={tabTheme}>
                 <Tabs value={selectedTab} onChange={handleTabChange}>
-                    <Tab label="Admin Trends" value={0} />
-                    <Tab label="All Trends" value={1} />
-                    <Tab label="By Category" value={2} />
+                    <Tab label="Trends by Provider" value={0} />
+                    <Tab label="Trends for all Providers" value={1} />
+                    <Tab label="By Provider Category" value={2} />
                 </Tabs>
             </ThemeProvider>
             {selectedTab === 0 && <AdminAppointmentTrends />}

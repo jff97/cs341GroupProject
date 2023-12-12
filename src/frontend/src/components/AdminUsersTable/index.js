@@ -1,15 +1,18 @@
-import React, {useEffect, useState} from 'react';
+import React from 'react';
 import CustomNoRowsOverlay from 'src/components/CustomNoRowsOverlay';
 import { DataGrid, GridToolbarContainer } from '@mui/x-data-grid';
 import userService from "../../services/user.service";
 import { useNotification } from '../NotificationProvider';
 import AppointmentService from "../../services/appointment.service";
-import { Button } from '@mui/material';
+import { Button, Typography } from '@mui/material';
+import { useTheme } from '@mui/material/styles';
 
 function CustomToolbar({filterDate, setFilterDate}) {
     return (
       <GridToolbarContainer>
-        <h2>User Table</h2>
+        <Typography variant="h6" component="div" sx={{ ml: 0.5, fontWeight: 'bold', mt: 2, mb: 2 }}>
+            Manage System Users
+        </Typography>
       </GridToolbarContainer>
     );
 }
@@ -19,7 +22,8 @@ async function getAppointmentsForUser(userID) {
 }
 
 export default function AdminUsersTable({ users, setUsers, getAllSystemUsers }) {
-    const notification = useNotification();
+    const { createNotification } = useNotification();
+    const theme = useTheme();
 
     const columns = [
         { field: 'User', headerName: 'Client', width: 200, valueGetter: (params) => {
@@ -98,11 +102,10 @@ export default function AdminUsersTable({ users, setUsers, getAllSystemUsers }) 
 
             // Delete user
             await userService.deleteUser(userID);
-
+            createNotification("User deleted", "success");
             getAllSystemUsers();
-            notification.createNotification("User deleted", "success");
         } catch (error) {
-            notification.createNotification("Error deleting user", "error");
+            createNotification("Error deleting user", "error");
             console.error("Error deleting user: ", error);
         }
     };
@@ -110,10 +113,10 @@ export default function AdminUsersTable({ users, setUsers, getAllSystemUsers }) 
     const handleEnable = async (userID) => {
         try {
             await userService.enableUser(userID);
-            notification.createNotification("User enabled successfully!", "success");
+            createNotification("User enabled successfully!", "success");
             getAllSystemUsers();
         } catch (error) {
-            notification.createNotification("Error enabling user", "error");
+            createNotification("Error enabling user", "error");
             console.error("Error enabling user: ", error);
         }
     };
@@ -121,10 +124,10 @@ export default function AdminUsersTable({ users, setUsers, getAllSystemUsers }) 
     const handleDisable = async (userID) => {
         try {
             await userService.disableUser(userID);
-            notification.createNotification("User disabled successfully!", "success");
+            createNotification("User disabled successfully!", "success");
             getAllSystemUsers();
         } catch (error) {
-            notification.createNotification("Error disabling user", "error");
+            createNotification("Error disabling user", "error");
             console.error("Error disabling user: ", error);
         }
     }
@@ -146,6 +149,7 @@ export default function AdminUsersTable({ users, setUsers, getAllSystemUsers }) 
                 border: 2,
                 flex: 1,
                 borderColor: 'primary.light',
+                backgroundColor: theme.palette.grey[900],
             }}
             />
     );

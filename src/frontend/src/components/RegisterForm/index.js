@@ -97,6 +97,7 @@ function RegisterForm() {
                                 <TextField
                                     label="First Name"
                                     color="info"
+                                    required
                                     value={firstname}
                                     onChange={(e) => setFirstname(e.target.value)}
                                     variant="outlined"
@@ -106,6 +107,7 @@ function RegisterForm() {
                                 <TextField
                                     label="Last Name"
                                     color="info"
+                                    required
                                     variant="outlined"
                                     value={lastname}
                                     onChange={(e) => setLastname(e.target.value)}
@@ -145,7 +147,7 @@ function RegisterForm() {
                             variant="outlined"
                             autoComplete="current-password"
                         />
-                        <DatePicker sx={{ mt: 1 }} label="Birthdate" onChange={(value) => setBirthdate(value)} />
+                        <DatePicker required sx={{ mt: 1 }} label="Birthdate" onChange={(value) => setBirthdate(value)} />
 
                         {role === 1 ? null : (
                             <Box>
@@ -158,6 +160,7 @@ function RegisterForm() {
                                     id="serviceTitle"
                                     label="Service Title"
                                     value={serviceTitle}
+                                    required
                                     name="serviceTitle"
                                     onChange={(e) => {
                                         setServiceTitle(e.target.value);
@@ -173,6 +176,7 @@ function RegisterForm() {
                                     fullWidth
                                     sx={{ mt: 1 }}
                                     color="info"
+                                    required
                                     id="serviceInfo"
                                     label="Service Qualifications"
                                     value={serviceInfo}

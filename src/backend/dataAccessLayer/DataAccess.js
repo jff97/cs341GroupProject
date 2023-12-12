@@ -322,6 +322,14 @@ class DataAccess {
          }
       })
    }
+
+   async deleteAllAppointmentsByServiceID(ServiceID) {
+      await models.AppointmentSlot.destroy({
+         where: {
+            ServiceID
+         }
+      })
+   }
 }
 
 // Singleton instance of DataAccess for "Dependency Injection"

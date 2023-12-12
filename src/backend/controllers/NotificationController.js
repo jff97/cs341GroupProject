@@ -12,7 +12,6 @@ async function createNotification(req, res, next) {
 
 async function getAllNotificationsForUser(req, res, next) {
     try {
-        console.log(req)
         const data = await NotificationService.getAllNotificationsForUser(req.UserID);
         res.status(200).send(data);
     } catch (err) {

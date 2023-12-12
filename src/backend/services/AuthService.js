@@ -18,7 +18,7 @@ class AuthService {
         }
 
         if(user.Active == 0) {
-            const err = new Error('User is not active!');
+            const err = new Error('User account is disabled!');
             err.code = 401;
             throw err;
         }

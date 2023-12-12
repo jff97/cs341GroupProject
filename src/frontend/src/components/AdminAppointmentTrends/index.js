@@ -86,19 +86,22 @@ export default function AdminAppointmentTrends() {
 
     return (
         <div>
-            <h1>Admin Trends</h1>
+            <h1>Provider Trends</h1>
             <FormControl fullWidth>
-                <InputLabel shrink={true} id="demo-simple-select-label">Provider</InputLabel>
+                <InputLabel shrink={true} color="info" id="provider-label">Provider</InputLabel>
                 <Select
-                    labelId="demo-simple-select-label"
+                    label="Provider"
+                    labelId="provider-label"
+                    notched={true}
                     id="demo-simple-select"
                     value={selectedProvider}
+                    color="info"
                     onChange={handleChange}
                 >
                     {menuItems}
                 </Select>
             </FormControl>
-            <ResponsiveContainer width="100%" height={300}>
+            <ResponsiveContainer width="100%" height={300} style={{marginTop: '30px'}}>
                 <BarChart data={data}>
                     <CartesianGrid strokeDasharray="3 3" />
                     <XAxis dataKey="day" />

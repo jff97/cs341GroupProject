@@ -15,6 +15,8 @@ export default function AdminManageAppointments() {
 
     useEffect(() => {
         getAppointmentsInRange();
+
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [filterStartDate, filterEndDate]);
 
     const onDialogClose = () => {
@@ -33,7 +35,7 @@ export default function AdminManageAppointments() {
      }
 
   return (
-    <Box sx={{height: '98%'}}>
+    <Box sx={{height: '100%', overflow: 'hidden'}}>
         <CustomAppBar 
             pageTitle="Admin Appointment Management" 
         />
