@@ -4,12 +4,15 @@ import { DataGrid, GridToolbarContainer } from '@mui/x-data-grid';
 import userService from "../../services/user.service";
 import { useNotification } from '../NotificationProvider';
 import AppointmentService from "../../services/appointment.service";
-import { Button } from '@mui/material';
+import { Button, Typography } from '@mui/material';
+import { useTheme } from '@mui/material/styles';
 
 function CustomToolbar({filterDate, setFilterDate}) {
     return (
       <GridToolbarContainer>
-        <h2>User Table</h2>
+        <Typography variant="h6" component="div" sx={{ ml: 0.5, fontWeight: 'bold', mt: 2, mb: 2 }}>
+            Manage System Users
+        </Typography>
       </GridToolbarContainer>
     );
 }
@@ -20,6 +23,7 @@ async function getAppointmentsForUser(userID) {
 
 export default function AdminUsersTable({ users, setUsers, getAllSystemUsers }) {
     const { createNotification } = useNotification();
+    const theme = useTheme();
 
     const columns = [
         { field: 'User', headerName: 'Client', width: 200, valueGetter: (params) => {
@@ -145,6 +149,7 @@ export default function AdminUsersTable({ users, setUsers, getAllSystemUsers }) 
                 border: 2,
                 flex: 1,
                 borderColor: 'primary.light',
+                backgroundColor: theme.palette.grey[900],
             }}
             />
     );
