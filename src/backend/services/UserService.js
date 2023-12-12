@@ -1,6 +1,7 @@
 const DataAccess = require('../dataAccessLayer/DataAccess');
 const bcrypt = require('bcrypt');
 const logger = require('../logging')
+const appointmentServiceInstance = require('./AppointmentService.js');
 
 const SALT_ROUNDS = 10;
 
@@ -57,6 +58,17 @@ class UserService {
     }
 
     async disableUser({UserID}) {
+        // Get User
+        const user = await DataAccess.getUser(UserID);
+
+        // If user is a client, cancel all appointments
+        if(user.RoleID === 1) {
+            appointmentServiceInstance.cancelAllAppointments(UserID);
+        } else if (user.RoleID === 2) {
+            const service = await DataAccess.getServiceIDByUserID(UserID);
+            appointmentServiceInstance.deleteAllAppointmentsByServiceID(service.ServiceID);
+        }
+
         await DataAccess.disableUser(UserID);
     }
     
