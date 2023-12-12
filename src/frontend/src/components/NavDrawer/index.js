@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Box, Drawer, CssBaseline, Toolbar, List, Typography, Divider, ListItem, ListItemButton, ListItemIcon, ListItemText } from '@mui/material';
 import TasksIcon from '@mui/icons-material/Task';
 import EventIcon from '@mui/icons-material/Event';
@@ -11,6 +11,7 @@ import AdminPanelSettingsIcon from '@mui/icons-material/AdminPanelSettings';
 import AppConfig from 'src/config/config';
 import useUserStore from 'src/utils/stores';
 import GitInfo from 'react-git-info/macro';
+import api from 'src/services/api';
 
 const drawerWidth = 240;
 
@@ -22,6 +23,16 @@ const linkStyles = {
 export default function NavDrawer() {
     const RoleID = useUserStore(state => state.RoleID);
     const gitInfo = GitInfo();
+    const [platform, setPlatform] = useState('');
+
+    useEffect(() => {
+        api.get('/api/util/platform')
+            .then((response) => {
+                setPlatform(response.data);
+            }).catch((error) => {
+                console.log(error);
+            });
+    }, []);
 
     return (
         <Box sx={{ display: 'flex' }}>
@@ -148,6 +159,7 @@ export default function NavDrawer() {
                             window.open('https://github.com/jff97/cs341GroupProject/commit/' + gitInfo.commit.hash)
                         }}>Production Build {gitInfo.commit.shortHash}</p>
                         <p>Build Date: {gitInfo.commit.date}</p>
+                        <p>Platform: {platform}</p>
                     </div>)}
             </Drawer>
         </Box>
