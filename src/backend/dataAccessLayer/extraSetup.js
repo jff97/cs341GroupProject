@@ -32,6 +32,7 @@ function applyAssociations(sequelize) {
         onDelete: 'CASCADE'
     });
 
+    //appointment is booked by a user
     AppointmentSlot.belongsTo(User, {
         foreignKey: {
             name: 'ClientUserID',
@@ -50,6 +51,7 @@ function applyAssociations(sequelize) {
 
     });
 
+    //appointment is a service type
     AppointmentSlot.belongsTo(Service, {
         foreignKey: {
             name: 'ServiceID',
@@ -65,6 +67,7 @@ function applyAssociations(sequelize) {
         }
     });
 
+    //notification belongs to a user
     Notification.belongsTo(User, {
         foreignKey: {
             name: 'UserID',

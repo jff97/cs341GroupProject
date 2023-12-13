@@ -8,10 +8,12 @@ const { Op, Sequelize } = require('sequelize')
 class DataAccess {
 
    // For User Services
+   //create a user
    createUser(userData) {
       return models.User.create(userData);
    }
 
+   //delete a user
    deleteUser(UserID) {
       return models.User.destroy({
          where: {
@@ -33,6 +35,7 @@ class DataAccess {
       });
    }
 
+   //get a users role
    getUsersRole(userID) {
       return models.User.findOne({
          where: {
@@ -45,6 +48,7 @@ class DataAccess {
       })
    }
 
+   //get users see if in system  
    getUser(userID) {
       return models.User.findOne({
          where: {
@@ -53,10 +57,12 @@ class DataAccess {
       })
    }
 
+   //create an appointment 
    createAppointment(appointmentData) {
       return models.AppointmentSlot.create(appointmentData)
    }
 
+   //delete an appointment
    deleteAppointment(AppointmentID) {
       return models.AppointmentSlot.destroy({
          where: {
@@ -65,6 +71,7 @@ class DataAccess {
       });
    }
 
+   //booking an appointment with user
    bookAppointment(AppointmentID, ClientUserID) {
       return models.AppointmentSlot.update({ClientUserID: ClientUserID}, {
          where: {
@@ -81,7 +88,8 @@ class DataAccess {
          }
       })
    }
-                                    
+   
+   //cancel an appointment 
    cancelAppointment(AppointmentID) {
       return models.AppointmentSlot.update({ClientUserID: null}, {
          where: {
@@ -90,6 +98,7 @@ class DataAccess {
       })
    }
 
+   //get all appointment slots from a service provider
    getAllAppointmentSlotsForProvider(ServiceID) {
       return models.AppointmentSlot.findAll({
          where: {
@@ -102,6 +111,7 @@ class DataAccess {
       })
    }
 
+   //modify appointment time
    modifyAppointmentTime(AppointmentID, StartDateTime, EndDateTime) {
       return models.AppointmentSlot.update({StartDateTime: StartDateTime, EndDateTime: EndDateTime}, {
          where: {
@@ -115,6 +125,7 @@ class DataAccess {
       
    }
 
+   //get appointment by its ID
    getAppointmentByID(AppointmentID) {
       return models.AppointmentSlot.findOne({
          where: {
@@ -130,6 +141,7 @@ class DataAccess {
       return models.Service.create(serviceData)
    }
 
+   //delete a service in bulk
    deleteProvidedService(ServiceID) {
       return models.Service.destroy({
          where: {
@@ -138,6 +150,7 @@ class DataAccess {
       })
    }
 
+   //modify&change a provided service 
    modifyProvidedService(ServiceID, ServiceTitle, ServiceInfo, Category) {
       return models.Service.update({ServiceTitle: ServiceTitle, ServiceInfo: ServiceInfo, Category: Category}, {
          where: {
@@ -146,6 +159,7 @@ class DataAccess {
       })
    }
 
+   //get all available appointments 
    getAllAvailableAppointments() {
       return models.AppointmentSlot.findAll({
          where: {
@@ -160,6 +174,7 @@ class DataAccess {
       })
    }
 
+   //get all appointments associated with userId
    getAppointmentsByUserId(UserID) {
       return models.AppointmentSlot.findAll({
          where: {
@@ -174,6 +189,7 @@ class DataAccess {
       })
    }
 
+   //get all appointments in system
    getAllSystemAppointments(filterDate) {
       const targetDate = new Date(filterDate);
       
@@ -196,6 +212,7 @@ class DataAccess {
       })
    }
 
+   //get all notifications from a user
    getAllNotificationsForUser(UserID) {
       return models.Notification.findAll({
          where: {
@@ -204,6 +221,7 @@ class DataAccess {
       })
    }
 
+   //create notification
    createNotification(NotificationTitle, NotificationMessage, NotificationDate, NotificationType, UserID) {
       return models.Notification.create({ 
          NotificationTitle: NotificationTitle, 
@@ -215,6 +233,7 @@ class DataAccess {
       })
    }
 
+   //delete notification
    deleteNotification(NotificationID) {
       return models.Notification.destroy({
          where: {
@@ -223,6 +242,7 @@ class DataAccess {
       })
    }
 
+   //toggle notification read
    toggleNotificationRead(NotificationID) {
       return models.Notification.update({NotificationRead: Sequelize.literal('NOT NotificationRead')}, {
          where: {
@@ -231,6 +251,7 @@ class DataAccess {
       })
    }
 
+   //get a service via its Id
    getServiceByID(ServiceID) {
       return models.Service.findOne({
          where: {
@@ -239,6 +260,7 @@ class DataAccess {
       })
    }
 
+   //modify&change appoiontment 
    modifyAppointment(AppointmentID, StartDateTime, EndDateTime, AppointmentTitle) {
       return models.AppointmentSlot.update({StartDateTime: StartDateTime, EndDateTime: EndDateTime, AppointmentTitle: AppointmentTitle}, {
          where: {
@@ -262,6 +284,7 @@ class DataAccess {
       })
    }
 
+   //get all users who are a service provider
    getAllServiceProviders() {
       return models.User.findAll({
          where: {
