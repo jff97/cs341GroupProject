@@ -37,13 +37,16 @@ class AppointmentService {
         const startDateTime = new Date(appointment.StartDateTime);
         const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric', hour: 'numeric', minute: 'numeric' };
         const startDateTimeString = startDateTime.toLocaleString('en-US', options);
-        await notificationServiceInstance.createNotification({
-            UserID: appointment.ClientUserID,
-            NotificationTitle: "Appointment Deleted",
-            NotificationMessage: "Your appointment \"" + appointment.AppointmentTitle + "\" for " + startDateTimeString + " has been canceled.",
-            NotificationDate: new Date(),
-            NotificationType: "Appointment"
-        });
+
+        if(appointment.ClientUserID !== undefined && appointment.ClientUserID !== null) {
+            await notificationServiceInstance.createNotification({
+                UserID: appointment.ClientUserID,
+                NotificationTitle: "Appointment Deleted",
+                NotificationMessage: "Your appointment \"" + appointment.AppointmentTitle + "\" for " + startDateTimeString + " has been canceled.",
+                NotificationDate: new Date(),
+                NotificationType: "Appointment"
+            });
+        } 
 
         await DataAccess.deleteAppointment(AppointmentID);
     }
@@ -114,7 +117,18 @@ class AppointmentService {
     async cancelAllAppointments(UserID) {
         const appointments = await DataAccess.getAppointmentsByUserId(UserID);
         for(const appointment of appointments) {
-            await this.cancelAppointment(appointment, UserID);
+            const service = await DataAccess.getServiceByID(appointment.ServiceID);
+            const startDateTime = new Date(appointment.StartDateTime);
+            const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric', hour: 'numeric', minute: 'numeric' };
+            const startDateTimeString = startDateTime.toLocaleString('en-US', options);
+            notificationServiceInstance.createNotification({
+                UserID: service.UserID,
+                NotificationTitle: "Appointment Canceled",
+                NotificationMessage: "Your appointment \"" + appointment.AppointmentTitle + "\" for " + startDateTimeString + " has been canceled.",
+                NotificationDate: new Date(),
+                NotificationType: "Appointment"
+            });
+            await DataAccess.cancelAppointment(appointment.AppointmentID);
         }
     }
 
