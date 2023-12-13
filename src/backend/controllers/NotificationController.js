@@ -13,6 +13,7 @@ async function createNotification(req, res, next) {
     }
 }
 
+//get all notifications for a user
 async function getAllNotificationsForUser(req, res, next) {
     try {
         const data = await NotificationService.getAllNotificationsForUser(req.UserID);
@@ -22,6 +23,7 @@ async function getAllNotificationsForUser(req, res, next) {
     }
 }
 
+//delete a notification from a user
 async function deleteNotification(req, res, next) {
     try {
         await NotificationService.deleteNotification(req.params.NotificationID);
@@ -31,6 +33,7 @@ async function deleteNotification(req, res, next) {
     }
 }
 
+//toggle if notification has been read
 async function toggleNotificationRead(req, res, next) {
     try {
         await NotificationService.toggleNotificationRead(req.params.NotificationID);

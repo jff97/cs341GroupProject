@@ -3,6 +3,7 @@
 //Class & Methods Explained: This class is used to contorl functions relatin to authtication using AuthService
 const AuthService = require('../services/AuthService');
 
+//login/user authentication and token generation
 async function login(req, res, next) {
     try {
         const tokens = await AuthService.login(req.body);
@@ -17,6 +18,7 @@ async function login(req, res, next) {
     }
 }
 
+//user logout
 async function logout(req, res, next) {
     try {
         await AuthService.logout(req.cookies.rft);
@@ -26,6 +28,7 @@ async function logout(req, res, next) {
     }
 }
 
+//checks if user is authenticated
 async function checkIfAuthenticated(req, res, next) {
     try {
         res.status(200).send("User is authenticated!");
@@ -34,6 +37,7 @@ async function checkIfAuthenticated(req, res, next) {
     }
 }
 
+//renew access token using refresh
 async function renewAccessToken(req, res, next) {
     try {
         const newAccessToken = await AuthService.getNewToken(req.cookies.rft);

@@ -3,6 +3,7 @@
 //Class & Methods Explained: This class is used to control functions realting to user management using a service called UserService
 const UserService = require('../services/UserService');
 
+//create a user
 async function createUser(req, res, next) {
     try {
         await UserService.createUser(req.body);
@@ -12,6 +13,7 @@ async function createUser(req, res, next) {
     }
 }
 
+//delete a user
 async function deleteUser(req, res, next) {
     try {
         await UserService.deleteUser(req.query);

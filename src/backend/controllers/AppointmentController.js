@@ -5,6 +5,7 @@
 //Class & Methods Explained: This class is used to handle various operations relating to appointments they act as the middle ground for handling requests and interation
 const AppointmentService = require('../services/AppointmentService');
 
+//create an Appointment
 async function createAppointment(req, res, next) {
     try {
         await AppointmentService.createAppointment(req.body);
@@ -14,6 +15,7 @@ async function createAppointment(req, res, next) {
     }
 }
 
+//delete an appointment
 async function deleteAppointment(req, res, next) {
     try {
         await AppointmentService.deleteAppointment(req.query);
@@ -23,6 +25,7 @@ async function deleteAppointment(req, res, next) {
     }
 }
 
+//book an appointment
 async function bookAppointment(req, res, next) {
     try {
         await AppointmentService.bookAppointment(req.body);
@@ -32,7 +35,7 @@ async function bookAppointment(req, res, next) {
     }
 }
 
-
+//get appointments slots for service providers 
 async function getAppointmentSlotsForProvider(req, res, next) {
     try {
         const data = await AppointmentService.getAllAppointmentSlotsForProvider(req.query.UserID);
@@ -42,6 +45,7 @@ async function getAppointmentSlotsForProvider(req, res, next) {
     }
 }
 
+//cancel appointments
 async function cancelAppointment(req, res, next) {
     try {
         await AppointmentService.cancelAppointment(req.body);
@@ -51,6 +55,7 @@ async function cancelAppointment(req, res, next) {
     }
 }
 
+//modify appointment times
 async function modifyAppointmentTime(req, res, next) {
     try {
         await AppointmentService.modifyAppointmentTime(req.body);
@@ -60,6 +65,7 @@ async function modifyAppointmentTime(req, res, next) {
     }
 }
 
+//get all appointments in the system
 async function getAllSystemAppointments(req, res, next) {
     try {
         const data = await AppointmentService.getAllSystemAppointments(req.query.filterDate);
@@ -69,6 +75,7 @@ async function getAllSystemAppointments(req, res, next) {
     }
 }
 
+//get all available appointments in the system
 async function getAllAvailableAppointments(req, res, next) {
     try {
         const data = await AppointmentService.getAllAvailableAppointments();
@@ -78,6 +85,7 @@ async function getAllAvailableAppointments(req, res, next) {
     }
 }
 
+//get all appointment by user
 async function getAppointmentsByUser(req, res, next) {
     try {
         const data = await AppointmentService.getAppointmentsByUser(req.query.UserID);
@@ -87,6 +95,7 @@ async function getAppointmentsByUser(req, res, next) {
     }
 }
 
+//modify appointment
 async function modifyAppointment(req, res, next) {
     try {
         await AppointmentService.modifyAppointment(req.body);
@@ -96,6 +105,7 @@ async function modifyAppointment(req, res, next) {
     }
 }
 
+//get appointment trands
 async function getAppointmentTrends(req, res, next) {
     try {
         const data = await AppointmentService.getAppointmentTrends(req.query.ProviderID, req.query.StartDateTime, req.query.EndDateTime);
@@ -105,6 +115,7 @@ async function getAppointmentTrends(req, res, next) {
     }
 }
 
+//get all servicer providers 
 async function getAllServiceProviders(req, res, next) {
     try {
         const data = await AppointmentService.getAllServiceProviders();

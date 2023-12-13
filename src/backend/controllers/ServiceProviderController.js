@@ -4,6 +4,7 @@
 //Class & Methods Explained: This class is used to handle various operations relating to provided services
 const ProvidedServiceService = require('../services/ProviderService');
 
+//create service provided 
 async function createProvidedService(req, res, next) {
     try {
         await ProvidedServiceService.createProvidedService(req.body);
@@ -13,6 +14,7 @@ async function createProvidedService(req, res, next) {
     }
 }
 
+//delete service provided 
 async function deleteProvidedService(req, res, next) {
     try {
         await ProvidedServiceService.deleteProvidedService(req.query);
@@ -22,6 +24,7 @@ async function deleteProvidedService(req, res, next) {
     }
 }
 
+//modify service provided 
 async function modifyProvidedService(req, res, next) {
     try {
         await ProvidedServiceService.modifyProvidedService(req.body);
