@@ -6,6 +6,7 @@ import CustomAppBar from 'src/components/CustomAppBar';
 import { Box } from '@mui/material';
 import AdminAppointmentTrends from "../../components/AdminAppointmentTrends";
 
+//admin ability to view appointment history
 export default function AdminAppointmentHistory() {
 
     useEffect(() => {

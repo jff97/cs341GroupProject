@@ -10,21 +10,25 @@ import CustomAppBar from 'src/components/CustomAppBar';
 import CreateEditAppointmentSlotDialog from 'src/components/CreateEditAppointmentSlotDialog';
 import { Box } from '@mui/material';
 
+//user ability to manage appointments
 export default function AppointmentManagement() {
     const [appointmentSlots, setAppointmentSlots] = useState([]);
     const [createAppointmentSlotDialogOpen, setCreateAppointmentSlotDialogOpen] = useState(false);
     const [selectedAppointment, setSelectedAppointment] = useState(null); 
     const UserID = useUserStore(state => state.UserID);
 
+    //abillity to create appointment
     const onCreateAppointmentSlotDialogClose = () => {
         setCreateAppointmentSlotDialogOpen(false);
         getAppointmentSlotsForProvider();
     }
 
+    //ability to delete appointment
     const onDeleteAppointmentSlot = () => {
         getAppointmentSlotsForProvider();
     }
 
+    //abillity to create appointment slots
     const getAppointmentSlotsForProvider = async () => {
         appointmentService.getAllAppointmentSlotsForProvider(UserID)
             .then((response) => {

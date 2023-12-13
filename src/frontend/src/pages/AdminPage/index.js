@@ -15,12 +15,13 @@ import timezone from 'dayjs/plugin/timezone';
 dayjs.extend(utc);
 dayjs.extend(timezone);
 
-
+//admin view of page
 export default function AdminPage() {
     const [systemAppointmentSlots, setSystemAppointmentSlots] = useState([]);
     const [filterDate, setFilterDate] = useState(dayjs());
     
 
+    //ability to view all appointments in system
     const getAllSystemAppointments= async () => {
         appointmentService.getAllSystemAppointments(filterDate)
         .then((response) => {
