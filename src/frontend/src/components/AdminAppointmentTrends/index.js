@@ -1,6 +1,6 @@
 //Author: Alex Cappel
 //Date Created: November 16  2023 
-//Class & Methods Explained: This class is used to manage and displa apoointments for service providers
+//Class & Methods Explained: This class is used to manage and display apoointments for service providers
 import React, { useEffect, useState, useCallback } from 'react';
 import {Select, MenuItem, FormControl, TextField} from '@mui/material';
 import InputLabel from '@mui/material/InputLabel';
@@ -9,6 +9,7 @@ import dayjs from "dayjs";
 import {Bar, BarChart, CartesianGrid, Legend, ResponsiveContainer, Tooltip, XAxis, YAxis} from "recharts";
 import {DatePicker} from "@mui/x-date-pickers/DatePicker";
 
+//admin user retrieving appointment trends
 export default function AdminAppointmentTrends() {
     const [providers, setProviders] = useState([]);
     const [menuItems, setMenuItems] = useState([]);

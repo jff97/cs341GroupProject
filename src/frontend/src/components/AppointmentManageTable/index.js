@@ -10,6 +10,7 @@ import appointmentService from 'src/services/appointment.service';
 import { useNotification } from '../NotificationProvider';
 import CustomNoRowsOverlay from 'src/components/CustomNoRowsOverlay';
 
+//creating tool bar for create appointment 
 function CustomToolbar({ openCreateAppointmentSlotDialog }) {
     return (
         <GridToolbarContainer>

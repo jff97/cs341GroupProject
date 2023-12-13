@@ -11,6 +11,7 @@ import useUserStore from 'src/utils/stores';
 import { useNotification } from '../NotificationProvider';
 import CustomNoRowsOverlay from 'src/components/CustomNoRowsOverlay';
 
+//creating tool bar for available appointments 
 function CustomToolbar() {
     return (
       <GridToolbarContainer>

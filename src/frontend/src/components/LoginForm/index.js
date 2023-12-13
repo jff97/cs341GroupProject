@@ -8,6 +8,7 @@ import { Avatar, Button, CssBaseline, TextField, FormControlLabel, Checkbox, Box
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import AppConfig from "src/config/config";
 
+//login form to become a user
 function LoginForm() {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");

@@ -9,6 +9,7 @@ import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import AppConfig from "src/config/config";
 import AppRegistrationIcon from '@mui/icons-material/AppRegistration';
 
+//create popup when account user has been made succesfully
 function ConfirmationDialog({open, handleClose}) {
     return (
         <Dialog
@@ -34,6 +35,7 @@ function ConfirmationDialog({open, handleClose}) {
     )
 }
 
+//use info from form to generate new user
 function RegisterForm() {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
@@ -53,6 +55,7 @@ function RegisterForm() {
         navigate("/login");
     }
 
+    //used to create new user
     const handleSubmit = (event) => {
         event.preventDefault();
         userService.createUser(firstname, lastname, username, password, birthdate, role, serviceTitle, serviceInfo, category).then(response => {

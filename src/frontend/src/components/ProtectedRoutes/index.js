@@ -6,6 +6,7 @@ import useUserStore from "src/utils/stores";
 import { CircularProgress, Box } from "@mui/material";
 import { Outlet, Navigate } from "react-router-dom";
 
+//used to validate routes and accesses
 function ProtectedRoutes() {
     const auth = useUserStore((state) => state.AccessToken)
     const loading = useUserStore((state) => state.loading)

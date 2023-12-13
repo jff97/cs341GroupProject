@@ -10,6 +10,7 @@ import { Button, TextField } from '@mui/material';
 import dayjs from 'dayjs';
 import {DatePicker} from "@mui/x-date-pickers/DatePicker";
 
+//getting appointment trends
 export default function AppointmentTrends() {
     const [trends, setApiData] = useState([]);
     const [startDateTime, setStartDateTime] = useState(dayjs().set('second', 0));

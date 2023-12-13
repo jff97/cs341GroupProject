@@ -11,6 +11,7 @@ import useUserStore from 'src/utils/stores';
 import dayjs from 'dayjs';
 import { useNotification } from "../NotificationProvider";
 
+//create and edit appointment slots
 export default function CreateEditAppointmentSlotDialog({ open, handleClose, selectedAppointment, setSelectedAppointment }) {
     const [appointmentTitle, setAppointmentTitle] = useState('');
     const [appointmentStart, setAppointmentStart] = useState(dayjs().set('second', 0));
@@ -55,6 +56,7 @@ export default function CreateEditAppointmentSlotDialog({ open, handleClose, sel
         }
     }
 
+    //close edit popup
     const closeDialog = () => {
         handleClose();
         setAppointmentTitle('');

@@ -7,6 +7,7 @@ import CustomNoRowsOverlay from 'src/components/CustomNoRowsOverlay';
 import { DatePicker } from '@mui/x-date-pickers';
 import { DataGrid, GridToolbarContainer } from '@mui/x-data-grid';
 
+//creating the appointment data toolbar
 function CustomToolbar({filterDate, setFilterDate}) {
     return (
       <GridToolbarContainer>
