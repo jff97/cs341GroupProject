@@ -9,6 +9,7 @@ const logger = require('../logging')
 const SALT_ROUNDS = 10;
 
 class UserService {
+    //create a new user
     async createUser({FirstName, LastName, UserName, Password, Birthdate, RoleID, ServiceTitle, ServiceInfo, Category}) {
         let hashedPassword; 
         if(!FirstName || !LastName || !UserName || !Password || !Birthdate || !RoleID) {
@@ -44,10 +45,12 @@ class UserService {
 
     }
 
+    //checking hashed password
     isPasswordValid(password) {
         return (password.match(/(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}/g));
     }
 
+    //delete a user
     async deleteUser({UserID}) {
         await DataAccess.deleteUser(UserID);
     }

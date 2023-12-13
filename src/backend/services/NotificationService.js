@@ -8,6 +8,7 @@ const logger = require('../logging')
 const SALT_ROUNDS = 10;
 
 class NotificationService {
+    //create a notification
     async createNotification({UserID, NotificationTitle, NotificationMessage, NotificationDate, NotificationType}) {
         if(!UserID || !NotificationTitle || !NotificationMessage || !NotificationDate || !NotificationType) {
             const err = new Error('Missing required fields for notification creation!');
@@ -18,6 +19,7 @@ class NotificationService {
         const notification = await DataAccess.createNotification(NotificationTitle, NotificationMessage, NotificationDate, NotificationType, UserID);
     }
 
+    //get all notifications for a user
     async getAllNotificationsForUser(UserID) {
         if(!UserID) {
             const err = new Error('Missing required fields for notification retrieval!');
@@ -29,6 +31,7 @@ class NotificationService {
         return notifications;
     }
 
+    //delete notification 
     async deleteNotification(NotificationID) {
         if(!NotificationID) {
             const err = new Error('Missing required fields for notification deletion!');
@@ -39,6 +42,7 @@ class NotificationService {
         const notification = await DataAccess.deleteNotification(NotificationID);
     }
 
+    //toggle notification read
     async toggleNotificationRead(NotificationID) {
         if(!NotificationID) {
             const err = new Error('Missing required fields for notification read toggle!');

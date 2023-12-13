@@ -8,6 +8,7 @@ const appSettings = require('../configs/tunableAppSettings.js');
 const notificationServiceInstance = require('./NotificationService.js');
 
 class AppointmentService {
+    //service provider creating an appointment
     async createAppointment({StartDateTime, EndDateTime, UserID, AppointmentTitle}) {
         if(!StartDateTime || !EndDateTime || !UserID) {
             const err = new Error('Missing required fields for appointment creation!');
@@ -35,6 +36,7 @@ class AppointmentService {
         await DataAccess.createAppointment(appointmentData);
     }
 
+    //service provider deleting an appointment
     async deleteAppointment({AppointmentID}) {
         const appointment = await DataAccess.getAppointmentByID(AppointmentID);
         
@@ -53,6 +55,7 @@ class AppointmentService {
         await DataAccess.deleteAppointment(AppointmentID);
     }
 
+    //user booking an appointment
     async bookAppointment({AppointmentID, ClientUserID}) {
         //check if user allready has an appointment overlapping
         const possibleAppt = await DataAccess.getAppointmentByID(AppointmentID)
@@ -68,10 +71,12 @@ class AppointmentService {
         await DataAccess.bookAppointment(AppointmentID, ClientUserID);
     }
 
+    //checks if appointment from user are overlapping
     #isApptsOverlapping(appointment1, appointment2) {
         return appointment1.StartDateTime <= appointment2.EndDateTime && appointment1.EndDateTime >= appointment2.StartDateTime;
     }
    
+    //cancel an appointment
     async cancelAppointment({AppointmentID}) {
         //prevent the user from canceling the appointment if it is not x many hours away
         const apptToCancel = await DataAccess.getAppointmentByID(AppointmentID)
@@ -105,10 +110,12 @@ class AppointmentService {
         });
     }
 
+    //modify&change appointment time
     async modifyAppointmentTime({AppointmentID, StartDateTime, EndDateTime}) {
         await DataAccess.modifyAppointmentTime(AppointmentID, StartDateTime, EndDateTime);
     }
 
+    //get all appointment for a service provider
     async getAllAppointmentSlotsForProvider(UserID) {
         if(!UserID) {
             const err = new Error('Missing UserID for appointment slot retrieval!');
@@ -120,10 +127,12 @@ class AppointmentService {
         return appointments;
     }
 
+    //get all available appointments
     async getAllAvailableAppointments() {
         return await DataAccess.getAllAvailableAppointments();
     }
 
+    //get appointments by user Id
     async getAppointmentsByUser(UserID) {
         if(!UserID) {
             const err = new Error('Missing UserID for appointment slot retrieval!');
@@ -133,10 +142,12 @@ class AppointmentService {
         return await DataAccess.getAppointmentsByUserId(UserID);
     }
 
+    //get all appointments from system
     async getAllSystemAppointments(filterDate) {
         return await DataAccess.getAllSystemAppointments(filterDate);
     }
 
+    //serivce provider changing&modifying appointment
     async modifyAppointment({AppointmentID, StartDateTime, EndDateTime, AppointmentTitle}) {
         if(!StartDateTime || !EndDateTime || !AppointmentID) {
             const err = new Error('Missing required fields for appointment creation!');
@@ -155,6 +166,7 @@ class AppointmentService {
         await DataAccess.modifyAppointment(AppointmentID, StartDateTime, EndDateTime, AppointmentTitle);
     }
 
+    //sends appointment data to trends
     #appointmentsToTrends(appointments) {
         let appointmentTrends = [0, 0, 0, 0, 0, 0, 0]
         for (let i = 0; i < appointments.length; i++) {
@@ -165,12 +177,14 @@ class AppointmentService {
         return appointmentTrends;
     }
     
+    //get appointment trends
     async getAppointmentTrends(ServiceProviderUserID, StartDateTime, EndDateTime) {
         const service = await DataAccess.getServiceIDByUserID(ServiceProviderUserID);
         const appointments = await DataAccess.getAppointmentsInTimeFrame(service.ServiceID, StartDateTime, EndDateTime);
         return this.#appointmentsToTrends(appointments);
     }
 
+    //get all service provider users
     async getAllServiceProviders() {
         return await DataAccess.getAllServiceProviders();
     }

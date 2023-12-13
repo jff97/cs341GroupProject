@@ -50,6 +50,7 @@ class AuthService {
         }
     }
 
+    //reteieve new token
     async getNewToken(refreshToken) {
         if (refreshToken == null || this.refreshTokens[refreshToken] == null) {
             const err = new Error('Invalid Token');
@@ -68,10 +69,12 @@ class AuthService {
         return this.generateAccessToken(decoded);
       }
 
+    //generate access token
     generateAccessToken({UserID, RoleID, FullName, UserName}) {
         return jwt.sign({UserID, RoleID, FullName, UserName}, process.env.ACCESS_TOKEN_SECRET, {expiresIn: '15m'});
     }
 
+    //generate refresh token
     generateRefreshToken({UserID, RoleID, FullName, UserName}) {
         return jwt.sign({UserID, RoleID, FullName, UserName}, process.env.REFRESH_TOKEN_SECRET, {expiresIn: '7d'});
     }
